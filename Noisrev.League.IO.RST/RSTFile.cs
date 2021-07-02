@@ -245,6 +245,39 @@ namespace Noisrev.League.IO.RST
             entries.Add(new RSTEntry(this, hash, value));
         }
         /// <summary>
+        /// Find the entry that matches the hash.
+        /// </summary>
+        /// <param name="hash">The hash</param>
+        /// <returns>If it does not exist in the list, return null.</returns>
+        public RSTEntry Find(ulong hash)
+        {
+            return entries.Find(x => x.Hash == hash);
+        }
+        /// <summary>
+        /// Remove all items that match hash.
+        /// </summary>
+        /// <param name="hash">The hash</param>
+        public void Remove(ulong hash)
+        {
+            entries.RemoveAll(x => x.Hash == hash);
+        }
+        /// <summary>
+        /// Remove the entry.
+        /// </summary>
+        /// <param name="entry">The entry</param>
+        public void Remove(RSTEntry entry)
+        {
+            entries.Remove(entry);
+        }
+        /// <summary>
+        /// Removes the entry at the specified index
+        /// </summary>
+        /// <param name="index">The index</param>
+        public void RemoveAt(int index)
+        {
+            entries.RemoveAt(index);
+        }
+        /// <summary>
         /// Reading content begins at the offset specified in the stream.
         /// </summary>
         /// <param name="entry">Entry to be read</param>
