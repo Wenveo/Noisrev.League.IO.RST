@@ -286,6 +286,29 @@ namespace Noisrev.League.IO.RST
             // Set the text
             entry.Text = DataStream.ReadStringWithEndByte(entry.Offset, 0x00);
         }
+        /// <summary>
+        /// Replace the matching items in the entire entry. And replace them.
+        /// </summary>
+        /// <param name="oldtext">To Replace</param>
+        /// <param name="newtext">Replace to</param>
+        /// <param name="caseSensitive">Is it case sensitive</param>
+        public void ReplaceAll(string oldtext, string newtext, bool caseSensitive = false)
+        {
+            IEnumerable<RSTEntry> list;
+            if (caseSensitive)
+            {
+                list = entries.Where(x => x.Text.Contains(oldtext));
+            }
+            else
+            {
+                list = entries.Where(x => x.Text.ToLower().Contains(oldtext.ToLower()));
+            }
+
+            foreach (var item in list)
+            {
+                item.Text = newtext;
+            }
+        }
         public void Write(Stream output, bool leaveOpen)
         {
             // Init Binary Writer
