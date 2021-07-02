@@ -91,6 +91,7 @@ namespace Noisrev.League.IO.RST
         public RSTFile()
         {
             this.entries = new List<RSTEntry>();
+            this.Entries = entries.AsReadOnly();
         }
 
         /// <summary>
