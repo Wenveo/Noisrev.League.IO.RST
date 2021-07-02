@@ -42,6 +42,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,21 +54,21 @@ namespace Noisrev.League.IO.RST
     public class RSTFile : IAsyncDisposable, IDisposable, IEquatable<RSTFile>
     {
         /// <summary>
-        /// Standard head
+        /// Magic Code
         /// </summary>
         public static readonly string Magic = "RST";
+        /// <summary>
+        /// The type of RST used to generate the hash
+        /// </summary>
+        public RType Type { get; private set; }
         /// <summary>
         /// RST File Font Config, using by RST v2
         /// </summary>
         public string Config { get; private set; }
         /// <summary>
-        /// The data segment is located at Position of the current stream.
+        /// The data segment is located at Position of the current stream
         /// </summary>
         public long DataOffset { get; private set; }
-        /// <summary>
-        /// The type of RST used to generate the hash
-        /// </summary>
-        public RType Type { get; private set; }
         /// <summary>
         /// Use LazyLoad for items
         /// </summary>
@@ -83,15 +84,13 @@ namespace Noisrev.League.IO.RST
 
         private readonly List<RSTEntry> entries;
 
-        internal Stream dataStream = new MemoryStream();
-
+        internal Stream DataStream;
         /// <summary>
         /// Initialize the RSTFile class
         /// </summary>
         public RSTFile()
         {
             this.entries = new List<RSTEntry>();
-            this.Entries = entries.AsReadOnly();
         }
 
         /// <summary>
@@ -213,14 +212,7 @@ namespace Noisrev.League.IO.RST
             DataOffset = br.BaseStream.Position;
 
             // Set Data Stream
-            {
-                // Set Start
-                long start = input.Position;
-                // Copy the remaining contents of the buffer to the DataStream.
-                input.CopyTo(dataStream);
-                // Back To Start
-                input.Seek(start, SeekOrigin.Begin);
-            }
+            input.AutoCopy(out DataStream);
 
             // If doesn't use LazyLoad
             if (!useLazyLoad)
@@ -239,7 +231,105 @@ namespace Noisrev.League.IO.RST
         /// <param name="entry">Entry to be read</param>
         internal void ReadText(RSTEntry entry)
         {
-            entry.Text = dataStream.ReadStringWithEndByte(entry.Offset, 0x00);
+            // Set the text
+            entry.Text = DataStream.ReadStringWithEndByte(entry.Offset, 0x00);
+        }
+        public void Write(Stream output, bool leaveOpen)
+        {
+            // Init Binary Writer
+            using BinaryWriter bw = new BinaryWriter(output, Encoding.UTF8, leaveOpen);
+
+            // Write Magic Code
+            bw.Write(Magic.ToCharArray());
+
+            // Write Major
+            bw.Write((byte)Version.Major);
+
+            // Version 2.1
+            if (Version.Major == 2 && Version.Minor == 1)
+            {
+                // Config whether there is any content?
+                bool hasConfig = Config.Length == 0;
+                bw.Write(hasConfig);
+
+                // True
+                if (hasConfig)
+                {
+                    // Write Config
+                    {
+                        // Write Size
+                        bw.Write(Config.Length);
+                        // Write Content
+                        bw.Write(Config.ToArray());
+                    }
+                }
+            }
+            // Write Count
+            bw.Write(entries.Count);
+
+            // Set the hash offset.
+            long hashOffset = bw.BaseStream.Position;
+            // Set the data offset.
+            long dataOffset = hashOffset + (entries.Count * 8) + 1; /* hashOffset + hashesSize + (byte)Minor */
+
+            // to dataOffset
+            bw.BaseStream.Seek(dataOffset, SeekOrigin.Begin);
+
+            // Initialize dictionary
+            // Use a dictionary to filter duplicate items
+            Dictionary<string, long> offsets = new Dictionary<string, long>();
+
+            // Write Data
+            foreach (var item in entries)
+            {
+                // Get the Text first. Otherwise, if this is in LazyLoad
+                // Like this:
+                //------You must set the offset, the starting point, before writing.
+                //
+                //      item.Offset = bw.BaseStream.Position - dataOffset;
+                //
+                //------So in Text.get. Since the offset has been reset, on the new offset.
+                //------It is likely that the content will not be read and an exception will be thrown.
+                //
+                //      string text = item.Text;
+                string text = item.Text;
+
+                // If there is duplicate content in the dictionary.
+                if (offsets.ContainsKey(text))
+                {
+                    // Set the offset. And do not write the content. Because there's repetition.
+                    item.Offset = offsets[text];
+                }
+                // No repeat
+                else
+                {
+                    // Write Offset
+                    item.Offset = bw.BaseStream.Position - dataOffset;
+                    // Write Text
+                    bw.Write(Encoding.UTF8.GetBytes(text));
+                    // Write End Byte
+                    bw.Write((byte)0x00);
+
+                    // Add to dictionary
+                    offsets.Add(text, item.Offset);
+                }
+            }
+            // To hashOffset
+            bw.BaseStream.Seek(hashOffset, SeekOrigin.Begin);
+            // Write hashes
+            foreach (var item in entries)
+            {
+                // Write RST Hash
+                bw.Write(RSTHash.ComputeHash(item.Hash, item.Offset, Type));
+            }
+            // Write Minor
+            bw.Write((byte)Version.Minor);
+            // Flush to prevent unwritten data
+            bw.Flush();
+
+            this.Dispose();
+            // Set Data Stream
+            output.AutoCopy(out DataStream);
         }
         public void Dispose()
         {
@@ -250,10 +340,10 @@ namespace Noisrev.League.IO.RST
         {
             if (disposing)
             {
-                (dataStream as IDisposable)?.Dispose();
+                (DataStream as IDisposable)?.Dispose();
             }
 
-            dataStream = null;
+            DataStream = null;
         }
         public async ValueTask DisposeAsync()
         {
@@ -264,11 +354,11 @@ namespace Noisrev.League.IO.RST
         }
         protected virtual async ValueTask DisposeAsyncCore()
         {
-            if (dataStream != null)
+            if (DataStream != null)
             {
-                await dataStream.DisposeAsync().ConfigureAwait(false);
+                await DataStream.DisposeAsync().ConfigureAwait(false);
             }
-            dataStream = null;
+            DataStream = null;
         }
 
         public bool Equals(RSTFile other)

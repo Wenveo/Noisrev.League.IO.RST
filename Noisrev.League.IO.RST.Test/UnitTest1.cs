@@ -15,9 +15,8 @@ namespace Noisrev.League.IO.RST.Test
                 input: File.OpenRead(path),
                 leaveOpen: false,
                 useLazyLoad: true);
-            RSTEntry entry = rst.Entries[0];
-            Console.WriteLine(entry.Text);
-            Console.WriteLine(RSTHash.ComputeHash(entry.Hash, entry.Offset, rst.Type));
+
+            rst.Write(File.Create(path + ".rst"), false);
             rst.Dispose();
         }
     }
