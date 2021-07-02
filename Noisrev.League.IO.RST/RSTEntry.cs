@@ -1,9 +1,11 @@
-﻿namespace Noisrev.League.IO.RST
+﻿using System;
+
+namespace Noisrev.League.IO.RST
 {
     /// <summary>
     /// This is the content entry for the RSTFile.
     /// </summary>
-    public class RSTEntry
+    public class RSTEntry : IEquatable<RSTEntry>
     {
         /// <summary>
         /// The parent class
@@ -44,6 +46,19 @@
             Parent = parent;
             Offset = offset;
             Hash = hash;
+        }
+
+        public bool Equals(RSTEntry other)
+        {
+            if (other is null)
+            {
+                return false;
+            }
+            else
+            {
+                return Hash == other.Hash
+                    && Text == other.Text;
+            }
         }
     }
 }

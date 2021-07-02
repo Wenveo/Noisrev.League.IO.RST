@@ -1,47 +1,48 @@
-﻿/* This is a RST (Riot String Table) file class.
- *
- * The RST file is a League of Legends file used to store a list of strings.
- *
- * They are often used to store text content in different language versions so that League of Legends can reference and switch between different languages.
- *
- * The RST file is usually located in the "DATA/Menu" directory.
- *
- * Like: "DATA/Menu/fontconfig_en_us.txt", "DATA/Menu/bootstrap_zh_cn.stringtable".
- *
- *
- *
- * The file structure of the RST is as follows:
- * 
+﻿/*  This is a RST (Riot String Table) file class.
  *  
- *  ___________________________________________________________________________________________________________
- *  |     Pos:     |       0      |       3      |       4      |       8       |      ...     |      ...     |
- *  |--------------|--------------|--------------|--------------|---------------|--------------|--------------|
- *  |     Size:    |       3      |       1      |       4      |      8xn      |       1      |      ...     |
- *  |--------------|--------------|--------------|--------------|---------------|--------------|--------------|
- *  |    Format:   |    String    |     Byte     |     Int32    |     UInt64    |     Byte     |    Entries   |
- *  |--------------|--------------|--------------|--------------|---------------|--------------|--------------|
- *  | Description: |  Magic Code  |     Major    |     Count    | RST hash list |     Minor    |  Entry List  |
- *  |______________|______________|______________|______________|_______________|______________|______________|
+ *  The RST file is a League of Legends file used to store a list of strings.
+ *  
+ *  They are often used to store text content in different language versions so that League of Legends can reference and switch between different languages.
+ *  
+ *  The RST file is usually located in the "DATA/Menu" directory.
+ *  
+ *  Like: "DATA/Menu/fontconfig_en_us.txt", "DATA/Menu/bootstrap_zh_cn.stringtable".
  *  
  *  
+ *  
+ *  The file structure of the RST is as follows:
+ *  
+ *   
+ *   ___________________________________________________________________________________________________________
+ *   |     Pos:     |       0      |       3      |       4      |       8       |      ...     |      ...     |
+ *   |--------------|--------------|--------------|--------------|---------------|--------------|--------------|
+ *   |     Size:    |       3      |       1      |       4      |      8xn      |       1      |      ...     |
+ *   |--------------|--------------|--------------|--------------|---------------|--------------|--------------|
+ *   |    Format:   |    String    |     Byte     |     Int32    |     UInt64    |     Byte     |    Entries   |
+ *   |--------------|--------------|--------------|--------------|---------------|--------------|--------------|
+ *   | Description: |  Magic Code  |     Major    |     Count    | RST hash list |     Minor    |  Entry List  |
+ *   |______________|______________|______________|______________|_______________|______________|______________|
+ *   
+ *   
  *  The entry structure:
- *                              ______________________________________________
- *                              |     Size:    |       ?      |       1      |
- *                              |--------------|--------------|--------------|
- *                              |    Format:   |    String    |     Byte     |
- *                              |--------------|--------------|--------------|
- *                              | Description: |    Content   |   End Byte   | // The end byte is always 0x00
- *                              |______________|______________|______________| // Like char* or char[] in C, always ending with 0x00 ('\0')
- *                              
- *                                                                                                      ---Author   : Noisrev(晚风✨)
- *                                                                                                      ---Email    : Noisrev@outlook.com
- *                                                                                                      ---DateTime : 7.2.2021 --13.14
+ *                               ______________________________________________
+ *                               |     Size:    |       ?      |       1      |
+ *                               |--------------|--------------|--------------|
+ *                               |    Format:   |    String    |     Byte     |
+ *                               |--------------|--------------|--------------|
+ *                               | Description: |    Content   |   End Byte   | // The end byte is always 0x00
+ *                               |______________|______________|______________| // Like char* or char[] in C, always ending with 0x00 ('\0')
+ *                               
+ *                                                                                                       ---Author   : Noisrev(晚风✨)
+ *                                                                                                       ---Email    : Noisrev@outlook.com
+ *                                                                                                       ---DateTime : 7.2.2021 --13.14
  */
 using Noisrev.League.IO.RST.Helper;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -50,7 +51,7 @@ namespace Noisrev.League.IO.RST
     /// <summary>
     /// Riot String Table File
     /// </summary>
-    public class RSTFile : IDisposable, IAsyncDisposable
+    public class RSTFile : IAsyncDisposable, IDisposable, IEquatable<RSTFile>
     {
         /// <summary>
         /// Standard head
@@ -270,6 +271,34 @@ namespace Noisrev.League.IO.RST
                 await dataStream.DisposeAsync().ConfigureAwait(false);
             }
             dataStream = null;
+        }
+
+        public bool Equals(RSTFile other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (!Version.Equals(other.Version))
+            {
+                return false;
+            }
+            if (Version.Major == 2 && Version.Minor == 1 && !Config.Equals(other.Config))
+            {
+                return false;
+            }
+            if (Type != other.Type || entries.Count != other.entries.Count)
+            {
+                return false;
+            }
+            for (int i = 0; i < entries.Count; i++)
+            {
+                if (!entries[i].Equals(other.entries[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
