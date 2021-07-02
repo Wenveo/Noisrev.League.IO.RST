@@ -1,4 +1,43 @@
-﻿using Noisrev.League.IO.RST.Helper;
+﻿/* This is a RST (Riot String Table) file class.
+ *
+ * The RST file is a League of Legends file used to store a list of strings.
+ *
+ * They are often used to store text content in different language versions so that League of Legends can reference and switch between different languages.
+ *
+ * The RST file is usually located in the "DATA/Menu" directory.
+ *
+ * Like: "DATA/Menu/fontconfig_en_us.txt", "DATA/Menu/bootstrap_zh_cn.stringtable".
+ *
+ *
+ *
+ * The file structure of the RST is as follows:
+ * 
+ *  
+ *  ___________________________________________________________________________________________________________
+ *  |     Pos:     |       0      |       3      |       4      |       8       |      ...     |      ...     |
+ *  |--------------|--------------|--------------|--------------|---------------|--------------|--------------|
+ *  |     Size:    |       3      |       1      |       4      |      8xn      |       1      |      ...     |
+ *  |--------------|--------------|--------------|--------------|---------------|--------------|--------------|
+ *  |    Format:   |    String    |     Byte     |     Int32    |     UInt64    |     Byte     |    Entries   |
+ *  |--------------|--------------|--------------|--------------|---------------|--------------|--------------|
+ *  | Description: |  Magic Code  |     Major    |     Count    | RST hash list |     Minor    |  Entry List  |
+ *  |______________|______________|______________|______________|_______________|______________|______________|
+ *  
+ *  
+ *  The entry structure:
+ *                              ______________________________________________
+ *                              |     Size:    |       ?      |       1      |
+ *                              |--------------|--------------|--------------|
+ *                              |    Format:   |    String    |     Byte     |
+ *                              |--------------|--------------|--------------|
+ *                              | Description: |    Content   |   End Byte   | // The end byte is always 0x00
+ *                              |______________|______________|______________| // Like char* or char[] in C, always ending with 0x00 ('\0')
+ *                              
+ *                                                                                                      ---Author   : Noisrev(晚风✨)
+ *                                                                                                      ---Email    : Noisrev@outlook.com
+ *                                                                                                      ---DateTime : 7.2.2021 --13.14
+ */
+using Noisrev.League.IO.RST.Helper;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,13 +59,13 @@ namespace Noisrev.League.IO.RST
         /// <summary>
         /// RST File Font Config, using by RST v2
         /// </summary>
-        public string Config { get; set; }
+        public string Config { get; private set; }
         /// <summary>
-        /// 
+        /// The data segment is located at Position of the current stream.
         /// </summary>
-        public long DataOffset { get; set; }
+        public long DataOffset { get; private set; }
         /// <summary>
-        /// Hash Algorithm key
+        /// The type of RST used to generate the hash
         /// </summary>
         public RType Type { get; private set; }
         /// <summary>
@@ -40,13 +79,12 @@ namespace Noisrev.League.IO.RST
         /// <summary>
         /// Collection of RST entries
         /// </summary>
-        public ReadOnlyCollection<RSTEntry> Entries { get; set; }
+        public ReadOnlyCollection<RSTEntry> Entries { get; private set; }
 
-        private ulong hashKey;
-        private List<RSTEntry> entries;
+        private readonly ulong hashKey;
+        private readonly List<RSTEntry> entries;
 
-        internal Stream stream = new MemoryStream();
-        internal BinaryReader br;
+        internal Stream dataStream = new MemoryStream();
 
         /// <summary>
         /// Initialize the RSTFile class
@@ -58,12 +96,11 @@ namespace Noisrev.League.IO.RST
         }
 
         /// <summary>
-        /// Initialize and set the version
+        /// Initialize and set the version and Type
         /// </summary>
         /// <param name="version">RST Version</param>
-        public RSTFile(RType type, Version version) : this()
+        public RSTFile(Version version) : this()
         {
-            this.Type    = type;
             this.Version = version;
         }
 
@@ -78,18 +115,9 @@ namespace Noisrev.League.IO.RST
         {
             // Set LazyLoad
             UseLazyLoad = useLazyLoad;
-            // Set Stream
-            long org = input.Position;
-            input.CopyTo(stream);
-            input.Seek(org, SeekOrigin.Begin);
-            stream.Seek(0, SeekOrigin.Begin);
-            if (!leaveOpen)
-            {
-                input.Dispose();
-            }
 
             // Init BinaryReader, use UTF-8
-            br = new BinaryReader(stream, Encoding.UTF8);
+            using BinaryReader br = new BinaryReader(input, Encoding.UTF8, leaveOpen);
 
             // Read magic code
             string magic = br.ReadString(3);
@@ -100,11 +128,14 @@ namespace Noisrev.League.IO.RST
             }
 
             //Set Version
-            byte major =  br.ReadByte();
+            byte major = br.ReadByte();
+
+            // If this is version 2 and version 3
             if (major == 2 || major == 3)
             {
                 // The keys for versions 2 and 3
                 Type = RType.Complex;
+                // Version 2
                 if (major == 2)
                 {
                     // 0 or 1
@@ -123,14 +154,16 @@ namespace Noisrev.League.IO.RST
                 // Version 3
                 // pass
             }
+            // If this is version 4
             else if (major == 4)
             {
                 // Key for version 4
                 Type = RType.Simple;
             }
+            // Not equivalent to versions 2, 3, and 4
             else
             {
-                // Not equivalent to versions 2, 3, and 4
+                // Invalid or unsupported version and throws an exception
                 throw new InvalidDataException($"Unsupported RST version: {Version}");
             }
 
@@ -138,10 +171,6 @@ namespace Noisrev.League.IO.RST
             hashKey = (1UL << ((int)Type)) - 1;
             // Read Count
             int count = br.ReadInt32();
-
-            // Initialize dictionary.
-            // Key is offset, value is hash
-            List<KeyValuePair<long, ulong>> pairs = new List<KeyValuePair<long, ulong>>(count);
 
             for (int i = 0; i < count; i++)
             {
@@ -153,8 +182,8 @@ namespace Noisrev.League.IO.RST
                 // Generate hash
                 ulong hash = Hashgroup & hashKey;
 
-                // Add offsets and hashes to the resource dictionary
-                pairs.Add(new KeyValuePair<long, ulong>(offset, hash));
+                // Add entry
+                entries.Add(new RSTEntry(this, offset, hash));
             }
 
             // Read minor
@@ -163,11 +192,37 @@ namespace Noisrev.League.IO.RST
             // Set Version
             Version = new Version(major, minor);
 
+            // Set Data Offset
             DataOffset = br.BaseStream.Position;
-            foreach (KeyValuePair<long, ulong> keyValuePair in pairs)
+
+            // Set Data Stream
             {
-                entries.Add(new RSTEntry(this, keyValuePair.Key, keyValuePair.Value));
+                // Set Start
+                long start = input.Position;
+                // Copy the remaining contents of the buffer to the DataStream
+                input.CopyTo(dataStream);
+                // Back To Start
+                input.Seek(start, SeekOrigin.Begin);
             }
+
+            // If doesn't use LazyLoad
+            if (!useLazyLoad)
+            {
+                // Iterate through all the entries
+                for (int i = 0; i < count; i++)
+                {
+                    // Set the content
+                    ReadText(entries[i]);
+                }
+            }
+        }
+        /// <summary>
+        /// Reading content begins at the offset specified in the stream
+        /// </summary>
+        /// <param name="entry">Entry to be read</param>
+        internal void ReadText(RSTEntry entry)
+        {
+            entry.Text = dataStream.ReadStringWithEndByte(entry.Offset, 0x00);
         }
         public void Dispose()
         {
@@ -178,10 +233,10 @@ namespace Noisrev.League.IO.RST
         {
             if (disposing)
             {
-                (stream as IDisposable)?.Dispose();
+                (dataStream as IDisposable)?.Dispose();
             }
 
-            stream = null;
+            dataStream = null;
         }
         public async ValueTask DisposeAsync()
         {
@@ -192,12 +247,11 @@ namespace Noisrev.League.IO.RST
         }
         protected virtual async ValueTask DisposeAsyncCore()
         {
-            if (stream != null)
+            if (dataStream != null)
             {
-                await stream.DisposeAsync().ConfigureAwait(false);
+                await dataStream.DisposeAsync().ConfigureAwait(false);
             }
-
-            stream = null;
+            dataStream = null;
         }
     }
 }
