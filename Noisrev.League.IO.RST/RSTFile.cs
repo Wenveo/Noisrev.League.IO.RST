@@ -227,6 +227,24 @@ namespace Noisrev.League.IO.RST
             }
         }
         /// <summary>
+        /// Add entry with key and value.
+        /// </summary>
+        /// <param name="key">The hash key/param>
+        /// <param name="value">The content</param>
+        public void AddEntry(string key, string value)
+        {
+            AddEntry(RSTHash.ComputeHash(key, Type), value);
+        }
+        /// <summary>
+        /// Add entry with hash and value.
+        /// </summary>
+        /// <param name="hash">The hash</param>
+        /// <param name="value">The content</param>
+        public void AddEntry(ulong hash, string value)
+        {
+            entries.Add(new RSTEntry(this, hash, value));
+        }
+        /// <summary>
         /// Reading content begins at the offset specified in the stream.
         /// </summary>
         /// <param name="entry">Entry to be read</param>

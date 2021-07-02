@@ -16,6 +16,14 @@ namespace Noisrev.League.IO.RST.Test
                 leaveOpen: false,
                 useLazyLoad: true);
 
+            {
+                rst.AddEntry(9527, "vicent");
+
+                RSTEntry entry = rst.Entries[rst.Entries.Count - 1];
+                Console.WriteLine($"Hash: {entry.Hash}"); // 9527
+                Console.WriteLine($"Text: {entry.Text}"); // vicent
+            }
+
             rst.Write(File.Create(path + ".rst"), false);
             rst.Dispose();
         }
