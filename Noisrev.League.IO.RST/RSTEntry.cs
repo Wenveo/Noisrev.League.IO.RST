@@ -19,7 +19,7 @@ namespace Noisrev.League.IO.RST
             }
             set { text = value; }
         }
-        public string text = null;
+        private string text = null;
         public RSTEntry(RSTFile parent, long offset, ulong hash)
         {
             Parent = parent;

@@ -17,7 +17,6 @@ namespace Noisrev.League.IO.RST.Test
                 input: File.OpenRead(path),
                 leaveOpen: false,
                 useLazyLoad: true);
-            Console.WriteLine(rst.Entries[0].text is null);
             Console.WriteLine(rst.Entries[0].Text);
         }
     }
