@@ -42,7 +42,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -82,7 +81,6 @@ namespace Noisrev.League.IO.RST
         /// </summary>
         public ReadOnlyCollection<RSTEntry> Entries { get; private set; }
 
-        private readonly ulong hashKey;
         private readonly List<RSTEntry> entries;
 
         internal Stream dataStream = new MemoryStream();
@@ -109,7 +107,7 @@ namespace Noisrev.League.IO.RST
                 Type = RType.Complex;
             }
             // Version4
-            else if (version.Major == 4) 
+            else if (version.Major == 4)
             {
                 // Set the type Simple.
                 Type = RType.Simple;
@@ -187,7 +185,7 @@ namespace Noisrev.League.IO.RST
             }
 
             // Set hash key
-            hashKey = (1UL << ((int)Type)) - 1;
+            ulong hashKey = Type.ComputeKey();
             // Read Count
             int count = br.ReadInt32();
 
