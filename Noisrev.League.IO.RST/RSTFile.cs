@@ -101,16 +101,34 @@ namespace Noisrev.League.IO.RST
         /// <param name="version">RST Version</param>
         public RSTFile(Version version) : this()
         {
+            // Version 2 and 3
+            if (version.Major == 2 || version.Major == 3)
+            {
+                // Set the type Complex.
+                Type = RType.Complex;
+            }
+            // Version4
+            else if (version.Major == 4) 
+            {
+                // Set the type Simple.
+                Type = RType.Simple;
+            }
+            // Invalid version.
+            else
+            {
+                // An exception is thrown.
+                throw new ArgumentException($"Invalid Major version {version.Major}. Must be one of 2,3,4");
+            }
+            // Set the version.
             this.Version = version;
         }
 
         /// <summary>
-        /// Read the RST file from the stream
+        /// Read the RST file from the stream.
         /// </summary>
-        /// <param name="input">The input stream</param>
-        /// <param name="leaveOpen">true to leave the stream open after the System.IO.BinaryReader object is disposed; otherwise, false.
-        /// <param name="useLazyLoad">Sets whether to use LazyLoad</param>
-        /// </param>
+        /// <param name="input">The input stream.</param>
+        /// <param name="leaveOpen">true to leave the stream open after the System.IO.BinaryReader object is disposed; otherwise, false.</param>
+        /// <param name="useLazyLoad">Sets whether to use LazyLoad.</param>
         public RSTFile(Stream input, bool leaveOpen, bool useLazyLoad) : this()
         {
             // Set LazyLoad
@@ -160,10 +178,10 @@ namespace Noisrev.League.IO.RST
                 // Key for version 4
                 Type = RType.Simple;
             }
-            // Not equivalent to versions 2, 3, and 4
+            // Not equivalent to versions 2, 3, and 4.
             else
             {
-                // Invalid or unsupported version and throws an exception
+                // Invalid or unsupported version and throws an exception.
                 throw new InvalidDataException($"Unsupported RST version: {Version}");
             }
 
@@ -199,7 +217,7 @@ namespace Noisrev.League.IO.RST
             {
                 // Set Start
                 long start = input.Position;
-                // Copy the remaining contents of the buffer to the DataStream
+                // Copy the remaining contents of the buffer to the DataStream.
                 input.CopyTo(dataStream);
                 // Back To Start
                 input.Seek(start, SeekOrigin.Begin);
@@ -217,7 +235,7 @@ namespace Noisrev.League.IO.RST
             }
         }
         /// <summary>
-        /// Reading content begins at the offset specified in the stream
+        /// Reading content begins at the offset specified in the stream.
         /// </summary>
         /// <param name="entry">Entry to be read</param>
         internal void ReadText(RSTEntry entry)

@@ -1,8 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Text;
 
 namespace Noisrev.League.IO.RST.Test
 {
@@ -18,6 +16,7 @@ namespace Noisrev.League.IO.RST.Test
                 leaveOpen: false,
                 useLazyLoad: true);
             Console.WriteLine(rst.Entries[0].Text);
+            rst.Dispose();
         }
     }
 }
