@@ -8,7 +8,7 @@ namespace Noisrev.League.IO.RST
     {
         public static ulong Comput()
         {
-            return 0;
+            return 1;
         }
     }
 }
