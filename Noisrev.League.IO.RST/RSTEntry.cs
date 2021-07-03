@@ -34,8 +34,10 @@ namespace Noisrev.League.IO.RST
         {
             get
             {
+                // Lazy Loading
                 if (text is null)
                 {
+                    // Get Content
                     Parent.ReadText(this);
                 }
                 return text;
