@@ -16,7 +16,7 @@ namespace Noisrev.League.IO.RST.Helper
         /// <exception cref="OverflowException"/>
         public static ulong ComputeOffset(this long offset, RType type)
         {
-            return Convert.ToUInt64(offset << (int)(type));
+            return Convert.ToUInt64(offset << (byte)type);
         }
     }
 }

@@ -7,12 +7,12 @@ namespace Noisrev.League.IO.RST
     /// <summary>
     /// This is the content entry for the RSTFile.
     /// </summary>
-    public class RSTEntry : IEquatable<RSTEntry>
+    public sealed class RSTEntry : ICloneable, IEquatable<RSTEntry>
     {
         /// <summary>
         /// The parent class
         /// </summary>
-        public RSTFile Parent { get; }
+        public readonly RSTFile Parent;
         /// <summary>
         /// Data offset, used to set the specified stream position and read the content
         /// </summary>
@@ -78,6 +78,11 @@ namespace Noisrev.League.IO.RST
                 return Hash == other.Hash
                     && Text == other.Text;
             }
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }
