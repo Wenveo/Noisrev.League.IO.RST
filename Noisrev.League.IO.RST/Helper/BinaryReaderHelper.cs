@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 
 namespace Noisrev.League.IO.RST.Helper
@@ -14,6 +15,11 @@ namespace Noisrev.League.IO.RST.Helper
         /// <param name="br">BinaryReader</param>
         /// <param name="count">size or Length</param>
         /// <returns>UTF-8 string</returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="DecoderExceptionFallback"></exception>
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="IOException"></exception>
         public static string ReadString<T>(this T br, int count) where T : BinaryReader
         {
             // Read count bytes and return a UTF-8 string

@@ -81,9 +81,13 @@ namespace Noisrev.League.IO.RST
         /// Collection of RST entries
         /// </summary>
         public ReadOnlyCollection<RSTEntry> Entries { get; private set; }
-
+        /// <summary>
+        /// Private list.
+        /// </summary>
         private readonly List<RSTEntry> entries;
-
+        /// <summary>
+        /// The stream that stores the RST data segment.
+        /// </summary>
         internal Stream DataStream;
         /// <summary>
         /// Initialize the RSTFile class
@@ -128,6 +132,15 @@ namespace Noisrev.League.IO.RST
         /// <param name="input">The input stream.</param>
         /// <param name="leaveOpen">true to leave the stream open after the System.IO.BinaryReader object is disposed; otherwise, false.</param>
         /// <param name="useLazyLoad">Sets whether to use LazyLoad.</param>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="DecoderExceptionFallback"></exception>
+        /// <exception cref="EndOfStreamException"></exception>
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="OverflowException"></exception>
+        /// <exception cref="IOException"></exception>
+        /// <exception cref="InvalidDataException"></exception>
         public RSTFile(Stream input, bool leaveOpen, bool useLazyLoad) : this()
         {
             // Set LazyLoad
@@ -249,14 +262,26 @@ namespace Noisrev.League.IO.RST
         /// </summary>
         /// <param name="hash">The hash</param>
         /// <returns>If it does not exist in the list, return null.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public RSTEntry Find(ulong hash)
         {
             return entries.Find(x => x.Hash == hash);
         }
         /// <summary>
+        /// Inserts an element into the <see cref="List{T}"/> at the specified index.
+        /// </summary>
+        /// <param name="index">The index</param>
+        /// <param name="entry">The item</param>
+        /// <exception cref="ArgumentOutOfRangeException"/>
+        public void Insert(int index, RSTEntry entry)
+        {
+            entries.Insert(index, entry);
+        }
+        /// <summary>
         /// Remove all items that match hash.
         /// </summary>
         /// <param name="hash">The hash</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public void Remove(ulong hash)
         {
             entries.RemoveAll(x => x.Hash == hash);
@@ -265,14 +290,16 @@ namespace Noisrev.League.IO.RST
         /// Remove the entry.
         /// </summary>
         /// <param name="entry">The entry</param>
-        public void Remove(RSTEntry entry)
+        /// <returns>true if item is successfully removed; otherwise, false. This method also returns false if item was not found in the <see cref="List{T}"/></returns>
+        public bool Remove(RSTEntry entry)
         {
-            entries.Remove(entry);
+            return entries.Remove(entry);
         }
         /// <summary>
         /// Removes the entry at the specified index
         /// </summary>
         /// <param name="index">The index</param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public void RemoveAt(int index)
         {
             entries.RemoveAt(index);
@@ -281,6 +308,12 @@ namespace Noisrev.League.IO.RST
         /// Reading content begins at the offset specified in the stream.
         /// </summary>
         /// <param name="entry">Entry to be read</param>
+        /// <exception cref="IOException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="NotSupportedException"></exception>
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="DecoderExceptionFallback"></exception>
         internal void ReadText(RSTEntry entry)
         {
             // Set the text
@@ -291,7 +324,8 @@ namespace Noisrev.League.IO.RST
         /// </summary>
         /// <param name="oldtext">To Replace</param>
         /// <param name="newtext">Replace to</param>
-        /// <param name="caseSensitive">Is it case sensitive</param>
+        /// <param name="caseSensitive">Case sensitive</param>
+        /// <exception cref="ArgumentNullException"/>
         public void ReplaceAll(string oldtext, string newtext, bool caseSensitive = false)
         {
             IEnumerable<RSTEntry> list;
@@ -309,6 +343,17 @@ namespace Noisrev.League.IO.RST
                 item.Text = newtext;
             }
         }
+        /// <summary>
+        /// Using an output stream, write the RST to that stream.
+        /// </summary>
+        /// <param name="output">The output stream.</param>
+        /// <param name="leaveOpen">true to leave the stream open after the System.IO.BinaryWriter object is disposed; otherwise, false.</param>
+        /// <exception cref="ArgumentException"/>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="EncoderFallbackException"/>
+        /// <exception cref="NotSupportedException"/>
+        /// <exception cref="ObjectDisposedException"/>
+        /// <exception cref="IOException"/>
         public void Write(Stream output, bool leaveOpen)
         {
             // Init Binary Writer

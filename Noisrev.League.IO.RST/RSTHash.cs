@@ -1,5 +1,6 @@
 ﻿using Extensions.Data;
 using Noisrev.League.IO.RST.Helper;
+using System;
 using System.Text;
 
 namespace Noisrev.League.IO.RST
@@ -15,6 +16,8 @@ namespace Noisrev.League.IO.RST
         /// <param name="toHash">The toHash is used to generate a hash.</param>
         /// <param name="type">Sets the type of hash generated.</param>
         /// <returns>The generated hash.</returns>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="EncoderFallbackException"/>
         public static ulong ComputeHash(string toHash, RType type)
         {
             toHash = toHash.ToLower();
@@ -27,6 +30,8 @@ namespace Noisrev.League.IO.RST
         /// <param name="offset">Set the offset to generate a hash with the offset.</param>
         /// <param name="type">Sets the type of hash generated.</param>
         /// <returns>The generated hash.</returns>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="EncoderFallbackException"/>
         public static ulong ComputeHash(string toHash, long offset, RType type)
         {
             return ComputeHash(toHash, type) + offset.ComputeOffset(type);

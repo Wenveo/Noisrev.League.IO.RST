@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 
 namespace Noisrev.League.IO.RST
 {
@@ -22,6 +24,12 @@ namespace Noisrev.League.IO.RST
         /// <summary>
         /// The content of the entry. String type
         /// </summary>
+        /// <exception cref="IOException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="NotSupportedException"></exception>
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="DecoderExceptionFallback"></exception>
         public string Text
         {
             get

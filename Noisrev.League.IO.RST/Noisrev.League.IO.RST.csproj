@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <Authors>Noisrev</Authors>
+    <Product>Noisrev.IO.Library</Product>
+    <Company>GZSkins</Company>
+    <Description>RST File library of League of Legends.</Description>
+    <Copyright>Copyright © 2021</Copyright>
+    <PackageProjectUrl>https://github.com/Noisrev/Noisrev.League.IO.RST</PackageProjectUrl>
+    <PackageTags>League, Leaug of Legends, RST, RSTFile, rst</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -15,6 +16,12 @@ namespace Noisrev.League.IO.RST.Helper
         /// <param name="input">BinaryReader</param>
         /// <param name="end">End Byte</param>
         /// <returns>UTF-8 string</returns>
+        /// <exception cref="IOException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="NotSupportedException"></exception>
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="DecoderExceptionFallback"></exception>
         public static string ReadStringWithEndByte<T>(this T input, long offset, byte end) where T : Stream
         {
             // Set Offset
@@ -38,6 +45,10 @@ namespace Noisrev.League.IO.RST.Helper
         /// </summary>
         /// <param name="src">left</param>
         /// <param name="dst">right</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="NotSupportedException"></exception>
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="IOException"></exception>
         public static void AutoCopy(this Stream src, out Stream dst)
         {
             // Init MemoryStream
