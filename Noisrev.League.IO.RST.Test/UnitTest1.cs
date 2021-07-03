@@ -37,7 +37,6 @@ namespace Noisrev.League.IO.RST.Test
                 RSTEntry entry1 = rst.Find(9527);
                 Console.WriteLine($"IsNull?: {entry1 is null}");
             }
-
             rst.Write(File.Create(output), false);
             rst.Dispose();
 

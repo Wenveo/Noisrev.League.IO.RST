@@ -72,7 +72,7 @@ namespace Noisrev.League.IO.RST
         /// <summary>
         /// Use LazyLoad for items
         /// </summary>
-        public bool UseLazyLoad { get; private set; }
+        public bool UseLazyLoad { get; }
         /// <summary>
         /// RST File Version
         /// </summary>
@@ -127,7 +127,6 @@ namespace Noisrev.League.IO.RST
             // Set the version.
             this.Version = version;
         }
-
         /// <summary>
         /// Read the RST file from the stream.
         /// </summary>
@@ -352,6 +351,28 @@ namespace Noisrev.League.IO.RST
             }
         }
         /// <summary>
+        /// Set the configuration.
+        /// </summary>
+        /// <param name="conf">The config</param>
+        /// <returns>It must be version 2.1 to set the configuration. Set to return true on success or false on failure.</returns>
+        public bool SetConfig(string conf)
+        {
+            // Version 2.1
+            if (Version.Major == 2 && Version.Minor == 1)
+            {
+                // Set the config
+                Config = conf;
+                // Return
+                return true;
+            }
+            // Not version 2.1
+            else
+            {
+                // Return
+                return false;
+            }
+        }
+        /// <summary>
         /// Using an output stream, write the RST to that stream.
         /// </summary>
         /// <param name="output">The output stream.</param>
@@ -361,6 +382,7 @@ namespace Noisrev.League.IO.RST
         /// <exception cref="EncoderFallbackException"/>
         /// <exception cref="NotSupportedException"/>
         /// <exception cref="ObjectDisposedException"/>
+        /// <exception cref="OverflowException"/>
         /// <exception cref="IOException"/>
         public void Write(Stream output, bool leaveOpen)
         {
