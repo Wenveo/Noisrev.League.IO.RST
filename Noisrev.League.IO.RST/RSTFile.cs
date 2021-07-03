@@ -99,7 +99,6 @@ namespace Noisrev.League.IO.RST
             // Set Entries to read-only
             this.Entries = entries.AsReadOnly();
         }
-
         /// <summary>
         /// Initialize and set the version and Type
         /// </summary>
@@ -243,20 +242,59 @@ namespace Noisrev.League.IO.RST
         /// <summary>
         /// Add entry with key and value.
         /// </summary>
-        /// <param name="key">The hash key/param>
+        /// <param name="key">The hash key</param>
         /// <param name="value">The content</param>
-        public void AddEntry(string key, string value)
+        /// <returns>If the same entry already exists, the entry is not added and false is returned. Otherwise, return true.</returns>
+        public bool AddEntry(string key, string value)
         {
-            AddEntry(RSTHash.ComputeHash(key, Type), value);
+            return AddEntry(RSTHash.ComputeHash(key, Type), value);
         }
         /// <summary>
         /// Add entry with hash and value.
         /// </summary>
         /// <param name="hash">The hash</param>
         /// <param name="value">The content</param>
-        public void AddEntry(ulong hash, string value)
+        /// <returns>If the same entry already exists, the entry is not added and false is returned. Otherwise, return true.</returns>
+        public bool AddEntry(ulong hash, string value)
         {
-            entries.Add(new RSTEntry(this, hash, value));
+            // If an entry with the same key already exists
+            // True
+            if (entries.Exists(x => x.Hash == hash))
+            {
+                // Return
+                return false;
+            }
+            // False
+            else
+            {
+                // Set the entry
+                RSTEntry entry = new RSTEntry(this, hash, value);
+                // Find an entry with the same content
+                RSTEntry findEntry = entries.Find(x => x.Text == value);
+                // Not null
+                if (findEntry != null)
+                {
+                    // Assign offsets from findEntry to Entry
+                    // Because the content is exactly the same
+                    entry.Offset = findEntry.Offset;
+                }
+                // findEntry is null
+                else
+                {
+                    // Set the offset to the end of the stream
+                    entry.Offset = DataStream.Length;
+                    // Start at the end of the stream
+                    DataStream.Seek(DataStream.Length, SeekOrigin.Begin);
+                    // Write content
+                    DataStream.Write(Encoding.UTF8.GetBytes(value));
+                    // Write end byte
+                    DataStream.WriteByte(0x00);
+                }
+                // Add entry
+                entries.Add(entry);
+                // Return
+                return true;
+            }
         }
         /// <summary>
         /// Find the entry that matches the hash.
@@ -267,16 +305,6 @@ namespace Noisrev.League.IO.RST
         public RSTEntry Find(ulong hash)
         {
             return entries.Find(x => x.Hash == hash);
-        }
-        /// <summary>
-        /// Inserts an element into the <see cref="List{T}"/> at the specified index.
-        /// </summary>
-        /// <param name="index">The index</param>
-        /// <param name="entry">The item</param>
-        /// <exception cref="ArgumentOutOfRangeException"/>
-        public void Insert(int index, RSTEntry entry)
-        {
-            entries.Insert(index, entry);
         }
         /// <summary>
         /// Remove all items that match hash.
@@ -315,7 +343,7 @@ namespace Noisrev.League.IO.RST
         /// <exception cref="NotSupportedException"></exception>
         /// <exception cref="ObjectDisposedException"></exception>
         /// <exception cref="DecoderExceptionFallback"></exception>
-        internal void ReadText(RSTEntry entry)
+        protected internal void ReadText(RSTEntry entry)
         {
             // Set the text
             entry.Text = DataStream.ReadStringWithEndByte(entry.Offset, 0x00);
@@ -416,56 +444,6 @@ namespace Noisrev.League.IO.RST
             }
             // Write Count
             bw.Write(entries.Count);
-
-            // Set the hash offset.
-            long hashOffset = bw.BaseStream.Position;
-            // Set the data offset.
-            long dataOffset = hashOffset + (entries.Count * 8) + 1; /* hashOffset + hashesSize + (byte)Minor */
-
-            // to dataOffset
-            bw.BaseStream.Seek(dataOffset, SeekOrigin.Begin);
-
-            // Initialize dictionary
-            // Use a dictionary to filter duplicate items
-            Dictionary<string, long> offsets = new Dictionary<string, long>();
-
-            // Write Data
-            foreach (var item in entries)
-            {
-                // Get the Text first. Otherwise, if this is in LazyLoad
-                // Like this:
-                //------You must set the offset, the starting point, before writing.
-                //
-                //      item.Offset = bw.BaseStream.Position - dataOffset;
-                //
-                //------So in Text.get. Since the offset has been reset, on the new offset.
-                //------It is likely that the content will not be read and an exception will be thrown.
-                //
-                //      string text = item.Text;
-                string text = item.Text;
-
-                // If there is duplicate content in the dictionary.
-                if (offsets.ContainsKey(text))
-                {
-                    // Set the offset. And do not write the content. Because there's repetition.
-                    item.Offset = offsets[text];
-                }
-                // No repeat
-                else
-                {
-                    // Write Offset
-                    item.Offset = bw.BaseStream.Position - dataOffset;
-                    // Write Text
-                    bw.Write(Encoding.UTF8.GetBytes(text));
-                    // Write End Byte
-                    bw.Write((byte)0x00);
-
-                    // Add to dictionary
-                    offsets.Add(text, item.Offset);
-                }
-            }
-            // To hashOffset
-            bw.BaseStream.Seek(hashOffset, SeekOrigin.Begin);
             // Write hashes
             foreach (var item in entries)
             {
@@ -474,13 +452,12 @@ namespace Noisrev.League.IO.RST
             }
             // Write Minor
             bw.Write((byte)Version.Minor);
+            // Copy Data
+            DataStream.Seek(0, SeekOrigin.Begin);
+            DataStream.CopyTo(bw.BaseStream);
+
             // Flush to prevent unwritten data
             bw.Flush();
-
-            // Dispose
-            this.Dispose();
-            // Set Data Stream
-            output.AutoCopy(out DataStream);
         }
         public void Dispose()
         {
@@ -526,6 +503,10 @@ namespace Noisrev.League.IO.RST
                 return false;
             }
             if (Type != other.Type || entries.Count != other.entries.Count)
+            {
+                return false;
+            }
+            if (entries.Count != other.entries.Count)
             {
                 return false;
             }
