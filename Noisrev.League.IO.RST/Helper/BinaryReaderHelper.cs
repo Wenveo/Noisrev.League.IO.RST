@@ -5,7 +5,7 @@ using System.Text;
 namespace Noisrev.League.IO.RST.Helper
 {
     /// <summary>
-    /// Binary Reader extension classes.
+    /// Binary Reader extension class.
     /// </summary>
     public static class BinaryReaderHelper
     {

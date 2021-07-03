@@ -1,7 +1,7 @@
 ﻿namespace Noisrev.League.IO.RST.Helper
 {
     /// <summary>
-    /// RType extension classes.
+    /// RType extension class.
     /// </summary>
     public static class RTypeHelper
     {

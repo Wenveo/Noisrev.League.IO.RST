@@ -4,7 +4,7 @@ using System.Text;
 namespace Noisrev.League.IO.RST.Helper
 {
     /// <summary>
-    /// Byte array extension classes.
+    /// Byte array extension class.
     /// </summary>
     public static class BytesHelper
     {

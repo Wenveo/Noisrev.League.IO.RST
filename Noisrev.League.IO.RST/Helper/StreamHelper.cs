@@ -6,7 +6,7 @@ using System.Text;
 namespace Noisrev.League.IO.RST.Helper
 {
     /// <summary>
-    /// Stream extension classes.
+    /// Stream extension class.
     /// </summary>
     public static class StreamHelper
     {

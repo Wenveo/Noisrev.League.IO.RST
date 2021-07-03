@@ -94,7 +94,9 @@ namespace Noisrev.League.IO.RST
         /// </summary>
         public RSTFile()
         {
+            // Initialize entries
             this.entries = new List<RSTEntry>();
+            // Set Entries to read-only
             this.Entries = entries.AsReadOnly();
         }
 
@@ -328,18 +330,24 @@ namespace Noisrev.League.IO.RST
         /// <exception cref="ArgumentNullException"/>
         public void ReplaceAll(string oldtext, string newtext, bool caseSensitive = false)
         {
+            // Set a list
             IEnumerable<RSTEntry> list;
+            // True
             if (caseSensitive)
             {
+                // Set list with case sensitive
                 list = entries.Where(x => x.Text.Contains(oldtext));
             }
+            // Flase
             else
             {
+                // Set list. not case sensitive
                 list = entries.Where(x => x.Text.ToLower().Contains(oldtext.ToLower()));
             }
 
             foreach (var item in list)
             {
+                // Set Text
                 item.Text = newtext;
             }
         }
@@ -447,6 +455,7 @@ namespace Noisrev.League.IO.RST
             // Flush to prevent unwritten data
             bw.Flush();
 
+            // Dispose
             this.Dispose();
             // Set Data Stream
             output.AutoCopy(out DataStream);
@@ -462,7 +471,6 @@ namespace Noisrev.League.IO.RST
             {
                 (DataStream as IDisposable)?.Dispose();
             }
-
             DataStream = null;
         }
         public async ValueTask DisposeAsync()

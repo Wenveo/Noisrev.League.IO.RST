@@ -3,7 +3,7 @@
 namespace Noisrev.League.IO.RST.Helper
 {
     /// <summary>
-    /// Offset extension classes.
+    /// Offset extension class.
     /// </summary>
     public static class OffsetHelper
     {
