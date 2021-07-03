@@ -7,8 +7,10 @@
     <Company>GZSkins</Company>
     <Description>RST File library of League of Legends.</Description>
     <Copyright>Copyright © 2021</Copyright>
-    <PackageProjectUrl>https://github.com/Noisrev/Noisrev.League.IO.RST</PackageProjectUrl>
     <PackageTags>League, Leaug of Legends, RST, RSTFile, rst</PackageTags>
+    <UserSecretsId>c1187aa9-c082-49ae-b7b1-9286780f330c</UserSecretsId>
+    <Version>1.1.0</Version>
+    <RepositoryUrl>https://github.com/Noisrev/Noisrev.League.IO.RST</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
