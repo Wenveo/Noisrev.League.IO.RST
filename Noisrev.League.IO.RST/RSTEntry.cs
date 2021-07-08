@@ -42,7 +42,10 @@ namespace Noisrev.League.IO.RST
                 }
                 return text;
             }
-            set { text = value; }
+            set 
+            { 
+                text = value;
+            }
         }
         private string text = null;
         /// <summary>

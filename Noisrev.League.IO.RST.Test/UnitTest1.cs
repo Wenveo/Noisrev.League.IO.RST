@@ -19,28 +19,28 @@ namespace Noisrev.League.IO.RST.Test
 
             {
                 // add
-                //rst.AddEntry(9527, "vicent");
+                rst.AddEntry(9527, "vicent");
 
-                // find
-                /*RSTEntry entry = rst.Find(9527);
+                //find
+                RSTEntry entry = rst.Find(9527);
 
                 PrintEntry(entry);
 
                 // replace
-                rst.ReplaceAll("vicent", "newValue");
+                //rst.ReplaceAll("vicent", "newValue");
                 PrintEntry(entry);
 
                 // remove
                 rst.Remove(entry);
 
                 RSTEntry entry1 = rst.Find(9527);
-                Console.WriteLine($"IsNull?: {entry1 is null}");*/
+                Console.WriteLine($"IsNull?: {entry1 is null}");
             }
             rst.Write(File.Create(output), false);
 
-            /*rst.Dispose();
+            rst.Dispose();
 
-            Console.WriteLine($"Equals: {rst.Equals(new RSTFile(File.OpenRead(output), false, false))}");*/
+            Console.WriteLine($"Equals: {rst.Equals(new RSTFile(File.OpenRead(output), false, false))}");
         }
         private void PrintEntry(RSTEntry entry)
         {
