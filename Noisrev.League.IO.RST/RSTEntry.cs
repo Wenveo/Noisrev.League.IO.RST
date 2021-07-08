@@ -24,30 +24,7 @@ namespace Noisrev.League.IO.RST
         /// <summary>
         /// The content of the entry. String type
         /// </summary>
-        /// <exception cref="IOException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="NotSupportedException"></exception>
-        /// <exception cref="ObjectDisposedException"></exception>
-        /// <exception cref="DecoderExceptionFallback"></exception>
-        public string Text
-        {
-            get
-            {
-                // Lazy Loading
-                if (text is null)
-                {
-                    // Get Content
-                    Parent.ReadText(this);
-                }
-                return text;
-            }
-            set 
-            { 
-                text = value;
-            }
-        }
-        private string text = null;
+        public string Text { get; set; }
         /// <summary>
         /// Initialize RSTEntry, and set the parent, offset, and hash.
         /// </summary>
@@ -68,7 +45,7 @@ namespace Noisrev.League.IO.RST
         /// <param name="value">The content</param>
         public RSTEntry(RSTFile parent, ulong hash, string value) : this(parent, 0, hash)
         {
-            text = value;
+            Text = value;
         }
         public bool Equals(RSTEntry other)
         {

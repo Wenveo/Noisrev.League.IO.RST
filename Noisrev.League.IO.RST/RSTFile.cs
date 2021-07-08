@@ -70,10 +70,6 @@ namespace Noisrev.League.IO.RST
         /// </summary>
         public long DataOffset { get; private set; }
         /// <summary>
-        /// Use LazyLoad for items
-        /// </summary>
-        public bool UseLazyLoad { get; }
-        /// <summary>
         /// RST File Version
         /// </summary>
         public global::System.Version Version { get; private set; }
@@ -132,7 +128,6 @@ namespace Noisrev.League.IO.RST
         /// </summary>
         /// <param name="input">The input stream.</param>
         /// <param name="leaveOpen">true to leave the stream open after the System.IO.BinaryReader object is disposed; otherwise, false.</param>
-        /// <param name="useLazyLoad">Sets whether to use LazyLoad.</param>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
@@ -415,12 +410,13 @@ namespace Noisrev.League.IO.RST
             // Set the data offset.
             long dataOffset = hashOffset + (entries.Count * 8) + 1; /* hashOffset + hashesSize + (byte)Minor */
 
-            // to dataOffset
+            // Go to the dataOffset
             bw.BaseStream.Seek(dataOffset, SeekOrigin.Begin);
 
             // Initialize dictionary
             // Use a dictionary to filter duplicate items
             Dictionary<string, long> offsets = new Dictionary<string, long>();
+
             // Write Data
             for (int i = 0; i < entries.Count; i++)
             {
@@ -447,7 +443,7 @@ namespace Noisrev.League.IO.RST
                     offsets.Add(text, entry.Offset);
                 }
             }
-            // To hashOffset
+            // Go to the hashOffset
             bw.BaseStream.Seek(hashOffset, SeekOrigin.Begin);
             // Write hashes
             for (int i = 0; i < entries.Count; i++)
