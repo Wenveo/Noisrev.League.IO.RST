@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>Noisrev</Authors>
-    <Product>Noisrev.IO.Library</Product>
+    <Product>Noisrev.Library</Product>
     <Company>GZSkins</Company>
     <Description>RST File library of League of Legends.</Description>
     <Copyright>Copyright © 2021</Copyright>
@@ -11,6 +11,7 @@
     <UserSecretsId>c1187aa9-c082-49ae-b7b1-9286780f330c</UserSecretsId>
     <Version>1.2.0</Version>
     <RepositoryUrl>https://github.com/Noisrev/Noisrev.League.IO.RST</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
