@@ -17,12 +17,9 @@ namespace Noisrev.League.IO.RST.Helper
         /// <param name="end">End Byte</param>
         /// <returns>UTF-8 string</returns>
         /// <exception cref="IOException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="NotSupportedException"></exception>
         /// <exception cref="ObjectDisposedException"></exception>
-        /// <exception cref="DecoderExceptionFallback"></exception>
-        public static string ReadStringWithEndByte<T>(this T input, long offset, byte end) where T : Stream
+        public static byte[] ReadBufferWithEndByte<T>(this T input, long offset, byte end) where T : Stream
         {
             // Set Offset
             input.Seek(offset, SeekOrigin.Begin);
@@ -38,8 +35,21 @@ namespace Noisrev.League.IO.RST.Helper
                 Buffer.Add(tmp);
             }
             // To an array and convert it to a UTF-8 string
-            return Buffer.ToArray().GetString(Encoding.UTF8);
+            return Buffer.ToArray();
         }
+        /// <summary>
+        /// Loop through the bytes and stop reading when a matching <paramref name="end"/> is read.
+        /// </summary>
+        /// <param name="input">BinaryReader</param>
+        /// <param name="end">End Byte</param>
+        /// <returns>UTF-8 string</returns>
+        /// <exception cref="IOException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="NotSupportedException"></exception>
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="DecoderExceptionFallback"></exception>
+        public static string ReadStringWithEndByte<T>(this T input, long offset, byte end) where T : Stream => ReadBufferWithEndByte(input, offset, end).GetString(Encoding.UTF8);
         /// <summary>
         /// Copy the stream and return the starting position.
         /// </summary>

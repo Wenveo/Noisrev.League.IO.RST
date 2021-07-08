@@ -142,11 +142,8 @@ namespace Noisrev.League.IO.RST
         /// <exception cref="OverflowException"></exception>
         /// <exception cref="IOException"></exception>
         /// <exception cref="InvalidDataException"></exception>
-        public RSTFile(Stream input, bool leaveOpen, bool useLazyLoad) : this()
+        public RSTFile(Stream input, bool leaveOpen) : this()
         {
-            // Set LazyLoad
-            UseLazyLoad = useLazyLoad;
-
             // Init BinaryReader, use UTF-8
             using BinaryReader br = new BinaryReader(input, Encoding.UTF8, leaveOpen);
 
@@ -229,15 +226,11 @@ namespace Noisrev.League.IO.RST
             // Set Data Stream
             input.AutoCopy(out DataStream);
 
-            // If doesn't use LazyLoad
-            if (!useLazyLoad)
+            // Iterate through all the entries
+            for (int i = 0; i < count; i++)
             {
-                // Iterate through all the entries
-                for (int i = 0; i < count; i++)
-                {
-                    // Set the content
-                    ReadText(entries[i]);
-                }
+                // Set the content
+                ReadText(entries[i]);
             }
         }
         /// <summary>
@@ -428,17 +421,17 @@ namespace Noisrev.League.IO.RST
             // Initialize dictionary
             // Use a dictionary to filter duplicate items
             Dictionary<string, long> offsets = new Dictionary<string, long>();
-
             // Write Data
             for (int i = 0; i < entries.Count; i++)
             {
                 RSTEntry entry = entries[i];
+                string text = entry.Text;
 
                 // If there is duplicate content in the dictionary.
-                if (offsets.ContainsKey(entry.Text))
+                if (offsets.ContainsKey(text))
                 {
                     // Set the offset. And do not write the content. Because there's repetition.
-                    entry.Offset = offsets[entry.Text];
+                    entry.Offset = offsets[text];
                 }
                 // No repeat
                 else
@@ -446,12 +439,12 @@ namespace Noisrev.League.IO.RST
                     // Write Offset
                     entry.Offset = bw.BaseStream.Position - dataOffset;
                     // Write Text
-                    bw.Write(Encoding.UTF8.GetBytes(entry.Text));
+                    bw.Write(Encoding.UTF8.GetBytes(text));
                     // Write End Byte
                     bw.Write((byte)0x00);
 
                     // Add to dictionary
-                    offsets.Add(entry.Text, entry.Offset);
+                    offsets.Add(text, entry.Offset);
                 }
             }
             // To hashOffset
