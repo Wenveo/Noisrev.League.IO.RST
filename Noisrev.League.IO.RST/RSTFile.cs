@@ -433,15 +433,6 @@ namespace Noisrev.League.IO.RST
             for (int i = 0; i < entries.Count; i++)
             {
                 RSTEntry entry = entries[i];
-                // Get the Text first. Otherwise, if this is in LazyLoad
-                // Like this:
-                //------You must set the offset, the starting point, before writing.
-                //
-                //      item.Offset = bw.BaseStream.Position - dataOffset;
-                //
-                //------So in Text.get. Since the offset has been reset, on the new offset.
-                //------It is likely that the content will not be read and an exception will be thrown.
-                //
 
                 // If there is duplicate content in the dictionary.
                 if (offsets.ContainsKey(entry.Text))
