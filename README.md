@@ -1,6 +1,6 @@
 # Noisrev.League.IO.RST
 
-This is a library that parses and manipulates League of Legends RST files.
+***This is a library that parses and manipulates League of Legends RST files.***
 
 <a>
   <img src="https://img.shields.io/badge/.Net%20Standard-v2.1-brightgreen"></img>
@@ -26,11 +26,37 @@ It is used to store text messages in League of Legends games.
 - Like "Riven", "Championship Riven 2016", "\<mainText>\<stats>\<attention>%i:scaleAP% 25\</attention> Ability Power\<br>\<attention>%i:scaleMPen% 15%\</attention> Magic Penetration\</stats>\</mainText>\<br>"
 - And more...
 
+***If you would like to see more details about the RST file, please see: [RSTFile.cs](Noisrev.League.IO.RST/RSTFile.cs).***
+
 # Note!
-- For the sake of performance, we removed the lazy loading function of RST files in version 1.2.
+- For the sake of performance, we removed the lazy loading function of RST files in version ***1.2***.
 
 - The reason is that when reading and writing RST files, using lazy loading to read will be 100 ~ 150ms slower than not using lazy loading.
+# Release Note
+
+***v1.2.1***
+- Remove unnecessary code.
+
+***v1.2***
+- Remove lazy loading mode.
+- Add the "SetConfig" method. // This is only applicable to RST files in version 2.1
+
+***v1.1***
+- Add "Insert" method.
+
+***v1.0***
+- Support for reading and writing RST.
+- Support loading RST files using lazy loading mode.
+- Add" Add", "Find", "Remove", "ReplaceAll" methods.
+- Add "RST Hash Algorithm".
+
+# Install
+- Install using NuGet Package Manager in VisualStudio.
+- .NET CLI : `dotnet add package Noisrev.League.IO.RST`
 
 # Simple
-- `using Noisrev.League.IO.RST;`
-- `RSTFile rst = new(path)`
+```
+using Noisrev.League.IO.RST;
+
+RSTFile rst = new(input: File.OpenRead("your rst file path"), leaveOpen: false);
+```
