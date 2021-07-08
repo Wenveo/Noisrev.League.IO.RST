@@ -1,9 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.IO;
-using System.Net;
 using System.Net.Http;
-using System.Web;
 
 namespace Noisrev.League.IO.RST.Test
 {
