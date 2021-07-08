@@ -1,1 +1,36 @@
 # Noisrev.League.IO.RST
+
+This is a library that parses and manipulates League of Legends RST files.
+
+<a>
+  <img src="https://img.shields.io/badge/.Net%20Standard-v2.1-brightgreen"></img>
+</a>
+<a href="https://github.com/Noisrev/Noisrev.League.IO.RST/blob/master/LICENSE/">
+  <img src="https://img.shields.io/github/license/noisrev/noisrev.league.io.rst"></img>
+</a>
+<a href="https://www.nuget.org/packages/Noisrev.League.IO.RST/">
+  <img src="https://img.shields.io/nuget/dt/noisrev.league.io.rst"></img>
+</a>
+<a href="https://www.nuget.org/packages/Noisrev.League.IO.RST/">
+  <img src="https://img.shields.io/nuget/v/noisrev.league.io.rst"></img>
+</a>
+<a href="https://github.com/Noisrev/Noisrev.League.IO.RST/releases/tag/v1.2.1">
+  <img src="https://img.shields.io/github/v/release/noisrev/noisrev.league.io.rst"></img>
+</a>
+
+# RST (Riot String Table)
+The RST file is a file that stores a list of strings.
+
+It is used to store text messages in League of Legends games.
+- For example: champion name, skill description, skin name, etc
+- Like "Riven", "Championship Riven 2016", "\<mainText>\<stats>\<attention>%i:scaleAP% 25\</attention> Ability Power\<br>\<attention>%i:scaleMPen% 15%\</attention> Magic Penetration\</stats>\</mainText>\<br>"
+- And more...
+
+# Note!
+- For the sake of performance, we removed the lazy loading function of RST files in version 1.2.
+
+- The reason is that when reading and writing RST files, using lazy loading to read will be 100 ~ 150ms slower than not using lazy loading.
+
+# Simple
+- `using Noisrev.League.IO.RST;`
+- `RSTFile rst = new(path)`
