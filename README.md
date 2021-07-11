@@ -22,16 +22,16 @@
 The RST file is a file that stores a list of strings.
 
 It is used to store text messages in League of Legends games.
-- For example: champion name, skill description, skin name, etc
-- Like "Riven", "Championship Riven 2016", "\<mainText>\<stats>\<attention>%i:scaleAP% 25\</attention> Ability Power\<br>\<attention>%i:scaleMPen% 15%\</attention> Magic Penetration\</stats>\</mainText>\<br>"
+- ***For example:*** champion name, skill description, skin name, etc
+- *Like:* **"Riven"**, **"Championship Riven 2016"**, **"\<mainText>\<stats>\<attention>%i:scaleAP% 25\</attention> Ability Power\<br>\<attention>%i:scaleMPen% 15%\</attention> Magic Penetration\</stats>\</mainText>\<br>"**
 - And more...
 
 ***If you would like to see more details about the RST file, please see: [RSTFile.cs](Noisrev.League.IO.RST/RSTFile.cs).***
 
 # Note!
-- For the sake of performance, we removed the lazy loading function of RST files in version ***1.2***.
+- For the sake of performance, we **removed** the lazy loading mode of RST files in version ***1.2***.
 
-- The reason is that when reading and writing RST files, using lazy loading to read will be 100 ~ 150ms slower than not using lazy loading.
+- The reason is that when reading and writing RST files, using lazy loading to read will be ***100 ~ 150ms*** slower than not using lazy loading.
 # Release Note
 
 ***v1.2.1***
