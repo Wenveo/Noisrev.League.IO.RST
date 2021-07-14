@@ -51,7 +51,7 @@ It is used to store text messages in League of Legends games.
 - Add "RST Hash Algorithm".
 
 # Install
-- Install using NuGet Package Manager in VisualStudio.
+- Install using NuGet Package Manager in Visual Studio.
 - .NET CLI : `dotnet add package Noisrev.League.IO.RST`
 
 # Simple
