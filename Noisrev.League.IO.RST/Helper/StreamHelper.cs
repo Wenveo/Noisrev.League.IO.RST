@@ -6,12 +6,12 @@ using System.Text;
 namespace Noisrev.League.IO.RST.Helper
 {
     /// <summary>
-    ///     Stream extension class.
+    /// Stream extension class.
     /// </summary>
     public static class StreamHelper
     {
         /// <summary>
-        ///     Loop through the bytes and stop reading when a matching <paramref name="end" /> is read.
+        /// Loop through the bytes and stop reading when a matching <paramref name="end"/> is read.
         /// </summary>
         /// <param name="input">BinaryReader</param>
         /// <param name="offset">The offset</param>
@@ -31,15 +31,17 @@ namespace Noisrev.League.IO.RST.Helper
             byte tmp;
             // Loop byte read
             while ( /*input.CanRead && */(tmp = (byte) input.ReadByte()) != end)
+            {
                 // Current byte is not end byte, added to buffer
                 buffer.Add(tmp);
+            }
 
             // To an array and convert it to a UTF-8 string
             return buffer.ToArray();
         }
 
         /// <summary>
-        ///     Loop through the bytes and stop reading when a matching <paramref name="end" /> is read.
+        /// Loop through the bytes and stop reading when a matching <paramref name="end"/> is read.
         /// </summary>
         /// <param name="input">BinaryReader</param>
         /// <param name="offset">The Offset</param>
@@ -51,13 +53,11 @@ namespace Noisrev.League.IO.RST.Helper
         /// <exception cref="NotSupportedException"></exception>
         /// <exception cref="ObjectDisposedException"></exception>
         /// <exception cref="DecoderExceptionFallback"></exception>
-        public static string ReadStringWithEndByte<T>(this T input, long offset, byte end) where T : Stream
-        {
-            return ReadBufferWithEndByte(input, offset, end).GetString(Encoding.UTF8);
-        }
+        public static string ReadStringWithEndByte<T>(this T input, long offset, byte end) where T : Stream =>
+            ReadBufferWithEndByte(input, offset, end).GetString(Encoding.UTF8);
 
         /// <summary>
-        ///     Copy the stream and return the starting position.
+        /// Copy the stream and return the starting position.
         /// </summary>
         /// <param name="src">left</param>
         /// <param name="dst">right</param>

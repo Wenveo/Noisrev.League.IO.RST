@@ -38,6 +38,7 @@
  *                                                                                                       ---DateTime : 7.2.2021 --13.14
  */
 
+using Noisrev.League.IO.RST.Helper;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -46,67 +47,104 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Noisrev.League.IO.RST.Helper;
-using Noisrev.League.IO.RST.Intefaces;
 
 namespace Noisrev.League.IO.RST
 {
     /// <summary>
-    ///     Riot String Table File
+    /// Riot String Table File
     /// </summary>
-    public class RSTFile : IRST, IEquatable<RSTFile>
+    public class RSTFile : IAsyncDisposable, IDisposable, IEquatable<RSTFile>
     {
         /// <summary>
-        ///     Private list.
+        /// Magic Code
+        /// </summary>
+        public string Magic { get; }
+
+        /// <summary>
+        /// RST File Version
+        /// </summary>
+        public byte Version { get; }
+
+        /// <summary>
+        /// RST File Font Config, using by RST v2
+        /// </summary>
+        public string Config { get; private set; }
+
+        /// <summary>
+        /// The data segment is located at Position of the current stream
+        /// </summary>
+        public long DataOffset { get; }
+
+        /// <summary>
+        /// The type of RST used to generate the hash
+        /// </summary>
+        public RType Type { get; }
+
+        /// <summary>
+        /// Mode of the RST
+        /// </summary>
+        public RMode Mode { get; }
+
+        /// <summary>
+        /// Collection of RST entries
+        /// </summary>
+        public ReadOnlyCollection<RSTEntry> Entries { get; }
+
+        /// <summary>
+        /// Private list.
         /// </summary>
         private readonly List<RSTEntry> _entries;
 
         /// <summary>
-        ///     The stream that stores the RST data segment.
+        /// The stream that stores the RST data segment.
         /// </summary>
         private Stream _dataStream;
 
         /// <summary>
-        ///     Initialize the RSTFile class
+        /// Initialize the RSTFile class
         /// </summary>
         private RSTFile()
         {
             // Initialize entries
-            _entries = new List<RSTEntry>();
+            this._entries = new List<RSTEntry>();
             // Set Entries to read-only
-            Entries = _entries.AsReadOnly();
+            this.Entries = _entries.AsReadOnly();
         }
 
         /// <summary>
-        ///     Initialize and set the version and Type
+        /// Initialize and set the version and Type
         /// </summary>
         /// <param name="version">RST Version</param>
         public RSTFile(byte version) : this()
         {
             // Version 2 and 3
             if (version >= 2 && version < 4)
+            {
                 // Set the type Complex.
                 Type = RType.Complex;
+            }
             // Version4
             else if (version == 4)
+            {
                 // Set the type Simple.
                 Type = RType.Simple;
+            }
             // Invalid version.
             else
+            {
                 // An exception is thrown.
                 throw new ArgumentException($"Invalid Major version {version}. Must be one of 2,3,4");
+            }
+
             // Set the version.
-            Version = version;
+            this.Version = version;
         }
 
         /// <summary>
-        ///     Read the RST file from the stream.
+        /// Read the RST file from the stream.
         /// </summary>
         /// <param name="input">The input stream.</param>
-        /// <param name="leaveOpen">
-        ///     true to leave the stream open after the System.IO.BinaryReader object is disposed; otherwise,
-        ///     false.
-        /// </param>
+        /// <param name="leaveOpen">true to leave the stream open after the System.IO.BinaryReader object is disposed; otherwise, false.</param>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
@@ -124,8 +162,10 @@ namespace Noisrev.League.IO.RST
             // Read magic code
             Magic = br.ReadString(3);
             if (Magic != "RST")
+            {
                 // Invalid magic code
                 throw new InvalidDataException($"Invalid RST file header: {Magic}");
+            }
 
             //Set Version
             Version = br.ReadByte();
@@ -175,7 +215,7 @@ namespace Noisrev.League.IO.RST
                 var hashGroup = br.ReadUInt64();
 
                 // Generate offset
-                var offset = Convert.ToInt64(hashGroup >> (int) Type);
+                var offset = Convert.ToInt64(hashGroup >> ((int) Type));
                 // Generate hash
                 var hash = hashGroup & hashKey;
 
@@ -194,57 +234,14 @@ namespace Noisrev.League.IO.RST
 
             // Iterate through all the entries
             for (var i = 0; i < count; i++)
+            {
                 // Set the content
                 ReadText(_entries[i]);
-        }
-
-        public bool Equals(RSTFile other)
-        {
-            if (other == null) return false;
-            if (!Version.Equals(other.Version)) return false;
-            if (Version == 2 && !Config.Equals(other.Config)) return false;
-            if (Type != other.Type || Mode != other.Mode || _entries.Count != other._entries.Count) return false;
-
-            return !_entries.Where((t, i) => !t.Equals(other._entries[i])).Any();
+            }
         }
 
         /// <summary>
-        ///     Magic Code
-        /// </summary>
-        public string Magic { get; }
-
-        /// <summary>
-        ///     RST File Version
-        /// </summary>
-        public byte Version { get; }
-
-        /// <summary>
-        ///     RST File Font Config, using by RST v2
-        /// </summary>
-        public string Config { get; private set; }
-
-        /// <summary>
-        ///     The data segment is located at Position of the current stream
-        /// </summary>
-        public long DataOffset { get; }
-
-        /// <summary>
-        ///     The type of RST used to generate the hash
-        /// </summary>
-        public RType Type { get; }
-
-        /// <summary>
-        ///     Mode of the RST
-        /// </summary>
-        public RMode Mode { get; }
-
-        /// <summary>
-        ///     Collection of RST entries
-        /// </summary>
-        public ReadOnlyCollection<RSTEntry> Entries { get; }
-
-        /// <summary>
-        ///     Add entry with key and value.
+        /// Add entry with key and value.
         /// </summary>
         /// <param name="key">The hash key</param>
         /// <param name="value">The content</param>
@@ -254,7 +251,7 @@ namespace Noisrev.League.IO.RST
         }
 
         /// <summary>
-        ///     Add entry with hash and value.
+        /// Add entry with hash and value.
         /// </summary>
         /// <param name="hash">The hash</param>
         /// <param name="value">The content</param>
@@ -264,7 +261,7 @@ namespace Noisrev.League.IO.RST
         }
 
         /// <summary>
-        ///     Find the entry that matches the hash.
+        /// Find the entry that matches the hash.
         /// </summary>
         /// <param name="hash">The hash</param>
         /// <returns>If it does not exist in the list, return null.</returns>
@@ -275,18 +272,18 @@ namespace Noisrev.League.IO.RST
         }
 
         /// <summary>
-        ///     Inserts an element into the <see cref="List{T}" /> at the specified index.
+        /// Inserts an element into the <see cref="List{T}"/> at the specified index.
         /// </summary>
         /// <param name="index">The index</param>
         /// <param name="entry">The item</param>
-        /// <exception cref="ArgumentOutOfRangeException" />
+        /// <exception cref="ArgumentOutOfRangeException"/>
         public void Insert(int index, RSTEntry entry)
         {
             _entries.Insert(index, entry);
         }
 
         /// <summary>
-        ///     Remove all items that match hash.
+        /// Remove all items that match hash.
         /// </summary>
         /// <param name="hash">The hash</param>
         /// <exception cref="ArgumentNullException"></exception>
@@ -296,20 +293,17 @@ namespace Noisrev.League.IO.RST
         }
 
         /// <summary>
-        ///     Remove the entry.
+        /// Remove the entry.
         /// </summary>
         /// <param name="entry">The entry</param>
-        /// <returns>
-        ///     true if item is successfully removed; otherwise, false. This method also returns false if item was not found
-        ///     in the <see cref="List{T}" />
-        /// </returns>
+        /// <returns>true if item is successfully removed; otherwise, false. This method also returns false if item was not found in the <see cref="List{T}"/></returns>
         public bool Remove([NotNull] RSTEntry entry)
         {
             return _entries.Remove(entry);
         }
 
         /// <summary>
-        ///     Removes the entry at the specified index
+        /// Removes the entry at the specified index
         /// </summary>
         /// <param name="index">The index</param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
@@ -319,40 +313,7 @@ namespace Noisrev.League.IO.RST
         }
 
         /// <summary>
-        ///     Replace the matching items in the entire entry. And replace them.
-        /// </summary>
-        /// <param name="oldText">To Replace</param>
-        /// <param name="newText">Replace to</param>
-        /// <param name="caseSensitive">Case sensitive</param>
-        /// <exception cref="ArgumentNullException" />
-        public void ReplaceAll([NotNull] string oldText, [NotNull] string newText, bool caseSensitive = false)
-        {
-            // Set a list
-            var list = caseSensitive
-                ? _entries.Where(x => x.Text.Contains(oldText))
-                : _entries.Where(x => x.Text.ToLower().Contains(oldText.ToLower()));
-
-            foreach (var item in list)
-                // Set Text
-                item.Text = newText;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        public async ValueTask DisposeAsync()
-        {
-            await DisposeAsyncCore();
-
-            Dispose(false);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        ///     Reading content begins at the offset specified in the stream.
+        /// Reading content begins at the offset specified in the stream.
         /// </summary>
         /// <param name="entry">Entry to be read</param>
         /// <exception cref="IOException"></exception>
@@ -368,7 +329,28 @@ namespace Noisrev.League.IO.RST
         }
 
         /// <summary>
-        ///     Set the configuration.
+        /// Replace the matching items in the entire entry. And replace them.
+        /// </summary>
+        /// <param name="oldText">To Replace</param>
+        /// <param name="newText">Replace to</param>
+        /// <param name="caseSensitive">Case sensitive</param>
+        /// <exception cref="ArgumentNullException"/>
+        public void ReplaceAll([NotNull] string oldText, [NotNull] string newText, bool caseSensitive = false)
+        {
+            // Set a list
+            var list = caseSensitive
+                ? _entries.Where(x => x.Text.Contains(oldText))
+                : _entries.Where(x => x.Text.ToLower().Contains(oldText.ToLower()));
+
+            foreach (var item in list)
+            {
+                // Set Text
+                item.Text = newText;
+            }
+        }
+
+        /// <summary>
+        /// Set the configuration.
         /// </summary>
         /// <param name="conf">The config</param>
         /// <returns>It must be version 2.1 to set the configuration. Set to return true on success or false on failure.</returns>
@@ -383,26 +365,25 @@ namespace Noisrev.League.IO.RST
                 return true;
             }
             // Not version 2
-
-            // Return
-            return false;
+            else
+            {
+                // Return
+                return false;
+            }
         }
 
         /// <summary>
-        ///     Using an output stream, write the RST to that stream.
+        /// Using an output stream, write the RST to that stream.
         /// </summary>
         /// <param name="output">The output stream.</param>
-        /// <param name="leaveOpen">
-        ///     true to leave the stream open after the System.IO.BinaryWriter object is disposed; otherwise,
-        ///     false.
-        /// </param>
-        /// <exception cref="ArgumentException" />
-        /// <exception cref="ArgumentNullException" />
-        /// <exception cref="EncoderFallbackException" />
-        /// <exception cref="NotSupportedException" />
-        /// <exception cref="ObjectDisposedException" />
-        /// <exception cref="OverflowException" />
-        /// <exception cref="IOException" />
+        /// <param name="leaveOpen">true to leave the stream open after the System.IO.BinaryWriter object is disposed; otherwise, false.</param>
+        /// <exception cref="ArgumentException"/>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="EncoderFallbackException"/>
+        /// <exception cref="NotSupportedException"/>
+        /// <exception cref="ObjectDisposedException"/>
+        /// <exception cref="OverflowException"/>
+        /// <exception cref="IOException"/>
         public void Write(Stream output, bool leaveOpen)
         {
             if (output == null) throw new ArgumentNullException(nameof(output));
@@ -424,12 +405,14 @@ namespace Noisrev.League.IO.RST
 
                 // True
                 if (hasConfig)
-                    // Write Config
                 {
-                    // Write Size
-                    bw.Write(Config.Length);
-                    // Write Content
-                    bw.Write(Config.ToArray());
+                    // Write Config
+                    {
+                        // Write Size
+                        bw.Write(Config.Length);
+                        // Write Content
+                        bw.Write(Config.ToArray());
+                    }
                 }
             }
 
@@ -439,7 +422,7 @@ namespace Noisrev.League.IO.RST
             // Set the hash offset.
             var hashOffset = bw.BaseStream.Position;
             // Set the data offset.
-            var dataOffset = hashOffset + _entries.Count * 8 + 1; /* hashOffset + hashesSize + (byte)Minor */
+            var dataOffset = hashOffset + (_entries.Count * 8) + 1; /* hashOffset + hashesSize + (byte)Minor */
 
             // Go to the dataOffset
             bw.BaseStream.Seek(dataOffset, SeekOrigin.Begin);
@@ -478,8 +461,11 @@ namespace Noisrev.League.IO.RST
             bw.BaseStream.Seek(hashOffset, SeekOrigin.Begin);
             // Write hashes
             foreach (var entry in _entries)
+            {
                 // Write RST Hash
                 bw.Write(RSTHash.ComputeHash(entry.Hash, entry.Offset, Type));
+            }
+
             // Write Mode
             bw.Write((byte) Mode);
 
@@ -487,21 +473,68 @@ namespace Noisrev.League.IO.RST
             bw.Flush();
 
             // Dispose
-            Dispose();
+            this.Dispose();
             // Set Data Stream
             output.AutoCopy(out _dataStream);
         }
 
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing) (_dataStream as IDisposable)?.Dispose();
+            if (disposing)
+            {
+                (_dataStream as IDisposable)?.Dispose();
+            }
+
             _dataStream = null;
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            await DisposeAsyncCore();
+
+            Dispose(disposing: false);
+            GC.SuppressFinalize(this);
         }
 
         protected virtual async ValueTask DisposeAsyncCore()
         {
-            if (_dataStream != null) await _dataStream.DisposeAsync().ConfigureAwait(false);
+            if (_dataStream != null)
+            {
+                await _dataStream.DisposeAsync().ConfigureAwait(false);
+            }
+
             _dataStream = null;
+        }
+
+        public bool Equals(RSTFile other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (!Version.Equals(other.Version))
+            {
+                return false;
+            }
+
+            if (Version == 2 && !Config.Equals(other.Config))
+            {
+                return false;
+            }
+
+            if (Type != other.Type || Mode != other.Mode || _entries.Count != other._entries.Count)
+            {
+                return false;
+            }
+
+            return !_entries.Where((t, i) => !t.Equals(other._entries[i])).Any();
         }
     }
 }

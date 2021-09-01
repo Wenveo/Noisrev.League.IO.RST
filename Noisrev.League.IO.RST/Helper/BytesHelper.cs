@@ -4,12 +4,12 @@ using System.Text;
 namespace Noisrev.League.IO.RST.Helper
 {
     /// <summary>
-    ///     Byte array extension class.
+    /// Byte array extension class.
     /// </summary>
     public static class BytesHelper
     {
         /// <summary>
-        ///     Return the string of the encoding specified in encoding.
+        /// Return the string of the encoding specified in encoding.
         /// </summary>
         /// <param name="buffer">Byte array</param>
         /// <param name="encoding">The encoding</param>
