@@ -53,9 +53,12 @@ namespace Noisrev.League.IO.RST.Test
         {
             var path = @"C:\Users\Noisr\Desktop\fontconfig_zh_cn.txt";
 
-            var rst = new RSTFile(File.OpenRead(path), false);
+            if (File.Exists(path))
+            {
+                var rst = new RSTFile(File.OpenRead(path), false);
 
-            rst.Write(File.Create(path + ".rst"), false);
+                rst.Write(File.Create(path + ".rst"), false);
+            }
         }
     }
 }

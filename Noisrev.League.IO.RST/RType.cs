@@ -6,11 +6,11 @@
     public enum RType
     {
         /// <summary>
-        /// using by RST v2 v3
+        /// using by RST v2, v3
         /// </summary>
         Complex = 40,
         /// <summary>
-        /// using by RST v4
+        /// using by RST v4, v5
         /// </summary>
         Simple = 39
     }

@@ -124,7 +124,7 @@ namespace Noisrev.League.IO.RST
                 Type = RType.Complex;
             }
             // Version4
-            else if (version == 4)
+            else if (version == 4 || version == 5)
             {
                 // Set the type Simple.
                 Type = RType.Simple;
@@ -133,7 +133,7 @@ namespace Noisrev.League.IO.RST
             else
             {
                 // An exception is thrown.
-                throw new ArgumentException($"Invalid Major version {version}. Must be one of 2,3,4");
+                throw new ArgumentException($"Invalid Major version {version}. Must be one of 2, 3, 4, 5");
             }
 
             // Set the version.
@@ -192,12 +192,12 @@ namespace Noisrev.League.IO.RST
                 // pass
             }
             // If this is version 4
-            else if (Version == 4)
+            else if (Version == 4 || Version == 5)
             {
-                // Key for version 4
+                // Key for version 4 and 5
                 Type = RType.Simple;
             }
-            // Not equivalent to versions 2, 3, and 4.
+            // Not equivalent to versions 2, 3, 4, 5.
             else
             {
                 // Invalid or unsupported version and throws an exception.
@@ -215,7 +215,7 @@ namespace Noisrev.League.IO.RST
                 var hashGroup = br.ReadUInt64();
 
                 // Generate offset
-                var offset = Convert.ToInt64(hashGroup >> ((int) Type));
+                var offset = Convert.ToInt64(hashGroup >> (int) Type);
                 // Generate hash
                 var hash = hashGroup & hashKey;
 
@@ -223,8 +223,12 @@ namespace Noisrev.League.IO.RST
                 _entries.Add(new RSTEntry(offset, hash));
             }
 
-            // Read List Type
-            Mode = (RMode) br.ReadByte();
+            /* Version less than 5 */ 
+            if (Version < 5)
+            {
+                // Read Mode
+                Mode = (RMode) br.ReadByte();
+            }
 
             // Set Data Offset
             DataOffset = br.BaseStream.Position;
@@ -466,8 +470,12 @@ namespace Noisrev.League.IO.RST
                 bw.Write(RSTHash.ComputeHash(entry.Hash, entry.Offset, Type));
             }
 
-            // Write Mode
-            bw.Write((byte) Mode);
+            /* Version less than 5 */ 
+            if (Version < 5)
+            {
+                // Write Mode
+                bw.Write((byte) Mode);
+            }
 
             // Flush to prevent unwritten data
             bw.Flush();
