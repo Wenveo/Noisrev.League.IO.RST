@@ -34,6 +34,11 @@ It is used to store text messages in League of Legends games.
 - The reason is that when reading and writing RST files, using lazy loading to read will be ***100 ~ 150ms*** slower than not using lazy loading.
 # Release Note
 
+***v1.3.0***
+- Support RST v5
+- Fix some code
+- Correct some code comments
+
 ***v1.2.1***
 - Remove unnecessary code.
 

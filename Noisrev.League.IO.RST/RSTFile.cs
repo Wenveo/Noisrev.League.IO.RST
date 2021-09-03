@@ -20,9 +20,10 @@
  *   |--------------|--------------|--------------|--------------|---------------|--------------|--------------|
  *   |    Format:   |    String    |     Byte     |     Int32    |     UInt64    |     Byte     |    Entries   |
  *   |--------------|--------------|--------------|--------------|---------------|--------------|--------------|
- *   | Description: |  Magic Code  |     Major    |     Count    | RST hash list |     Minor    |  Entry List  |
+ *   | Description: |  Magic Code  |    Version   |     Count    | RST hash list |     Mode     |  Entry List  |
  *   |______________|______________|______________|______________|_______________|______________|______________|
- *   
+ *
+ *   *** "Mode" was deprecated in version 5 ***
  *   
  *  The entry structure:
  *                               ______________________________________________
@@ -35,7 +36,7 @@
  *                               
  *                                                                                                       ---Author   : Noisrev(晚风✨)
  *                                                                                                       ---Email    : Noisrev@outlook.com
- *                                                                                                       ---DateTime : 7.2.2021 --13.14
+ *                                                                                                       ---DateTime : 7.2.2021 --13:14
  */
 
 using Noisrev.League.IO.RST.Helper;
@@ -58,7 +59,7 @@ namespace Noisrev.League.IO.RST
         /// <summary>
         /// Magic Code
         /// </summary>
-        public string Magic { get; }
+        public const string Magic = "RST";
 
         /// <summary>
         /// RST File Version
@@ -123,7 +124,7 @@ namespace Noisrev.League.IO.RST
                 // Set the type Complex.
                 Type = RType.Complex;
             }
-            // Version4
+            // Version 4 and 5 
             else if (version == 4 || version == 5)
             {
                 // Set the type Simple.
@@ -160,11 +161,11 @@ namespace Noisrev.League.IO.RST
             using var br = new BinaryReader(input, Encoding.UTF8, leaveOpen);
 
             // Read magic code
-            Magic = br.ReadString(3);
-            if (Magic != "RST")
+            var magic = br.ReadString(3);
+            if (magic != Magic)
             {
                 // Invalid magic code
-                throw new InvalidDataException($"Invalid RST file header: {Magic}");
+                throw new InvalidDataException($"Invalid RST file header: {magic}");
             }
 
             //Set Version
@@ -191,7 +192,7 @@ namespace Noisrev.League.IO.RST
                 // Version 3
                 // pass
             }
-            // If this is version 4
+            // If this is version 4 or version 5
             else if (Version == 4 || Version == 5)
             {
                 // Key for version 4 and 5
@@ -388,7 +389,7 @@ namespace Noisrev.League.IO.RST
         /// <exception cref="ObjectDisposedException"/>
         /// <exception cref="OverflowException"/>
         /// <exception cref="IOException"/>
-        public void Write(Stream output, bool leaveOpen)
+        public void Write([NotNull]Stream output, bool leaveOpen)
         {
             if (output == null) throw new ArgumentNullException(nameof(output));
             // Init Binary Writer
@@ -397,13 +398,13 @@ namespace Noisrev.League.IO.RST
             // Write Magic Code
             bw.Write(Magic.ToCharArray());
 
-            // Write Major
+            // Write Version
             bw.Write(Version);
 
             // Version 2
             if (Version == 2)
             {
-                var hasConfig = Config.Length != 0;
+                var hasConfig = Config is { } && Config.Length != 0;
                 /* Config whether there is any content? */
                 bw.Write(hasConfig);
 
@@ -426,7 +427,7 @@ namespace Noisrev.League.IO.RST
             // Set the hash offset.
             var hashOffset = bw.BaseStream.Position;
             // Set the data offset.
-            var dataOffset = hashOffset + (_entries.Count * 8) + 1; /* hashOffset + hashesSize + (byte)Minor */
+            var dataOffset = hashOffset + (_entries.Count * 8) + (Version < 5 ? 1 : 0); /* hashOffset + hashesSize + (byte)Mode */
 
             // Go to the dataOffset
             bw.BaseStream.Seek(dataOffset, SeekOrigin.Begin);

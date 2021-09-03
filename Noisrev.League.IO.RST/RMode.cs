@@ -5,9 +5,7 @@
     /// </summary>
     public enum RMode : byte
     {
-        /* Null */
         None,
-        /* List */
         Default
     }
 }

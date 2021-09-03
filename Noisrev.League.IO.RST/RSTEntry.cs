@@ -10,7 +10,7 @@ namespace Noisrev.League.IO.RST
         /// <summary>
         /// Data offset, used to set the specified stream position and read the content
         /// </summary>
-        public long Offset { get; set; }
+        public long Offset { get; internal set; }
         /// <summary>
         /// The hash located at Entry
         /// </summary>

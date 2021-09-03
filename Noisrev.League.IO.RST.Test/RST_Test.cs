@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Net.Http;
+using Noisrev.League.IO.RST.Helper;
 
 namespace Noisrev.League.IO.RST.Test
 {

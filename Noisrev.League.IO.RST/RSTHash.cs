@@ -20,8 +20,7 @@ namespace Noisrev.League.IO.RST
         /// <exception cref="EncoderFallbackException"/>
         public static ulong ComputeHash(string toHash, RType type)
         {
-            toHash = toHash.ToLower();
-            return XXHash.XXH64(Encoding.UTF8.GetBytes(toHash)) & type.ComputeKey();
+            return XXHash.XXH64(Encoding.UTF8.GetBytes(toHash.ToLower())) & type.ComputeKey();
         }
         /// <summary>
         /// Generate a hash with an offset using toHash and offset, as well as type.

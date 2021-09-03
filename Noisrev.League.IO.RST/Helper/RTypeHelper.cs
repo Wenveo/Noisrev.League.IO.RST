@@ -12,7 +12,7 @@
         /// <returns>Returns the computed value.</returns>
         public static ulong ComputeKey(this RType type)
         {
-            return (1UL << ((int)type)) - 1;
+            return (1UL << (int)type) - 1;
         }
     }
 }
