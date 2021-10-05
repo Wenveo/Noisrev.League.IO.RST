@@ -74,7 +74,40 @@ namespace Noisrev.League.IO.RST
         /// <summary>
         /// The data segment is located at Position of the current stream
         /// </summary>
-        public long DataOffset { get; }
+        public long DataOffset
+        {
+            get
+            {
+                /* Magic Code(3) + Version(1) */
+                long offset = 4;
+
+                // Version 2
+                if (Version == 2)
+                {
+                    /* hasConfig? (1) boolean */
+                    offset += 1;
+
+                    /* Config is not null ? */
+                    if (Config is { } && Config.Length != 0)
+                    {
+                        /* size(int) + strlen */
+                        offset += 4 + Config.Length;
+                    }
+                }
+
+                /* count (4 bytes) +  8 * Count  ***/
+                offset += 4 + (8 * _entries.Count);
+
+                /* Version less than 5 */
+                if (Version < 5)
+                {
+                    offset += 1;
+                }
+
+                /* Return the offset */
+                return offset;
+            }
+        }
 
         /// <summary>
         /// The type of RST used to generate the hash
@@ -172,7 +205,7 @@ namespace Noisrev.League.IO.RST
             Version = br.ReadByte();
 
             // Version 2 and Version 3
-            if (Version >= 2 && Version < 4)
+            if (Version == 2 || Version == 3)
             {
                 // The keys for versions 2 and 3
                 Type = RType.Complex;
@@ -230,9 +263,6 @@ namespace Noisrev.League.IO.RST
                 // Read Mode
                 Mode = (RMode) br.ReadByte();
             }
-
-            // Set Data Offset
-            DataOffset = br.BaseStream.Position;
 
             // Set Data Stream
             input.AutoCopy(out _dataStream);
