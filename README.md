@@ -14,9 +14,6 @@
 <a href="https://www.nuget.org/packages/Noisrev.League.IO.RST/">
   <img src="https://img.shields.io/nuget/v/noisrev.league.io.rst"></img>
 </a>
-<a href="https://github.com/Noisrev/Noisrev.League.IO.RST/releases/tag/v1.2.1">
-  <img src="https://img.shields.io/github/v/release/noisrev/noisrev.league.io.rst"></img>
-</a>
 
 # RST (Riot String Table)
 The RST file is a file that stores a list of strings.
@@ -28,11 +25,11 @@ It is used to store text messages in League of Legends games.
 
 ***If you would like to see more details about the RST file, please see: [RSTFile.cs](Noisrev.League.IO.RST/RSTFile.cs).***
 
-# Note!
-- For the sake of performance, we **removed** the lazy loading mode of RST files in version ***1.2***.
 
-- The reason is that when reading and writing RST files, using lazy loading to read will be ***100 ~ 150ms*** slower than not using lazy loading.
 # Release Note
+
+***v1.3.1***
+- Change the get method for "DataOffset"
 
 ***v1.3.0***
 - Support RST v5
