@@ -16,7 +16,7 @@ namespace Noisrev.League.IO.RST.Helper
         /// <param name="input">BinaryReader</param>
         /// <param name="offset">The offset</param>
         /// <param name="end">End Byte</param>
-        /// <returns>UTF-8 string</returns>
+        /// <returns>Byte Array</returns>
         /// <exception cref="IOException"></exception>
         /// <exception cref="NotSupportedException"></exception>
         /// <exception cref="ObjectDisposedException"></exception>
@@ -36,7 +36,7 @@ namespace Noisrev.League.IO.RST.Helper
                 buffer.Add(tmp);
             }
 
-            // To an array and convert it to a UTF-8 string
+            // return the buffer
             return buffer.ToArray();
         }
 
