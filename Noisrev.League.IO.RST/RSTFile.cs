@@ -151,26 +151,12 @@ namespace Noisrev.League.IO.RST
         /// <param name="version">RST Version</param>
         public RSTFile(byte version) : this()
         {
-            // Version 2 and 3
-            if (version >= 2 && version < 4)
-            {
-                // Set the type Complex.
-                Type = RType.Complex;
-            }
-            // Version 4 and 5 
-            else if (version == 4 || version == 5)
-            {
-                // Set the type Simple.
-                Type = RType.Simple;
-            }
-            // Invalid version.
-            else
-            {
-                // An exception is thrown.
-                throw new ArgumentException($"Invalid Major version {version}. Must be one of 2, 3, 4, 5");
-            }
+            var type = version.GetRType();
 
-            // Set the version.
+            /* Check the type  */
+            if (type == null) throw new ArgumentException($"Invalid Major version {version}. Must be one of 2, 3, 4, 5");
+
+            this.Type = Type;
             this.Version = version;
         }
 
@@ -178,7 +164,7 @@ namespace Noisrev.League.IO.RST
         /// Read the RST file from the stream.
         /// </summary>
         /// <param name="input">The input stream.</param>
-        /// <param name="leaveOpen">true to leave the stream open after the System.IO.BinaryReader object is disposed; otherwise, false.</param>
+        /// <param name="leaveOpen">true to leave the stream open after the <see cref="System.IO.BinaryReader"/> object is disposed; otherwise, false.</param>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
@@ -411,7 +397,7 @@ namespace Noisrev.League.IO.RST
         /// Using an output stream, write the RST to that stream.
         /// </summary>
         /// <param name="output">The output stream.</param>
-        /// <param name="leaveOpen">true to leave the stream open after the System.IO.BinaryWriter object is disposed; otherwise, false.</param>
+        /// <param name="leaveOpen">true to leave the stream open after the  <see cref="System.IO.BinaryWriter"/> object is disposed; otherwise, false.</param>
         /// <exception cref="ArgumentException"/>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="EncoderFallbackException"/>
