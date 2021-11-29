@@ -39,6 +39,7 @@
  *                                                                                                       ---DateTime : 7.2.2021 --13:14
  */
 
+#pragma warning disable CS1591
 using Noisrev.League.IO.RST.Helper;
 using System;
 using System.Collections.Generic;

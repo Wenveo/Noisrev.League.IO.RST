@@ -1,4 +1,5 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+using System;
 
 namespace Noisrev.League.IO.RST
 {
@@ -50,7 +51,6 @@ namespace Noisrev.League.IO.RST
                     && Text == other.Text;
             }
         }
-
         public object Clone()
         {
             return new RSTEntry(Hash, Text);
