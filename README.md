@@ -28,6 +28,9 @@ It is used to store text messages in League of Legends games.
 
 # Release Note
 
+***v1.3.3***
+- Add the RST file version enumeration
+
 ***v1.3.2***
 - Added a new RType extension function that returns the corresponding RType based on the input Version(int or byte)
 - Fixed some code comments
