@@ -65,7 +65,7 @@ namespace Noisrev.League.IO.RST
         /// <summary>
         /// RST File Version
         /// </summary>
-        public byte Version { get; }
+        public RVersion Version { get; }
 
         /// <summary>
         /// RST File Font Config, using by RST v2
@@ -83,7 +83,7 @@ namespace Noisrev.League.IO.RST
                 long offset = 4;
 
                 // Version 2
-                if (Version == 2)
+                if (Version == RVersion.Ver2)
                 {
                     /* hasConfig? (1) boolean */
                     offset += 1;
@@ -100,7 +100,7 @@ namespace Noisrev.League.IO.RST
                 offset += 4 + (8 * _entries.Count);
 
                 /* Version less than 5 */
-                if (Version < 5)
+                if (Version < RVersion.Ver5)
                 {
                     offset += 1;
                 }
@@ -150,12 +150,12 @@ namespace Noisrev.League.IO.RST
         /// Initialize and set the version and Type
         /// </summary>
         /// <param name="version">RST Version</param>
-        public RSTFile(byte version) : this()
+        public RSTFile(RVersion version) : this()
         {
             var type = version.GetRType();
 
             /* Check the type  */
-            if (type == null) throw new ArgumentException($"Invalid Major version {version}. Must be one of 2, 3, 4, 5");
+            if (type == null) throw new ArgumentException($"Invalid Major version {(byte)version}. Must be one of 2, 3, 4, 5");
 
             this.Type = Type;
             this.Version = version;
@@ -189,15 +189,15 @@ namespace Noisrev.League.IO.RST
             }
 
             //Set Version
-            Version = br.ReadByte();
+            Version = (RVersion)br.ReadByte();
 
             // Version 2 and Version 3
-            if (Version == 2 || Version == 3)
+            if (Version == RVersion.Ver2 || Version == RVersion.Ver3)
             {
                 // The keys for versions 2 and 3
                 Type = RType.Complex;
                 // Version 2
-                if (Version == 2)
+                if (Version == RVersion.Ver2)
                 {
                     // 0 or 1
                     var hasConfig = br.ReadBoolean();
@@ -213,7 +213,7 @@ namespace Noisrev.League.IO.RST
                 // pass
             }
             // If this is version 4 or version 5
-            else if (Version == 4 || Version == 5)
+            else if (Version == RVersion.Ver4 || Version == RVersion.Ver5)
             {
                 // Key for version 4 and 5
                 Type = RType.Simple;
@@ -245,7 +245,7 @@ namespace Noisrev.League.IO.RST
             }
 
             /* Version less than 5 */ 
-            if (Version < 5)
+            if (Version < RVersion.Ver5)
             {
                 // Read Mode
                 Mode = (RMode) br.ReadByte();
@@ -379,7 +379,7 @@ namespace Noisrev.League.IO.RST
         public bool SetConfig(string conf)
         {
             // Version 2
-            if (Version == 2)
+            if (Version == RVersion.Ver2)
             {
                 // Set the config
                 Config = conf;
@@ -416,10 +416,10 @@ namespace Noisrev.League.IO.RST
             bw.Write(Magic.ToCharArray());
 
             // Write Version
-            bw.Write(Version);
+            bw.Write((byte)Version);
 
             // Version 2
-            if (Version == 2)
+            if (Version == RVersion.Ver2)
             {
                 var hasConfig = Config is { } && Config.Length != 0;
                 /* Config whether there is any content? */
@@ -444,7 +444,7 @@ namespace Noisrev.League.IO.RST
             // Set the hash offset.
             var hashOffset = bw.BaseStream.Position;
             // Set the data offset.
-            var dataOffset = hashOffset + (_entries.Count * 8) + (Version < 5 ? 1 : 0); /* hashOffset + hashesSize + (byte)Mode */
+            var dataOffset = hashOffset + (_entries.Count * 8) + (Version < RVersion.Ver5 ? 1 : 0); /* hashOffset + hashesSize + (byte)Mode */
 
             // Go to the dataOffset
             bw.BaseStream.Seek(dataOffset, SeekOrigin.Begin);
@@ -489,7 +489,7 @@ namespace Noisrev.League.IO.RST
             }
 
             /* Version less than 5 */ 
-            if (Version < 5)
+            if (Version < RVersion.Ver5)
             {
                 // Write Mode
                 bw.Write((byte) Mode);
@@ -550,7 +550,7 @@ namespace Noisrev.League.IO.RST
                 return false;
             }
 
-            if (Version == 2 && !Config.Equals(other.Config))
+            if (Version == RVersion.Ver2 && !Config.Equals(other.Config))
             {
                 return false;
             }
