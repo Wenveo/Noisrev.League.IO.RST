@@ -179,7 +179,8 @@ namespace Noisrev.League.IO.RST
         {
             // Init BinaryReader, use UTF-8
             using (BinaryReader br = new BinaryReader(input, Encoding.UTF8, leaveOpen))
-            {// Read magic code
+            {
+                // Read magic code
                 var magic = br.ReadString(3);
                 if (magic != Magic)
                 {
@@ -411,7 +412,8 @@ namespace Noisrev.League.IO.RST
             if (output == null) throw new ArgumentNullException(nameof(output));
             // Init Binary Writer
             using (BinaryWriter bw = new BinaryWriter(output, Encoding.UTF8, leaveOpen))
-            { // Write Magic Code
+            {
+                // Write Magic Code
                 bw.Write(Magic.ToCharArray());
 
                 // Write Version
@@ -493,15 +495,14 @@ namespace Noisrev.League.IO.RST
                     // Write Mode
                     bw.Write((byte)Mode);
                 }
-
                 // Flush to prevent unwritten data
                 bw.Flush();
-            }
 
-            // Dispose
-            this.Dispose();
-            // Set Data Stream
-            output.AutoCopy(out _dataStream);
+                // Dispose
+                this.Dispose();
+                // Set Data Stream
+                output.AutoCopy(out _dataStream);
+            }
         }
 
         public void Dispose()
