@@ -1,4 +1,4 @@
-# Noisrev.League.IO.RST
+﻿# Noisrev.League.IO.RST
 
 ***This is a library that parses and manipulates League of Legends RST files.***
 
@@ -15,7 +15,7 @@
   <img src="https://img.shields.io/nuget/v/noisrev.league.io.rst"></img>
 </a>
 
-# RST (Riot String Table)
+# RST (Riot String Table) 
 The RST file is a file that stores a list of strings.
 
 It is used to store text messages in League of Legends games.
@@ -28,7 +28,11 @@ It is used to store text messages in League of Legends games.
 
 # Release Note
 
-***v1.3.3***
+***v1.4.0***
+- Fixed a bug in version 1.3.3 (This bug causes the file contents to not be written out correctly)
+- Changed Framework to ".NET Standard 2.0" to be compatible with ".NET Framework" and ".NET Core"
+
+***~~v1.3.3~~*** [Deprecated]🙄
 - Add the RST file version enumeration
 
 ***v1.3.2***
