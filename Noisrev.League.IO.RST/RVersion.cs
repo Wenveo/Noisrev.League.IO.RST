@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Noisrev.League.IO.RST
+﻿namespace Noisrev.League.IO.RST
 {
     /// <summary>
     /// RST File Version
