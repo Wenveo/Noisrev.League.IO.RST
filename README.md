@@ -3,7 +3,7 @@
 ***This is a library that parses and manipulates League of Legends RST files.***
 
 <a>
-  <img src="https://img.shields.io/badge/.Net%20Standard-v2.1-brightgreen"></img>
+  <img src="https://img.shields.io/badge/.Net%20Standard-v2.0-brightgreen"></img>
 </a>
 <a href="https://github.com/Noisrev/Noisrev.League.IO.RST/blob/master/LICENSE/">
   <img src="https://img.shields.io/github/license/noisrev/noisrev.league.io.rst"></img>
