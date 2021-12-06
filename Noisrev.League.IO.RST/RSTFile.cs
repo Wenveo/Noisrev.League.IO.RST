@@ -280,7 +280,17 @@ namespace Noisrev.League.IO.RST
         /// <param name="value">The content</param>
         public void AddEntry(ulong hash, string value)
         {
-            _entries.Add(new RSTEntry(hash, value));
+            AddEntry(new RSTEntry(hash, value));
+        }
+
+
+        /// <summary>
+        /// Add entry with <see cref="RSTEntry"/>.
+        /// </summary>
+        /// <param name="entry">The rst entry</param>
+        public void AddEntry(RSTEntry entry)
+        {
+            _entries.Add(entry);
         }
 
         /// <summary>
