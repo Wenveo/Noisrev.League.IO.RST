@@ -552,7 +552,18 @@ namespace Noisrev.League.IO.RST
                 return false;
             }
 
-            return !_entries.Where((t, i) => !t.Equals(other._entries[i])).Any();
+            var entries = _entries.OrderBy(x => x.Hash);
+            var otherEntries = other._entries.OrderBy(x => x.Hash);
+
+            for (int i = 0; i < _entries.Count; i++)
+            {
+                if (!entries.ElementAt(i).Equals(otherEntries.ElementAt(i)))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
