@@ -58,6 +58,20 @@ namespace Noisrev.League.IO.RST
     public class RSTFile : IDisposable, IEquatable<RSTFile>
     {
         /// <summary>
+        /// Loads a RST file from a file path.
+        /// </summary>
+        /// <param name="filePath">The file path.</param>
+        public static RSTFile Load(string filePath)
+        {
+            if (string.IsNullOrEmpty(filePath))
+                throw new ArgumentNullException(nameof(filePath));
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException("File not found.", filePath);
+            
+            return new RSTFile(File.OpenRead(filePath), false);
+        }
+
+        /// <summary>
         /// Magic Code
         /// </summary>
         public const string Magic = "RST";
