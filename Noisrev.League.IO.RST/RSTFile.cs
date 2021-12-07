@@ -59,6 +59,17 @@ namespace Noisrev.League.IO.RST
         /// Loads a RST file from a file path.
         /// </summary>
         /// <param name="filePath">The file path.</param>
+        /// <returns>The <see cref="RSTFile"/>.</returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="DecoderExceptionFallback"></exception>
+        /// <exception cref="EndOfStreamException"></exception>
+        /// <exception cref="FileNotFoundException"></exception>
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="OverflowException"></exception>
+        /// <exception cref="IOException"></exception>
+        /// <exception cref="InvalidDataException"></exception>
         public static RSTFile Load(string filePath)
         {
             if (string.IsNullOrEmpty(filePath))
@@ -162,6 +173,7 @@ namespace Noisrev.League.IO.RST
         /// Initialize and set the version and Type
         /// </summary>
         /// <param name="version">RST Version</param>
+        /// <exception cref="ArgumentException"></exception>
         public RSTFile(RVersion version) : this()
         {
             var type = version.GetRType();
@@ -417,11 +429,22 @@ namespace Noisrev.League.IO.RST
             }
         }
 
-        public void Write(string output)
+        /// <summary>
+        /// Write the <see cref="RSTFile"/>.
+        /// </summary>
+        /// <param name="outputPath">The output path</param> 
+        /// <exception cref="ArgumentException"/>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="EncoderFallbackException"/>
+        /// <exception cref="NotSupportedException"/>
+        /// <exception cref="ObjectDisposedException"/>
+        /// <exception cref="OverflowException"/>
+        /// <exception cref="IOException"/>
+        public void Write(string outputPath)
         {
-            if (string.IsNullOrEmpty(output))
+            if (string.IsNullOrEmpty(outputPath))
             {
-                throw new ArgumentNullException(nameof(output));
+                throw new ArgumentNullException(nameof(outputPath));
             }
             
             using (var ms = new MemoryStream())
@@ -429,7 +452,7 @@ namespace Noisrev.League.IO.RST
                 // Write to MemoryStream
                 Write(ms, false);
                 // Write All Bytes
-                File.WriteAllBytes(output, ms.ToArray());
+                File.WriteAllBytes(outputPath, ms.ToArray());
             }
         }
 
