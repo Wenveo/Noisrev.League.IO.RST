@@ -656,18 +656,10 @@ namespace Noisrev.League.IO.RST
                 return false;
             }
 
-            var entries = _entries.OrderBy(x => x.Hash);
-            var otherEntries = other._entries.OrderBy(x => x.Hash);
+            var entries = _entries.OrderBy(x => x.Hash).ToList();
+            var otherEntries = other._entries.OrderBy(x => x.Hash).ToList();
 
-            for (int i = 0; i < _entries.Count; i++)
-            {
-                if (!entries.ElementAt(i).Equals(otherEntries.ElementAt(i)))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return !entries.Where((t, i) => !t.Equals(otherEntries[i])).Any();
         }
     }
 }
