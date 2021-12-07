@@ -159,6 +159,23 @@ namespace Noisrev.League.IO.RST
         private Stream _dataStream;
 
         /// <summary>
+        /// Gets the RST entry by the specified key.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns>The <see cref="RSTEntry"/>.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public RSTEntry this[string key] => Find(key);
+        
+        /// <summary>
+        /// Gets the RST entry by the specified hash.
+        /// </summary>
+        /// <param name="hash">The hash.</param>
+        /// <returns>The <see cref="RSTEntry"/>.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public RSTEntry this[ulong hash] => Find(hash);
+
+
+        /// <summary>
         /// Initialize the RSTFile class
         /// </summary>
         private RSTFile()
@@ -287,6 +304,16 @@ namespace Noisrev.League.IO.RST
             }
         }
 
+        private void CheckDuplicate(ulong hash)
+        {
+            // Check if the entry is already in the list
+            if (_entries.Any(e => e.Hash == hash))
+            {
+                // Throw an exception
+                throw new InvalidDataException($"Duplicate hash: {hash}");
+            }
+        }
+
         /// <summary>
         /// Add entry with key and value.
         /// </summary>
@@ -304,11 +331,8 @@ namespace Noisrev.League.IO.RST
         /// <param name="value">The content</param>
         public void AddEntry(ulong hash, string value)
         {
-            if (Find(hash) != null)
-            {
-                throw new ArgumentException($"Hash {hash} already exists.");
-            }
-            AddEntry(new RSTEntry(hash, value));
+            CheckDuplicate(hash);
+            _entries.Add(new RSTEntry(hash, value));
         }
 
 
@@ -318,10 +342,7 @@ namespace Noisrev.League.IO.RST
         /// <param name="entry">The rst entry</param>
         public void AddEntry(RSTEntry entry)
         {
-            if (Find(entry.Hash) != null)
-            {
-                throw new ArgumentException($"Hash {entry.Hash} already exists.");
-            }
+            CheckDuplicate(entry.Hash);
             _entries.Add(entry);
         }
 
@@ -334,6 +355,30 @@ namespace Noisrev.League.IO.RST
         public RSTEntry Find(ulong hash)
         {
             return _entries.Find(x => x.Hash == hash);
+        }
+
+        /// <summary>
+        /// Find the entry that matches the key.
+        /// </summary>
+        /// <param name="key">The key</param>
+        /// <returns>If it does not exist in the list, return null.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public RSTEntry Find(string key)
+        {
+            if (string.IsNullOrEmpty(key)) throw new ArgumentNullException(nameof(key));
+            
+            return Find(RSTHash.ComputeHash(key, Type));
+        }
+
+        /// <summary>
+        /// Find the matching entry.
+        /// </summary>
+        /// <param name="match">The match function</param>
+        /// <returns>If it does not exist in the list, return null.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public RSTEntry Find(Predicate<RSTEntry> match)
+        {
+            return _entries.Find(match);
         }
 
         /// <summary>
@@ -503,7 +548,7 @@ namespace Noisrev.League.IO.RST
                             // Write Size
                             bw.Write(Config.Length);
                             // Write Content
-                            bw.Write(Config.ToArray());
+                            bw.Write(Config.ToCharArray());
                         }
                     }
                 }
