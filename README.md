@@ -76,5 +76,5 @@ It is used to store text messages in League of Legends games.
 ```
 using Noisrev.League.IO.RST;
 
-RSTFile rst = new(input: File.OpenRead("your rst file path"), leaveOpen: false);
+var rst = RSTFile.Load("your rst file path");
 ```
