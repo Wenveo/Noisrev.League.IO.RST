@@ -21,6 +21,9 @@ It is used to store text messages in League of Legends games.
 
 # 🎉 Release Note
 
+***v1.4.1.2***
+- Update "Equals" Method
+
 ***v1.4.1.1***
 - Add indexer to RSTFile and add check for duplicates
 
