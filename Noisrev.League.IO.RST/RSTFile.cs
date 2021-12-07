@@ -304,6 +304,10 @@ namespace Noisrev.League.IO.RST
         /// <param name="value">The content</param>
         public void AddEntry(ulong hash, string value)
         {
+            if (Find(hash) != null)
+            {
+                throw new ArgumentException($"Hash {hash} already exists.");
+            }
             AddEntry(new RSTEntry(hash, value));
         }
 
@@ -314,6 +318,10 @@ namespace Noisrev.League.IO.RST
         /// <param name="entry">The rst entry</param>
         public void AddEntry(RSTEntry entry)
         {
+            if (Find(entry.Hash) != null)
+            {
+                throw new ArgumentException($"Hash {entry.Hash} already exists.");
+            }
             _entries.Add(entry);
         }
 
