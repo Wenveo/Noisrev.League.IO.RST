@@ -304,7 +304,7 @@ namespace Noisrev.League.IO.RST
             }
         }
 
-        private void CheckDuplicate(ulong hash)
+        internal void CheckDuplicate(ulong hash)
         {
             // Check if the entry is already in the list
             if (_entries.Any(e => e.Hash == hash))
