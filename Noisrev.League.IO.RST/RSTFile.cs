@@ -44,11 +44,9 @@ using Noisrev.League.IO.RST.Helper;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Noisrev.League.IO.RST
 {
@@ -74,7 +72,7 @@ namespace Noisrev.League.IO.RST
         /// <summary>
         /// Magic Code
         /// </summary>
-        public const string Magic = "RST";
+        public static string Magic = "RST";
 
         /// <summary>
         /// RST File Version
@@ -416,6 +414,22 @@ namespace Noisrev.League.IO.RST
             {
                 // Return
                 return false;
+            }
+        }
+
+        public void Write(string output)
+        {
+            if (string.IsNullOrEmpty(output))
+            {
+                throw new ArgumentNullException(nameof(output));
+            }
+            
+            using (var ms = new MemoryStream())
+            {
+                // Write to MemoryStream
+                Write(ms, false);
+                // Write All Bytes
+                File.WriteAllBytes(output, ms.ToArray());
             }
         }
 
