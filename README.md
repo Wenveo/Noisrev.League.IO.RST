@@ -18,8 +18,17 @@ It is used to store text messages in League of Legends games.
 
 ***If you would like to see more details about the RST file, please see: [RSTFile.cs](Noisrev.League.IO.RST/RSTFile.cs).***
 
+# 📢 Notice
+
+**In version 2.0, we optimized and tested all the code and found no problems**
+
+**---(except for multithreading, because Dictionary is not thread-safe)😅**
 
 # 🎉 Release Note
+
+***v2.0***
+- Change it to Dictionary for faster retrieval and storage
+- Disabling Hash changes (read only)
 
 ***v1.4.1.2***
 - Update "Equals" Method
