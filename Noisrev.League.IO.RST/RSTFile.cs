@@ -43,7 +43,6 @@
 using Noisrev.League.IO.RST.Helper;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -53,7 +52,7 @@ namespace Noisrev.League.IO.RST
     /// <summary>
     /// Riot String Table File
     /// </summary>
-    public class RSTFile : IDisposable, IEquatable<RSTFile>
+    public class RSTFile : Dictionary<ulong, RSTEntry>, IDisposable, IEquatable<RSTFile>
     {
         /// <summary>
         /// Loads a RST file from a file path.
@@ -120,7 +119,7 @@ namespace Noisrev.League.IO.RST
                 }
 
                 /* count (4 bytes) +  8 * Count  ***/
-                offset += 4 + (8 * _entries.Count);
+                offset += 4 + (8 * this.Count);
 
                 /* Version less than 5 */
                 if (Version < RVersion.Ver5)
@@ -144,54 +143,16 @@ namespace Noisrev.League.IO.RST
         public RMode Mode { get; }
 
         /// <summary>
-        /// Collection of RST entries
-        /// </summary>
-        public ReadOnlyCollection<RSTEntry> Entries { get; }
-
-        /// <summary>
-        /// Private list.
-        /// </summary>
-        private readonly List<RSTEntry> _entries;
-
-        /// <summary>
         /// The stream that stores the RST data segment.
         /// </summary>
         private Stream _dataStream;
-
-        /// <summary>
-        /// Gets the RST entry by the specified key.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        /// <returns>The <see cref="RSTEntry"/>.</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public RSTEntry this[string key] => Find(key);
-        
-        /// <summary>
-        /// Gets the RST entry by the specified hash.
-        /// </summary>
-        /// <param name="hash">The hash.</param>
-        /// <returns>The <see cref="RSTEntry"/>.</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public RSTEntry this[ulong hash] => Find(hash);
-
-
-        /// <summary>
-        /// Initialize the RSTFile class
-        /// </summary>
-        private RSTFile()
-        {
-            // Initialize entries
-            this._entries = new List<RSTEntry>();
-            // Set Entries to read-only
-            this.Entries = _entries.AsReadOnly();
-        }
 
         /// <summary>
         /// Initialize and set the version and Type
         /// </summary>
         /// <param name="version">RST Version</param>
         /// <exception cref="ArgumentException"></exception>
-        public RSTFile(RVersion version) : this()
+        public RSTFile(RVersion version) : base()
         {
             var type = version.GetRType();
 
@@ -216,7 +177,7 @@ namespace Noisrev.League.IO.RST
         /// <exception cref="OverflowException"></exception>
         /// <exception cref="IOException"></exception>
         /// <exception cref="InvalidDataException"></exception>
-        public RSTFile(Stream input, bool leaveOpen) : this()
+        public RSTFile(Stream input, bool leaveOpen) : base()
         {
             // Init BinaryReader, use UTF-8
             using (BinaryReader br = new BinaryReader(input, Encoding.UTF8, leaveOpen))
@@ -282,7 +243,7 @@ namespace Noisrev.League.IO.RST
                     var hash = hashGroup & hashKey;
 
                     // Add entry
-                    _entries.Add(new RSTEntry(offset, hash));
+                    Add(new RSTEntry(offset, hash));
                 }
 
                 /* Version less than 5 */
@@ -296,131 +257,32 @@ namespace Noisrev.League.IO.RST
                 input.AutoCopy(out _dataStream);
 
                 // Iterate through all the entries
-                for (var i = 0; i < count; i++)
+                foreach (var item in this)
                 {
                     // Set the content
-                    ReadText(_entries[i]);
+                    ReadText(item.Value);
                 }
             }
         }
-
-        internal void CheckDuplicate(ulong hash)
-        {
-            // Check if the entry is already in the list
-            if (_entries.Any(e => e.Hash == hash))
-            {
-                // Throw an exception
-                throw new InvalidDataException($"Duplicate hash: {hash}");
-            }
-        }
-
         /// <summary>
-        /// Add entry with key and value.
-        /// </summary>
-        /// <param name="key">The hash key</param>
-        /// <param name="value">The content</param>
-        public void AddEntry(string key, string value)
-        {
-            AddEntry(RSTHash.ComputeHash(key, Type), value);
-        }
-
-        /// <summary>
-        /// Add entry with hash and value.
-        /// </summary>
-        /// <param name="hash">The hash</param>
-        /// <param name="value">The content</param>
-        public void AddEntry(ulong hash, string value)
-        {
-            CheckDuplicate(hash);
-            _entries.Add(new RSTEntry(hash, value));
-        }
-
-
-        /// <summary>
-        /// Add entry with <see cref="RSTEntry"/>.
-        /// </summary>
-        /// <param name="entry">The rst entry</param>
-        public void AddEntry(RSTEntry entry)
-        {
-            CheckDuplicate(entry.Hash);
-            _entries.Add(entry);
-        }
-
-        /// <summary>
-        /// Find the entry that matches the hash.
-        /// </summary>
-        /// <param name="hash">The hash</param>
-        /// <returns>If it does not exist in the list, return null.</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public RSTEntry Find(ulong hash)
-        {
-            return _entries.Find(x => x.Hash == hash);
-        }
-
-        /// <summary>
-        /// Find the entry that matches the key.
+        /// Adds the specified key and value to the dictionary.
         /// </summary>
         /// <param name="key">The key</param>
-        /// <returns>If it does not exist in the list, return null.</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public RSTEntry Find(string key)
-        {
-            if (string.IsNullOrEmpty(key)) throw new ArgumentNullException(nameof(key));
-            
-            return Find(RSTHash.ComputeHash(key, Type));
-        }
+        /// <param name="value">The value</param>
+        public void Add(string key, string value) => Add(RSTHash.ComputeHash(key, this.Type), value);
 
         /// <summary>
-        /// Find the matching entry.
+        /// Adds the specified key and value to the dictionary.
         /// </summary>
-        /// <param name="match">The match function</param>
-        /// <returns>If it does not exist in the list, return null.</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public RSTEntry Find(Predicate<RSTEntry> match)
-        {
-            return _entries.Find(match);
-        }
+        /// <param name="key">The key</param>
+        /// <param name="value">The value</param>
+        public void Add(ulong key, string value) => Add(new RSTEntry(key, value));
 
         /// <summary>
-        /// Inserts an element into the <see cref="List{T}"/> at the specified index.
-        /// </summary>
-        /// <param name="index">The index</param>
-        /// <param name="entry">The item</param>
-        /// <exception cref="ArgumentOutOfRangeException"/>
-        public void Insert(int index, RSTEntry entry)
-        {
-            _entries.Insert(index, entry);
-        }
-
-        /// <summary>
-        /// Remove all items that match hash.
-        /// </summary>
-        /// <param name="hash">The hash</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        public void Remove(ulong hash)
-        {
-            _entries.RemoveAll(x => x.Hash == hash);
-        }
-
-        /// <summary>
-        /// Remove the entry.
+        /// Adds the specified entry to the dictionary.
         /// </summary>
         /// <param name="entry">The entry</param>
-        /// <returns>true if item is successfully removed; otherwise, false. This method also returns false if item was not found in the <see cref="List{T}"/></returns>
-        public bool Remove(RSTEntry entry)
-        {
-            return _entries.Remove(entry);
-        }
-
-        /// <summary>
-        /// Removes the entry at the specified index
-        /// </summary>
-        /// <param name="index">The index</param>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public void RemoveAt(int index)
-        {
-            _entries.RemoveAt(index);
-        }
+        public void Add(RSTEntry entry) => Add(entry.Hash, entry);
 
         /// <summary>
         /// Reading content begins at the offset specified in the stream.
@@ -449,8 +311,8 @@ namespace Noisrev.League.IO.RST
         {
             // Set a list
             var list = caseSensitive
-                ? _entries.Where(x => x.Text.Contains(oldText))
-                : _entries.Where(x => x.Text.ToLower().Contains(oldText.ToLower()));
+                ? this.Values.Where(x => x.Text.Contains(oldText))
+                : this.Values.Where(x => x.Text.ToLower().Contains(oldText.ToLower()));
 
             foreach (var item in list)
             {
@@ -463,7 +325,7 @@ namespace Noisrev.League.IO.RST
         /// Set the configuration.
         /// </summary>
         /// <param name="conf">The config</param>
-        /// <returns>It must be version 2.1 to set the configuration. Set to return true on success or false on failure.</returns>
+        /// <returns>It must be version 2 to set the configuration. Set to return true on success or false on failure.</returns>
         public bool SetConfig(string conf)
         {
             // Version 2
@@ -554,12 +416,12 @@ namespace Noisrev.League.IO.RST
                 }
 
                 // Write Count
-                bw.Write(_entries.Count);
+                bw.Write(this.Count);
 
                 // Set the hash offset.
                 var hashOffset = bw.BaseStream.Position;
                 // Set the data offset.
-                var dataOffset = hashOffset + (_entries.Count * 8) + (Version < RVersion.Ver5 ? 1 : 0); /* hashOffset + hashesSize + (byte)Mode */
+                var dataOffset = hashOffset + (this.Count * 8) + (Version < RVersion.Ver5 ? 1 : 0); /* hashOffset + hashesSize + (byte)Mode */
 
                 // Go to the dataOffset
                 bw.BaseStream.Seek(dataOffset, SeekOrigin.Begin);
@@ -569,7 +431,7 @@ namespace Noisrev.League.IO.RST
                 var offsets = new Dictionary<string, long>();
 
                 // Write Data
-                foreach (var entry in _entries)
+                foreach (var entry in this.Values)
                 {
                     var text = entry.Text;
 
@@ -597,10 +459,10 @@ namespace Noisrev.League.IO.RST
                 // Go to the hashOffset
                 bw.BaseStream.Seek(hashOffset, SeekOrigin.Begin);
                 // Write hashes
-                foreach (var entry in _entries)
+                foreach (var pair in this)
                 {
                     // Write RST Hash
-                    bw.Write(RSTHash.ComputeHash(entry.Hash, entry.Offset, Type));
+                    bw.Write(RSTHash.ComputeHash(pair.Value.Hash, pair.Value.Offset, Type));
                 }
 
                 /* Version less than 5 */
@@ -651,15 +513,26 @@ namespace Noisrev.League.IO.RST
                 return false;
             }
 
-            if (Type != other.Type || Mode != other.Mode || _entries.Count != other._entries.Count)
+            if (Type != other.Type || Mode != other.Mode || this.Count != other.Count)
             {
                 return false;
             }
 
-            var entries = _entries.OrderBy(x => x.Hash).ToList();
-            var otherEntries = other._entries.OrderBy(x => x.Hash).ToList();
-
-            return !entries.Where((t, i) => !t.Equals(otherEntries[i])).Any();
+            foreach (var pair in this)
+            {
+                if (other.ContainsKey(pair.Key))
+                {
+                    if (!pair.Value.Equals(other[pair.Key]))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

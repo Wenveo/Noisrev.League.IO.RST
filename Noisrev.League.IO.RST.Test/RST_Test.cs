@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Net.Http;
-using Noisrev.League.IO.RST.Helper;
+using System;
+using System.Diagnostics;
 
 namespace Noisrev.League.IO.RST.Test
 {
@@ -31,18 +31,18 @@ namespace Noisrev.League.IO.RST.Test
             }
         }
         [TestMethod]
-        public void A_Open()
+        public void Open()
         {
             _ = new RSTFile(File.OpenRead(en_us), false);
         }
         [TestMethod]
-        public void B_OpenWrite()
+        public void OpenWrite()
         {
             RSTFile rst = new RSTFile(File.OpenRead(en_us), false);
             rst.Write(File.Create(output), false);
         }
         [TestMethod]
-        public void C_Equals()
+        public void _Equals()
         {
             RSTFile left = new RSTFile(File.OpenRead(en_us), false);
             RSTFile right = new RSTFile(File.OpenRead(output), false);
@@ -50,17 +50,40 @@ namespace Noisrev.League.IO.RST.Test
             Assert.IsTrue(left.Equals(right));
         }
 
+        static RSTFile _TEST = new RSTFile(RVersion.Ver5);
+
         [TestMethod]
-        public void __R()
+        public void AddTest()
         {
-            var path = @"C:\Users\Noisr\Desktop\fontconfig_zh_cn.txt";
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
 
-            if (File.Exists(path))
             {
-                var rst = new RSTFile(File.OpenRead(path), false);
-
-                rst.Write(File.Create(path + ".rst"), false);
+                for (int i = 0; i < 10000000; i++)
+                {
+                    _TEST.Add((ulong)i, i.ToString());
+                }
             }
+
+            watch.Stop();
+            TimeSpan timespan = watch.Elapsed;
+            Console.WriteLine("watch: {0}(ms)", timespan.TotalMilliseconds);
+        }
+        [TestMethod]
+        public void RemoveTest()
+        {
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+            {
+                foreach (var item in _TEST)
+                {
+                    _TEST.Remove(item.Key);
+                }
+            }
+
+            watch.Stop();
+            TimeSpan timespan = watch.Elapsed;
+            Console.WriteLine("watch: {0}(ms)", timespan.TotalMilliseconds);
         }
     }
 }
