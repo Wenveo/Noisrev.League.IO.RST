@@ -15,7 +15,7 @@ namespace Noisrev.League.IO.RST
         /// <summary>
         /// The hash located at Entry
         /// </summary>
-        public ulong Hash { get; private set; }
+        public ulong Hash { get; }
         /// <summary>
         /// The content of the entry. String type
         /// </summary>
