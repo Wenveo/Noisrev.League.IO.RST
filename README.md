@@ -20,11 +20,30 @@ It is used to store text messages in League of Legends games.
 
 # 📢 Notice
 
-**In version 2.0, we optimized and tested all the code and found no problems**
+In version 3.0, I refactored most of the read and write code to improve performance.
+A faster BytesReader and a BytesWriter were created to optimize read and write operations.
 
-**---(except for multithreading, because Dictionary is not thread-safe)😅**
+| Method |              Runtime |      Mean | Allocated |
+|------- |--------------------- |----------:|----------:|
+| (Version 3)
+|   Open |             .NET 6.0 |  84.09 ms |     36 MB |
+|  Write |             .NET 6.0 |  54.13 ms |      9 MB |
+| (Before)
+|   Open |             .NET 6.0 |  323.0 ms |    120 MB |
+|  Write |             .NET 6.0 |  434.6 ms |     46 MB |
+
+***Read and write will now be faster and less memory allocated than before!***
 
 # 🎉 Release Note
+
+***v3.0***
+- Added new RSTBuilder (content to build RSTFile).
+- Deprecated **Extensions.Data.xxHash.core20** package, change to use **Standart.Hash.xxHash** package.
+- New BytesReader and BytesWriter were created to improve performance.
+- Optimized Read and Write performance of RSTFile (now **76%** faster (Read) and **87%** (Write)).
+- Set the Release Optimize to true (I've never noticed that before...).
+- Test projects are tested using BenchmarkDotnet.
+- Update and fix some code comments.
 
 ***v2.0***
 - Change it to Dictionary for faster retrieval and storage
