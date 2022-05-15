@@ -1,4 +1,12 @@
-﻿namespace Noisrev.League.IO.RST
+﻿/*
+ * Copyright (c) Noisrev, GZSkins, Inc.
+ * All rights reserved.
+ *
+ * This source code is distributed under an MIT license. 
+ * LICENSE file in the root directory of this source tree.
+ */
+
+namespace Noisrev.League.IO.RST
 {
     /// <summary>
     /// RST File Version

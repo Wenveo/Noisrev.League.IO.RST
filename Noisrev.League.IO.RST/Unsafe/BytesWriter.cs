@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * Copyright (c) Noisrev, GZSkins, Inc.
+ * All rights reserved.
+ *
+ * This source code is distributed under an MIT license. 
+ * LICENSE file in the root directory of this source tree.
+ */
+
+using System;
 using System.Buffers;
 using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;

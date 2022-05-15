@@ -1,4 +1,12 @@
-﻿using Noisrev.League.IO.RST.Helpers;
+﻿/*
+ * Copyright (c) Noisrev, GZSkins, Inc.
+ * All rights reserved.
+ *
+ * This source code is distributed under an MIT license. 
+ * LICENSE file in the root directory of this source tree.
+ */
+
+using Noisrev.League.IO.RST.Helpers;
 using Standart.Hash.xxHash;
 using System;
 using System.Text;

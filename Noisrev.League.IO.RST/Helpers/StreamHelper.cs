@@ -1,4 +1,12 @@
-﻿using System.IO;
+﻿/*
+ * Copyright (c) Noisrev, GZSkins, Inc.
+ * All rights reserved.
+ *
+ * This source code is distributed under an MIT license. 
+ * LICENSE file in the root directory of this source tree.
+ */
+
+using System.IO;
 
 namespace Noisrev.League.IO.RST.Helpers
 {

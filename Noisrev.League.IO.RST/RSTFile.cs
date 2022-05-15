@@ -1,4 +1,12 @@
-﻿/*  This is a RST (Riot String Table) file class.
+﻿/*
+ * Copyright (c) Noisrev, GZSkins, Inc.
+ * All rights reserved.
+ *
+ * This source code is distributed under an MIT license. 
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/*  This is a RST (Riot String Table) file class.
  *  
  *  The RST file is a League of Legends file used to store a list of strings.
  *  
