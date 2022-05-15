@@ -39,63 +39,54 @@
  *                                                                                                       ---DateTime : 7.2.2021 --13:14
  */
 
-#pragma warning disable CS1591
-using Noisrev.League.IO.RST.Helper;
+using Noisrev.League.IO.RST.Helpers;
+using Noisrev.League.IO.RST.Unsafe;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 
 namespace Noisrev.League.IO.RST
 {
     /// <summary>
-    /// Riot String Table File
+    /// Riot String Table File.
     /// </summary>
-    public class RSTFile : Dictionary<ulong, RSTEntry>, IDisposable, IEquatable<RSTFile>
+    public class RSTFile : IEquatable<RSTFile>
     {
         /// <summary>
-        /// Loads a RST file from a file path.
+        /// Load a RST file from a file path.
         /// </summary>
         /// <param name="filePath">The file path.</param>
-        /// <returns>The <see cref="RSTFile"/>.</returns>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        /// <exception cref="DecoderExceptionFallback"></exception>
-        /// <exception cref="EndOfStreamException"></exception>
-        /// <exception cref="FileNotFoundException"></exception>
-        /// <exception cref="ObjectDisposedException"></exception>
-        /// <exception cref="OverflowException"></exception>
-        /// <exception cref="IOException"></exception>
-        /// <exception cref="InvalidDataException"></exception>
+        /// <returns>An instance of the <see cref="RSTFile"/> that was successfully read.</returns>
+        /// <exception cref="ArgumentNullException">filePath is null.</exception>
+        /// <exception cref="FileNotFoundException">File not found.</exception>
         public static RSTFile Load(string filePath)
         {
             if (string.IsNullOrEmpty(filePath))
                 throw new ArgumentNullException(nameof(filePath));
             if (!File.Exists(filePath))
                 throw new FileNotFoundException("File not found.", filePath);
-            
+
             return new RSTFile(File.OpenRead(filePath), false);
         }
 
         /// <summary>
         /// Magic Code
         /// </summary>
-        public static string Magic = "RST";
+        public const string Magic = "RST";
 
         /// <summary>
-        /// RST File Version
+        /// RST File Version.
         /// </summary>
         public RVersion Version { get; }
 
         /// <summary>
-        /// RST File Font Config, using by RST v2
+        /// RST File Font Config, using by RST v2.
         /// </summary>
-        public string Config { get; private set; }
+        public string Config { get; set; }
 
         /// <summary>
-        /// The data segment is located at Position of the current stream
+        /// The data segment is located at Position of the current stream.
         /// </summary>
         public long DataOffset
         {
@@ -119,7 +110,7 @@ namespace Noisrev.League.IO.RST
                 }
 
                 /* count (4 bytes) +  8 * Count  ***/
-                offset += 4 + (8 * this.Count);
+                offset += 4 + (8 * this.Entries.Count);
 
                 /* Version less than 5 */
                 if (Version < RVersion.Ver5)
@@ -133,26 +124,34 @@ namespace Noisrev.League.IO.RST
         }
 
         /// <summary>
-        /// The type of RST used to generate the hash
+        /// The type of RST used to generate the hash.
         /// </summary>
         public RType Type { get; }
 
         /// <summary>
-        /// Mode of the RST
+        /// Mode of the RST.
         /// </summary>
         public RMode Mode { get; }
 
         /// <summary>
-        /// The stream that stores the RST data segment.
+        /// Entries of the RST File.
         /// </summary>
-        private Stream _dataStream;
+        public Dictionary<ulong, string> Entries { get; }
 
         /// <summary>
-        /// Initialize and set the version and Type
+        /// Initializes a new instance of the <see cref="RSTFile"/> class.
+        /// </summary>
+        private RSTFile()
+        {
+            this.Entries = new Dictionary<ulong, string>();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RSTFile"/> class and set the version and Type.
         /// </summary>
         /// <param name="version">RST Version</param>
-        /// <exception cref="ArgumentException"></exception>
-        public RSTFile(RVersion version) : base()
+        /// <exception cref="ArgumentException">Invalid Major version.</exception>
+        public RSTFile(RVersion version) : this()
         {
             var type = version.GetRType();
 
@@ -164,204 +163,133 @@ namespace Noisrev.League.IO.RST
         }
 
         /// <summary>
-        /// Read the RST file from the stream.
+        /// Initializes a new instance of the <see cref="RSTFile"/> class and read content from the <paramref name="inputStream"/>.
         /// </summary>
-        /// <param name="input">The input stream.</param>
-        /// <param name="leaveOpen">true to leave the stream open after the <see cref="System.IO.BinaryReader"/> object is disposed; otherwise, false.</param>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        /// <exception cref="DecoderExceptionFallback"></exception>
-        /// <exception cref="EndOfStreamException"></exception>
-        /// <exception cref="ObjectDisposedException"></exception>
-        /// <exception cref="OverflowException"></exception>
-        /// <exception cref="IOException"></exception>
-        /// <exception cref="InvalidDataException"></exception>
-        public RSTFile(Stream input, bool leaveOpen) : base()
-        {
-            // Init BinaryReader, use UTF-8
-            using (BinaryReader br = new BinaryReader(input, Encoding.UTF8, leaveOpen))
-            {
-                // Read magic code
-                var magic = br.ReadString(3);
-                if (magic != Magic)
-                {
-                    // Invalid magic code
-                    throw new InvalidDataException($"Invalid RST file header: {magic}");
-                }
-
-                //Set Version
-                Version = (RVersion)br.ReadByte();
-
-                // Version 2 and Version 3
-                if (Version == RVersion.Ver2 || Version == RVersion.Ver3)
-                {
-                    // The keys for versions 2 and 3
-                    Type = RType.Complex;
-                    // Version 2
-                    if (Version == RVersion.Ver2)
-                    {
-                        // 0 or 1
-                        var hasConfig = br.ReadBoolean();
-                        if (hasConfig) // true
-                        {
-                            // Config length
-                            var length = br.ReadInt32();
-                            // Read the Config.
-                            Config = br.ReadString(length);
-                        }
-                    }
-                    // Version 3
-                    // pass
-                }
-                // If this is version 4 or version 5
-                else if (Version == RVersion.Ver4 || Version == RVersion.Ver5)
-                {
-                    // Key for version 4 and 5
-                    Type = RType.Simple;
-                }
-                // Not equivalent to versions 2, 3, 4, 5.
-                else
-                {
-                    // Invalid or unsupported version and throws an exception.
-                    throw new InvalidDataException($"Unsupported RST version: {Version}");
-                }
-
-                // Set hash key
-                var hashKey = Type.ComputeKey();
-                // Read Count
-                var count = br.ReadInt32();
-
-                for (var i = 0; i < count; i++)
-                {
-                    //Read the hash data
-                    var hashGroup = br.ReadUInt64();
-
-                    // Generate offset
-                    var offset = Convert.ToInt64(hashGroup >> (int)Type);
-                    // Generate hash
-                    var hash = hashGroup & hashKey;
-
-                    // Add entry
-                    Add(new RSTEntry(offset, hash));
-                }
-
-                /* Version less than 5 */
-                if (Version < RVersion.Ver5)
-                {
-                    // Read Mode
-                    Mode = (RMode)br.ReadByte();
-                }
-
-                // Set Data Stream
-                input.AutoCopy(out _dataStream);
-
-                // Iterate through all the entries
-                foreach (var item in this)
-                {
-                    // Set the content
-                    ReadText(item.Value);
-                }
-            }
-        }
-        /// <summary>
-        /// Adds the specified key and value to the dictionary.
-        /// </summary>
-        /// <param name="key">The key</param>
-        /// <param name="value">The value</param>
-        public void Add(string key, string value) => Add(RSTHash.ComputeHash(key, this.Type), value);
-
-        /// <summary>
-        /// Adds the specified key and value to the dictionary.
-        /// </summary>
-        /// <param name="key">The key</param>
-        /// <param name="value">The value</param>
-        public void Add(ulong key, string value) => Add(new RSTEntry(key, value));
-
-        /// <summary>
-        /// Adds the specified entry to the dictionary.
-        /// </summary>
-        /// <param name="entry">The entry</param>
-        public void Add(RSTEntry entry) => Add(entry.Hash, entry);
-
-        /// <summary>
-        /// Reading content begins at the offset specified in the stream.
-        /// </summary>
-        /// <param name="entry">Entry to be read</param>
-        /// <exception cref="IOException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="NotSupportedException"></exception>
-        /// <exception cref="ObjectDisposedException"></exception>
-        /// <exception cref="DecoderExceptionFallback"></exception>
-        private void ReadText(RSTEntry entry)
-        {
-            // Set the text
-            entry.Text = _dataStream.ReadStringWithEndByte(entry.Offset, 0x00);
-        }
-
-        /// <summary>
-        /// Replace the matching items in the entire entry. And replace them.
-        /// </summary>
-        /// <param name="oldText">To Replace</param>
-        /// <param name="newText">Replace to</param>
-        /// <param name="caseSensitive">Case sensitive</param>
+        /// <param name="inputStream">The input stream.</param>
+        /// <param name="leaveOpen">true to leave the stream open after the <see cref="BinaryReader"/> object is disposed; otherwise, false.</param>
+        /// <exception cref="ArgumentException"/>
         /// <exception cref="ArgumentNullException"/>
-        public void ReplaceAll(string oldText, string newText, bool caseSensitive = false)
+        /// <exception cref="InvalidDataException"/>
+        public RSTFile(Stream inputStream, bool leaveOpen) : this()
         {
-            // Set a list
-            var list = caseSensitive
-                ? this.Values.Where(x => x.Text.Contains(oldText))
-                : this.Values.Where(x => x.Text.ToLower().Contains(oldText.ToLower()));
+            if (inputStream == null) throw new ArgumentNullException(nameof(inputStream));
+            if (!inputStream.CanRead) throw new ArgumentException("The inputStream does not supports reading!");
 
-            foreach (var item in list)
-            {
-                // Set Text
-                item.Text = newText;
-            }
-        }
+            //Read all bytes from the stream and create a reader
+            var bytesReader = BytesReader.Create(inputStream.ReadToEnd(), Encoding.UTF8);
 
-        /// <summary>
-        /// Set the configuration.
-        /// </summary>
-        /// <param name="conf">The config</param>
-        /// <returns>It must be version 2 to set the configuration. Set to return true on success or false on failure.</returns>
-        public bool SetConfig(string conf)
-        {
-            // Version 2
-            if (Version == RVersion.Ver2)
+            // Read magic code
+            var magic = bytesReader.ReadString(3);
+            if (magic != Magic)
             {
-                // Set the config
-                Config = conf;
-                // Return
-                return true;
+                // Invalid magic code
+                throw new InvalidDataException($"Invalid RST file header: {magic}");
             }
-            // Not version 2
+
+            //Set the Version
+            Version = (RVersion)bytesReader.ReadByte();
+
+            // Version 2 and Version 3
+            if (Version == RVersion.Ver2 || Version == RVersion.Ver3)
+            {
+                // The keys for versions 2 and 3
+                Type = RType.Complex;
+                // Version 2
+                if (Version == RVersion.Ver2)
+                {
+                    // 0 or 1
+                    var hasConfig = bytesReader.ReadBoolean();
+                    if (hasConfig) // true
+                    {
+                        // Config length
+                        var configLength = bytesReader.ReadInt32();
+                        // Read the Config.
+                        Config = bytesReader.ReadString(configLength);
+                    }
+                }
+                // Version 3
+                // pass
+            }
+            // If this is version 4 or version 5
+            else if (Version == RVersion.Ver4 || Version == RVersion.Ver5)
+            {
+                // Key for version 4 and 5
+                Type = RType.Simple;
+            }
+            // Not equivalent to versions 2, 3, 4, 5.
             else
             {
-                // Return
-                return false;
+                // Invalid or unsupported version and throws an exception.
+                throw new InvalidDataException($"Unsupported RST version: {Version}");
             }
+
+            // Set the hash key
+            var hashKey = Type.ComputeKey();
+
+            // Read the count
+            var count = bytesReader.ReadInt32();
+
+            // Used to save hashes and offsets
+            var hashesOffsets = new Dictionary<ulong, long>(count);
+
+            // Read Hashes
+            for (var i = 0; i < count; i++)
+            {
+                //Read the hash data
+                var hashData = bytesReader.ReadUInt64();
+
+                // Generate offset
+                var offset = Convert.ToInt64(hashData >> (int)Type);
+
+                // Generate hash
+                var hash = hashData & hashKey;
+
+                // Add entry
+                hashesOffsets[hash] = offset;
+            }
+
+            // Version less than 5
+            if (Version < RVersion.Ver5)
+            {
+                // Read Mode
+                Mode = (RMode)bytesReader.ReadByte();
+            }
+
+            // Current Position
+            var position = bytesReader.Position;
+
+            // Used to filter duplicate text
+            var offsetTexts = new Dictionary<long, string>(count);
+
+            // Read Content
+            foreach (var item in hashesOffsets)
+            {
+                // Try to get a string from the dictionary.
+                // If false, the string is read and added to the dictionary.
+                // But if true, the same text is fetched from the dictionary (to avoid reading the string multiple times).
+                if (!offsetTexts.TryGetValue(item.Value, out var value))
+                {
+                    // Reads the string from position + offset
+                    value = bytesReader.ReadStringWithOffset((int)(position + item.Value));
+                    // Add the offset and text to the Dictionary
+                    offsetTexts.Add(item.Value, value);
+                }
+                // Add the key and value.
+                this.Entries[item.Key] = value;
+            }
+
+            if (!leaveOpen) inputStream.Close();
         }
 
         /// <summary>
         /// Write the <see cref="RSTFile"/>.
         /// </summary>
-        /// <param name="outputPath">The output path</param> 
-        /// <exception cref="ArgumentException"/>
-        /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="EncoderFallbackException"/>
-        /// <exception cref="NotSupportedException"/>
-        /// <exception cref="ObjectDisposedException"/>
-        /// <exception cref="OverflowException"/>
-        /// <exception cref="IOException"/>
+        /// <param name="outputPath">Output path of the RST file.</param> 
+        /// <exception cref="ArgumentNullException">outputPath is null.</exception>
         public void Write(string outputPath)
         {
-            if (string.IsNullOrEmpty(outputPath))
-            {
-                throw new ArgumentNullException(nameof(outputPath));
-            }
-            
+            if (string.IsNullOrEmpty(outputPath)) throw new ArgumentNullException(nameof(outputPath));
+
             using (var ms = new MemoryStream())
             {
                 // Write to MemoryStream
@@ -372,130 +300,100 @@ namespace Noisrev.League.IO.RST
         }
 
         /// <summary>
-        /// Using an output stream, write the RST to that stream.
+        /// Using an output stream, write the <see cref="RSTFile"/> to that stream.
         /// </summary>
-        /// <param name="output">The output stream.</param>
-        /// <param name="leaveOpen">true to leave the stream open after the  <see cref="System.IO.BinaryWriter"/> object is disposed; otherwise, false.</param>
-        /// <exception cref="ArgumentException"/>
-        /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="EncoderFallbackException"/>
-        /// <exception cref="NotSupportedException"/>
-        /// <exception cref="ObjectDisposedException"/>
-        /// <exception cref="OverflowException"/>
-        /// <exception cref="IOException"/>
-        public void Write(Stream output, bool leaveOpen)
+        /// <param name="outputStream">The stream used to output RST file.</param>
+        /// <param name="leaveOpen">true to leave the stream open after the <see cref="System.IO.BinaryWriter"/> object is disposed; otherwise, false.</param>
+        /// <exception cref="ArgumentException">The outputStream does not support writes.</exception>
+        /// <exception cref="ArgumentNullException">outputStream is null.</exception>
+        public void Write(Stream outputStream, bool leaveOpen)
         {
-            if (output == null) throw new ArgumentNullException(nameof(output));
-            // Init Binary Writer
-            using (BinaryWriter bw = new BinaryWriter(output, Encoding.UTF8, leaveOpen))
+            if (outputStream == null) throw new ArgumentNullException(nameof(outputStream));
+            if (outputStream.CanWrite == false) throw new ArgumentException("The outputStream does not supports writing!");
+
+            // Used to write the header block (DataOffset = HeaderSize). 
+            var bytesWriter = BytesWriter.Create((int)DataOffset);
+
+            // Write the Magic Code.
+            bytesWriter.Write(new byte[3] { 0x52, 0x53, 0x54 });
+
+            // Write the Version.
+            bytesWriter.Write((byte)Version);
+
+            // Version 2
+            if (Version == RVersion.Ver2)
             {
-                // Write Magic Code
-                bw.Write(Magic.ToCharArray());
+                // True if Config is not empty, false otherwise.
+                var hasConfig = !string.IsNullOrEmpty(Config) && Config.Length != 0;
+                // Write the boolean value.
+                bytesWriter.Write(hasConfig);
 
-                // Write Version
-                bw.Write((byte)Version);
-
-                // Version 2
-                if (Version == RVersion.Ver2)
+                // If True, Write the Config.
+                if (hasConfig)
                 {
-                    var hasConfig = !string.IsNullOrEmpty(Config) && Config.Length != 0;
-                    /* Config whether there is any content? */
-                    bw.Write(hasConfig);
-
-                    // True
-                    if (hasConfig)
-                    {
-                        // Write Config
-                        {
-                            // Write Size
-                            bw.Write(Config.Length);
-                            // Write Content
-                            bw.Write(Config.ToCharArray());
-                        }
-                    }
+                    // Size of Config
+                    bytesWriter.Write(Config.Length);
+                    // Content
+                    bytesWriter.Write(Config, Encoding.UTF8);
                 }
-
-                // Write Count
-                bw.Write(this.Count);
-
-                // Set the hash offset.
-                var hashOffset = bw.BaseStream.Position;
-                // Set the data offset.
-                var dataOffset = hashOffset + (this.Count * 8) + (Version < RVersion.Ver5 ? 1 : 0); /* hashOffset + hashesSize + (byte)Mode */
-
-                // Go to the dataOffset
-                bw.BaseStream.Seek(dataOffset, SeekOrigin.Begin);
-
-                // Initialize dictionary
-                // Use a dictionary to filter duplicate items
-                var offsets = new Dictionary<string, long>();
-
-                // Write Data
-                foreach (var entry in this.Values)
-                {
-                    var text = entry.Text;
-
-                    // If there is duplicate content in the dictionary.
-                    if (offsets.ContainsKey(text))
-                    {
-                        // Set the offset. And do not write the content. Because there's repetition.
-                        entry.Offset = offsets[text];
-                    }
-                    // No repeat
-                    else
-                    {
-                        // Write Offset
-                        entry.Offset = bw.BaseStream.Position - dataOffset;
-                        // Write Text
-                        bw.Write(Encoding.UTF8.GetBytes(text));
-                        // Write End Byte
-                        bw.Write((byte)0x00);
-
-                        // Add to dictionary
-                        offsets.Add(text, entry.Offset);
-                    }
-                }
-
-                // Go to the hashOffset
-                bw.BaseStream.Seek(hashOffset, SeekOrigin.Begin);
-                // Write hashes
-                foreach (var pair in this)
-                {
-                    // Write RST Hash
-                    bw.Write(RSTHash.ComputeHash(pair.Value.Hash, pair.Value.Offset, Type));
-                }
-
-                /* Version less than 5 */
-                if (Version < RVersion.Ver5)
-                {
-                    // Write Mode
-                    bw.Write((byte)Mode);
-                }
-                // Flush to prevent unwritten data
-                bw.Flush();
-
-                // Dispose
-                this.Dispose();
-                // Set Data Stream
-                output.AutoCopy(out _dataStream);
             }
-        }
+            // Current Count
+            var count = this.Entries.Count;
 
-        public void Dispose()
-        {
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
-        }
+            // Write the Count
+            bytesWriter.Write(count);
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
+            // Used to write blocks of data.
+            var dataWriter = BytesWriter.Create(count * 256);
+
+            // Use a dictionary to filter duplicate items.
+            var textOffsets = new Dictionary<string, long>(count);
+
+            // Filter duplicates and add data to the list.
+            foreach (var entry in Entries)
             {
-                (_dataStream as IDisposable)?.Dispose();
+                var text = entry.Value;
+
+                // Try to get a string from the dictionary.
+                // If false, add the current string and write the current string to the data block.
+                if (!textOffsets.TryGetValue(text, out var offset))
+                {
+                    // Current offset
+                    offset = dataWriter.Position;
+
+                    // Write the Text
+                    dataWriter.Write(text, Encoding.UTF8, true);
+
+                    // Add the text and offset to the Dictionary
+                    textOffsets.Add(text, offset);
+                }
+                // Write the Hash
+                bytesWriter.Write(RSTHash.ComputeHash(entry.Key, offset, Type));
             }
 
-            _dataStream = null;
+            // Version less than 5.
+            if (Version < RVersion.Ver5)
+            {
+                // Mode
+                bytesWriter.Write((byte)Mode);
+            }
+
+            // Write Blocks
+            outputStream.Write(bytesWriter.Buffer, 0, bytesWriter.Length);
+            outputStream.Write(dataWriter.Buffer, 0, dataWriter.Length);
+
+            // End of Write
+            if (leaveOpen)
+                outputStream.Flush();
+            else
+                outputStream.Close();
         }
+
+        /// <summary>
+        ///  Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>true if the current object is equal to the other parameter; otherwise, false.</returns>
         public bool Equals(RSTFile other)
         {
             if (other == null)
@@ -513,16 +411,16 @@ namespace Noisrev.League.IO.RST
                 return false;
             }
 
-            if (Type != other.Type || Mode != other.Mode || this.Count != other.Count)
+            if (Type != other.Type || Mode != other.Mode || this.Entries.Count != other.Entries.Count)
             {
                 return false;
             }
 
-            foreach (var pair in this)
+            foreach (var pair in this.Entries)
             {
-                if (other.ContainsKey(pair.Key))
+                if (other.Entries.TryGetValue(pair.Key, out string value))
                 {
-                    if (!pair.Value.Equals(other[pair.Key]))
+                    if (!pair.Value.Equals(value))
                     {
                         return false;
                     }

@@ -1,5 +1,5 @@
-﻿using Extensions.Data;
-using Noisrev.League.IO.RST.Helper;
+﻿using Noisrev.League.IO.RST.Helpers;
+using Standart.Hash.xxHash;
 using System;
 using System.Text;
 
@@ -11,36 +11,42 @@ namespace Noisrev.League.IO.RST
     public static class RSTHash
     {
         /// <summary>
-        /// Use toHash and type to generate a hash with no offset.
+        /// Use <paramref name="toHash"/> and <paramref name="type"/> to generate a hash with no offset.
         /// </summary>
-        /// <param name="toHash">The toHash is used to generate a hash.</param>
-        /// <param name="type">Sets the type of hash generated.</param>
+        /// <param name="toHash">The string used to generate the hash.</param>
+        /// <param name="type">The type of <see cref="RSTFile"/>.</param>
         /// <returns>The generated hash.</returns>
         /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="EncoderFallbackException"/>
         public static ulong ComputeHash(string toHash, RType type)
         {
-            return XXHash.XXH64(Encoding.UTF8.GetBytes(toHash.ToLower())) & type.ComputeKey();
+            if (toHash == null) throw new ArgumentNullException(nameof(toHash));
+
+            var buffer = Encoding.UTF8.GetBytes(toHash.ToLower());
+            return xxHash64.ComputeHash(buffer, buffer.Length) & type.ComputeKey();
         }
         /// <summary>
-        /// Generate a hash with an offset using toHash and offset, as well as type.
+        /// Generate a hash with an offset using <paramref name="toHash"/> and <paramref name="offset"/>, as well as <paramref name="type"/>.
         /// </summary>
-        /// <param name="toHash">The toHash is used to generate a hash.</param>
-        /// <param name="offset">Set the offset to generate a hash with the offset.</param>
-        /// <param name="type">Sets the type of hash generated.</param>
+        /// <param name="toHash">The string used to generate the hash.</param>
+        /// <param name="offset">The offset of the text.</param>
+        /// <param name="type">The type of <see cref="RSTFile"/>.</param>
         /// <returns>The generated hash.</returns>
         /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="EncoderFallbackException"/>
+        /// <exception cref="ArgumentOutOfRangeException"/>
         public static ulong ComputeHash(string toHash, long offset, RType type)
         {
-            return ComputeHash(toHash, type) + offset.ComputeOffset(type);
+            if (toHash == null) throw new ArgumentNullException(nameof(toHash));
+            if (offset < 0) throw new ArgumentOutOfRangeException(nameof(offset));
+
+            var buffer = Encoding.UTF8.GetBytes(toHash.ToLower());
+            return xxHash64.ComputeHash(buffer, buffer.Length) & type.ComputeKey() + offset.ComputeOffset(type);
         }
         /// <summary>
-        /// Regenerate a hash with an offset using the generated hash and offset, as well as type.
+        /// Regenerate a hash with an offset using the generated <paramref name="hash"/> and <paramref name="offset"/>, as well as <paramref name="type"/>.
         /// </summary>
-        /// <param name="hash">The hash that has been generated.</param>
-        /// <param name="offset">Set the offset to generate a hash with the offset.</param>
-        /// <param name="type">Sets the type of hash generated.</param>
+        /// <param name="hash">A hash used to merge offset.</param>
+        /// <param name="offset">The offset of the text.</param>
+        /// <param name="type">The type of <see cref="RSTFile"/>.</param>
         /// <returns>The generated hash.</returns>
         public static ulong ComputeHash(ulong hash, long offset, RType type)
         {
