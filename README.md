@@ -27,8 +27,8 @@ A faster BytesReader and a BytesWriter were created to optimize read and write o
 | Method |              Runtime |      Mean | Allocated |
 |------- |--------------------- |----------:|----------:|
 | (Version 3)
-|   Open |             .NET 6.0 |  84.09 ms |     36 MB |
-|  Write |             .NET 6.0 |  54.13 ms |      9 MB |
+|   Open |             .NET 6.0 |  84.56 ms |     36 MB |
+|  Write |             .NET 6.0 |  62.65 ms |     30 MB |
 | (Before)
 |   Open |             .NET 6.0 |  323.0 ms |    120 MB |
 |  Write |             .NET 6.0 |  434.6 ms |     46 MB |
@@ -36,6 +36,9 @@ A faster BytesReader and a BytesWriter were created to optimize read and write o
 ***Read and write will now be faster and less memory allocated than before!***
 
 # 🎉 Release Note
+
+***3.1***
+- Fix a bug (https://github.com/Noisrev/Noisrev.League.IO.RST/issues/4) where the end byte of the written string is not 0
 
 ***v3.0***
 - Added new RSTBuilder (content to build RSTFile).
