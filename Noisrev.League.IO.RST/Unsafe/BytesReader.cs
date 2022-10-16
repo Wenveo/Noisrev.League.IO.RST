@@ -8,6 +8,7 @@
 
 using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -64,54 +65,41 @@ namespace Noisrev.League.IO.RST.Unsafe
             return _buffer[_position++];
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public sbyte ReadSByte()
-        {
-            return (sbyte)ReadByte();
-        }
+        => (sbyte)ReadByte();
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool ReadBoolean()
-        {
-            return ReadByte() != 0;
-        }
+        => ReadByte() != 0;
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public char ReadChar()
-        {
-            var value = (char)ReadByte();
-            if (value == -1)
-                throw new EndOfStreamException();
+        => (char)ReadByte();
 
-            return value;
-        }
-
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public short ReadInt16()
-        {
-            return MemoryMarshal.Read<short>(Read(2));
-        }
+        => MemoryMarshal.Read<short>(Read(2));
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ushort ReadUInt16()
-        {
-            return MemoryMarshal.Read<ushort>(Read(2));
-        }
+        => MemoryMarshal.Read<ushort>(Read(2));
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int ReadInt32()
-        {
-            return MemoryMarshal.Read<int>(Read(4));
-        }
+        => MemoryMarshal.Read<int>(Read(4));
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public uint ReadUInt32()
-        {
-            return MemoryMarshal.Read<uint>(Read(4));
-        }
+        => MemoryMarshal.Read<uint>(Read(4));
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public long ReadInt64()
-        {
-            return MemoryMarshal.Read<long>(Read(8));
-        }
+        => MemoryMarshal.Read<long>(Read(8));
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ulong ReadUInt64()
-        {
-            return MemoryMarshal.Read<ulong>(Read(8));
-        }
+        => MemoryMarshal.Read<ulong>(Read(8));
 
         public string ReadString()
         {
@@ -123,6 +111,7 @@ namespace Noisrev.League.IO.RST.Unsafe
             _position += length;
             return _encoding.GetString(_buffer, _position, length);
         }
+
         public string ReadString(int count)
         {
             return _encoding.GetString(Read(count).ToArray());
@@ -143,6 +132,7 @@ namespace Noisrev.League.IO.RST.Unsafe
         {
             return new BytesReader(buffer);
         }
+
         public static BytesReader Create(byte[] buffer, Encoding encoding)
         {
             return new BytesReader(buffer, encoding);

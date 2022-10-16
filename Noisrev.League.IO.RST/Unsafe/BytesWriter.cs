@@ -7,8 +7,7 @@
  */
 
 using System;
-using System.Buffers;
-using System.Diagnostics.Contracts;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -27,60 +26,37 @@ namespace Noisrev.League.IO.RST.Unsafe
 
         private BytesWriter()
         {
-            _buffer = ArrayPool<byte>.Shared.Rent(4);
-            ArrayPool<byte>.Shared.Return(_buffer);
+            _buffer = new byte[4];
         }
 
         private BytesWriter(int capacity)
         {
-            _buffer = ArrayPool<byte>.Shared.Rent(capacity);
-            ArrayPool<byte>.Shared.Return(_buffer);
+            _buffer = new byte[capacity];
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Write(bool value)
-        {
-            Contract.Ensures(Contract.Result<BytesWriter>() != null);
-            WriteByte((byte)(value ? 1 : 0));
-        }
+        => WriteByte((byte)(value ? 1 : 0));
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Write(byte value)
-        {
-            Contract.Ensures(Contract.Result<BytesWriter>() != null);
-            WriteByte(value);
-        }
+        => WriteByte(value);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Write(sbyte value)
-        {
-            Contract.Ensures(Contract.Result<BytesWriter>() != null);
-            WriteByte((byte)value);
-        }
+        => WriteByte((byte)value);
 
-        public void Write(byte[] bytes)
-        {
-            if (bytes == null)
-                throw new ArgumentNullException(nameof(bytes));
-
-            CoreceWrite(bytes, 0, bytes.Length);
-        }
-
-        public void Write(byte[] bytes, int index, int count)
-        {
-            CoreceWrite(bytes, index, count);
-        }
-
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Write(char[] ch)
-        {
-            Write(ch, Encoding.ASCII);
-        }
+        => Write(ch, Encoding.ASCII);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Write(char[] ch, Encoding encoding)
-        {
-            var rented = ArrayPool<byte>.Shared.Rent(encoding.GetByteCount(ch));
-            var actualByteCount = encoding.GetBytes(ch, 0, ch.Length, rented, 0);
+        => CoreceWrite(encoding.GetBytes(ch));
 
-            CoreceWrite(rented, 0, actualByteCount);
-            ArrayPool<byte>.Shared.Return(rented);
-        }
+        public void Write(byte[] bytes) => CoreceWrite(bytes);
+
+        public void Write(byte[] bytes, int index, int count) => CoreceWrite(bytes, index, count);
 
         public void Write(double value)
         {
@@ -137,21 +113,21 @@ namespace Noisrev.League.IO.RST.Unsafe
             CoreceWrite(buffer);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Write(string value, bool writeEndChar = false)
-        {
-            Write(value, Encoding.Default, writeEndChar);
-        }
+        => Write(value, Encoding.Default, writeEndChar);
 
         public void Write(string value, Encoding encoding, bool writeEndChar = false)
         {
-            var rented = ArrayPool<byte>.Shared.Rent(encoding.GetByteCount(value));
-            var actualByteCount = encoding.GetBytes(value, 0, value.Length, rented, 0);
-
+            var byteCount = encoding.GetByteCount(value);
             if (writeEndChar)
-                CoreceWriteWithEndByte(rented, 0, actualByteCount);
-            else
-                CoreceWrite(rented, 0, actualByteCount);
-            ArrayPool<byte>.Shared.Return(rented);
+            {
+                byteCount += 1;
+            }
+
+            var bytes = new byte[byteCount];
+            encoding.GetBytes(value, 0, value.Length, bytes, 0);
+            CoreceWrite(bytes);
         }
 
         public void WriteByte(byte value)
@@ -162,47 +138,25 @@ namespace Noisrev.League.IO.RST.Unsafe
             _length++;
         }
 
-        private void CoreceWrite(Span<byte> buffer)
+        private void CoreceWrite(ReadOnlySpan<byte> buffer)
         {
             var size = buffer.Length;
             CheckOrResize(size);
 
-            var sharedBuffer = ArrayPool<byte>.Shared.Rent(size);
-            try
-            {
-                buffer.CopyTo(sharedBuffer);
-
-                var offsetPtr = (IntPtr)((byte*)System.Runtime.CompilerServices.Unsafe.AsPointer(ref _buffer[0]) + (uint)Position);
-                Marshal.Copy(sharedBuffer, 0, offsetPtr, size);
-
-                _position += size;
-                _length += size;
-            }
-            finally
-            {
-                ArrayPool<byte>.Shared.Return(sharedBuffer);
-            }
-        }
-
-        private void CoreceWrite(byte[] buffer, int index, int count)
-        {
-            var size = count;
-            CheckOrResize(size);
-
-            var offsetPtr = (IntPtr)((byte*)System.Runtime.CompilerServices.Unsafe.AsPointer(ref _buffer[0]) + (uint)Position);
-            Marshal.Copy(buffer, index, offsetPtr, count);
+            var span = new Span<byte>(_buffer);
+            buffer.CopyTo(span.Slice(_position, size));
 
             _position += size;
             _length += size;
         }
 
-        private void CoreceWriteWithEndByte(byte[] buffer, int index, int count)
+        private void CoreceWrite(ReadOnlySpan<byte> buffer, int index, int count)
         {
-            var size = count + 1;
+            var size = count;
             CheckOrResize(size);
 
-            var offsetPtr = (IntPtr)((byte*)System.Runtime.CompilerServices.Unsafe.AsPointer(ref _buffer[0]) + (uint)Position);
-            Marshal.Copy(buffer, index, offsetPtr, count);
+            var span = new Span<byte>(_buffer);
+            buffer.Slice(index, size).CopyTo(span.Slice(_position, size));
 
             _position += size;
             _length += size;
@@ -216,11 +170,13 @@ namespace Noisrev.League.IO.RST.Unsafe
                 var maxValue = Math.Max(bufferSize, capacity);
                 var rentedSize = checked(capacity + maxValue);
 
-                var buffer = ArrayPool<byte>.Shared.Rent(rentedSize);
-                Array.Copy(_buffer, buffer, _length);
+                var span = new Span<byte>(_buffer, 0, _length);
 
-                ArrayPool<byte>.Shared.Return(buffer);
-                _buffer = buffer;
+                var newBuffer = new byte[rentedSize];
+                var span2 = new Span<byte>(newBuffer);
+
+                span.CopyTo(span2);
+                _buffer = newBuffer;
             }
         }
 
