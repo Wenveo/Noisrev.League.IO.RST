@@ -268,7 +268,7 @@ namespace Noisrev.League.IO.RST
         /// <returns>A reference to this instance after the add operation has completed.</returns>
         /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
         /// <exception cref="ArgumentNullException">key is null.</exception>
-        public RSTBuilder Add(ulong key, object value)
+        public RSTBuilder Add(ulong key, object? value)
         {
             Contract.Ensures(Contract.Result<RSTBuilder>() != null);
 
@@ -276,7 +276,7 @@ namespace Noisrev.League.IO.RST
             {
                 return this;
             }
-            return Add(key, value.ToString());
+            return Add(key, value.ToString()!);
         }
 
         /// <summary>
