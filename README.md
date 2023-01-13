@@ -40,6 +40,7 @@ A faster BytesReader and a BytesWriter were created to optimize read and write o
 ***3.1.1***
 - Add multi-target framework
 - Update project properties and package references
+- Enable `nullable` for project and improve the code
 
 ***3.1***
 - Fix a bug (https://github.com/Noisrev/Noisrev.League.IO.RST/issues/4) where the end byte of the written string is not 0
