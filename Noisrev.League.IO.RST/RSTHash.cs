@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) Noisrev, GZSkins, Inc.
+ * Copyright (c) 2021 - 2023 Noisrev
  * All rights reserved.
  *
  * This source code is distributed under an MIT license. 
