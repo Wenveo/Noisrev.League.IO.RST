@@ -302,23 +302,20 @@ namespace Noisrev.League.IO.RST
         {
             if (string.IsNullOrEmpty(outputPath)) throw new ArgumentNullException(nameof(outputPath));
 
-            using (var ms = new MemoryStream())
-            {
-                // Write to MemoryStream
-                Write(ms, false);
-                // Write All Bytes
-                File.WriteAllBytes(outputPath, ms.ToArray());
-            }
-        }
+            using var ms = new MemoryStream();
+            // Write to MemoryStream
+            Write(ms, false);
+            // Write All Bytes
+            File.WriteAllBytes(outputPath, ms.ToArray());
 
-        /// <summary>
-        /// Using an output stream, write the <see cref="RSTFile"/> to that stream.
-        /// </summary>
-        /// <param name="outputStream">The stream used to output RST file.</param>
-        /// <param name="leaveOpen">true to leave the stream open after the <see cref="System.IO.BinaryWriter"/> object is disposed; otherwise, false.</param>
-        /// <exception cref="ArgumentException">The outputStream does not support writes.</exception>
-        /// <exception cref="ArgumentNullException">outputStream is null.</exception>
-        public void Write(Stream outputStream, bool leaveOpen)
+            /// <summary>
+            /// Using an output stream, write the <see cref="RSTFile"/> to that stream.
+            /// </summary>
+            /// <param name="outputStream">The stream used to output RST file.</param>
+            /// <param name="leaveOpen">true to leave the stream open after the <see cref="System.IO.BinaryWriter"/> object is disposed; otherwise, false.</param>
+            /// <exception cref="ArgumentException">The outputStream does not support writes.</exception>
+            /// <exception cref="ArgumentNullException">outputStream is null.</exception>
+            public void Write(Stream outputStream, bool leaveOpen)
         {
             if (outputStream == null) throw new ArgumentNullException(nameof(outputStream));
             if (outputStream.CanWrite == false) throw new ArgumentException("The outputStream does not supports writing!");
