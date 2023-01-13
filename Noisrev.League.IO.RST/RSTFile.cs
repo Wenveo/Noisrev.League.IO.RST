@@ -92,7 +92,7 @@ namespace Noisrev.League.IO.RST
         /// <summary>
         /// RST File Font Config, using by RST v2.
         /// </summary>
-        public string Config { get; set; }
+        public string? Config { get; set; }
 
         /// <summary>
         /// The data segment is located at Position of the current stream.
@@ -110,9 +110,15 @@ namespace Noisrev.League.IO.RST
                     /* hasConfig? (1) boolean */
                     offset += 1;
 
+#if NETFRAMEWORK
+#pragma warning disable CS8602
+#endif
                     /* Config is not null ? */
-                    if (!string.IsNullOrEmpty(Config) && Config.Length != 0)
+                    if (!string.IsNullOrEmpty(Config) && Config.Length > 0)
                     {
+#if NETFRAMEWORK
+#pragma warning restore CS8602
+#endif
                         /* size(int) + strlen */
                         offset += 4 + Config.Length;
                     }
@@ -162,12 +168,9 @@ namespace Noisrev.League.IO.RST
         /// <exception cref="ArgumentException">Invalid Major version.</exception>
         public RSTFile(RVersion version) : this()
         {
-            var type = version.GetRType();
-
             /* Check the type  */
-            if (type == null) throw new ArgumentException($"Invalid Major version {(byte)version}. Must be one of 2, 3, 4, 5");
 
-            this.Type = type.Value;
+            this.Type = version.GetRType() ?? throw new ArgumentException($"Invalid Major version {(byte)version}. Must be one of 2, 3, 4, 5"); ;
             this.Version = version;
         }
 
@@ -332,18 +335,26 @@ namespace Noisrev.League.IO.RST
             // Version 2
             if (Version == RVersion.Ver2)
             {
-                // True if Config is not empty, false otherwise.
-                var hasConfig = !string.IsNullOrEmpty(Config) && Config.Length != 0;
-                // Write the boolean value.
-                bytesWriter.Write(hasConfig);
-
+#if NETFRAMEWORK
+#pragma warning disable CS8602
+#endif
                 // If True, Write the Config.
-                if (hasConfig)
+                if (!string.IsNullOrEmpty(Config) && Config.Length > 0)
                 {
+#if NETFRAMEWORK
+#pragma warning restore CS8602
+#endif
+                    // Write the boolean value.
+                    bytesWriter.Write(true);
                     // Size of Config
                     bytesWriter.Write(Config.Length);
                     // Content
                     bytesWriter.Write(Config, Encoding.UTF8);
+                }
+                else
+                {
+                    // Write the boolean value.
+                    bytesWriter.Write(false);
                 }
             }
             // Current Count
@@ -403,7 +414,7 @@ namespace Noisrev.League.IO.RST
         /// </summary>
         /// <param name="other">An object to compare with this object.</param>
         /// <returns>true if the current object is equal to the other parameter; otherwise, false.</returns>
-        public bool Equals(RSTFile other)
+        public bool Equals(RSTFile? other)
         {
             if (other == null)
             {
@@ -415,7 +426,7 @@ namespace Noisrev.League.IO.RST
                 return false;
             }
 
-            if (Version == RVersion.Ver2 && !Config.Equals(other.Config))
+            if (Version == RVersion.Ver2 && !StringComparer.Ordinal.Equals(Config, other.Config))
             {
                 return false;
             }
@@ -427,7 +438,7 @@ namespace Noisrev.League.IO.RST
 
             foreach (var pair in this.Entries)
             {
-                if (other.Entries.TryGetValue(pair.Key, out string value))
+                if (other.Entries.TryGetValue(pair.Key, out string? value))
                 {
                     if (!pair.Value.Equals(value))
                     {

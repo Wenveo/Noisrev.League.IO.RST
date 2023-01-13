@@ -22,7 +22,7 @@ namespace Noisrev.League.IO.RST.Helpers
         public static RVersion GetLatestVersion()
         {
             var array = Enum.GetValues(typeof(RVersion));
-            return (RVersion)array.GetValue(array.Length - 1);
+            return (RVersion)array.GetValue(array.Length - 1)!;
         }
     }
 }

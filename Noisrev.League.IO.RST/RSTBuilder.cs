@@ -679,11 +679,7 @@ namespace Noisrev.League.IO.RST
         /// <para>if the key is found; otherwise, the default value for the type of the value parameter.</para>
         /// </param>
         /// <returns>true if the <see cref="RSTFile"/> contains an element with the specified key; otherwise, false.</returns>
-        public bool TryGetValue(ulong key,
-#if NETCOREAPP
-            [MaybeNullWhen(false)]
-#endif 
-            out string? value)
+        public bool TryGetValue(ulong key, [NotNullWhen(true)] out string? value)
         {
             return Current.Entries.TryGetValue(key, out value);
         }
