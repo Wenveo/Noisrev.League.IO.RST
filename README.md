@@ -12,8 +12,8 @@
 # ✨ RST (Riot String Table) 
 The RST file is a file that stores a list of strings.
 
-It is used to store text messages in League of Legends games.
-- ***For example:*** champion name, skill description, skin name, etc
+It is used to store the game text and messages for **League of Legends**.
+- champion name, skill description, skin name, etc...
 - *Like:* **"Riven"**, **"Championship Riven 2016"**, **"\<mainText>\<stats>\<attention>%i:scaleAP% 25\</attention> Ability Power\<br>\<attention>%i:scaleMPen% 15%\</attention> Magic Penetration\</stats>\</mainText>\<br>"**
 - And more...
 
