@@ -441,5 +441,17 @@ namespace Noisrev.League.IO.RST
             }
             return true;
         }
+
+        /// <inheritdoc />
+        public override bool Equals(object? obj)
+        => Equals(obj as RSTFile);
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+        => Version.GetHashCode() ^
+               Type.GetHashCode() ^
+                    Mode.GetHashCode() ^
+                        Entries.GetHashCode();
+
     }
 }
