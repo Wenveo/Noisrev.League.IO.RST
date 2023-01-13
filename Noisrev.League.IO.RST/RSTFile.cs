@@ -110,13 +110,13 @@ namespace Noisrev.League.IO.RST
                     /* hasConfig? (1) boolean */
                     offset += 1;
 
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NETSTANDARD
 #pragma warning disable CS8602
 #endif
                     /* Config is not null ? */
                     if (!string.IsNullOrEmpty(Config) && Config.Length > 0)
                     {
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NETSTANDARD
 #pragma warning restore CS8602
 #endif
                         /* size(int) + strlen */
@@ -332,13 +332,13 @@ namespace Noisrev.League.IO.RST
             // Version 2
             if (Version == RVersion.Ver2)
             {
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NETSTANDARD
 #pragma warning disable CS8602
 #endif
                 // If True, Write the Config.
                 if (!string.IsNullOrEmpty(Config) && Config.Length > 0)
                 {
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NETSTANDARD
 #pragma warning restore CS8602
 #endif
                     // Write the boolean value.
