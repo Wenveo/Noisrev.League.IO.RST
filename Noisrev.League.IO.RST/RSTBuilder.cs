@@ -10,6 +10,7 @@ using Noisrev.League.IO.RST.Helpers;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.IO;
@@ -678,7 +679,11 @@ namespace Noisrev.League.IO.RST
         /// <para>if the key is found; otherwise, the default value for the type of the value parameter.</para>
         /// </param>
         /// <returns>true if the <see cref="RSTFile"/> contains an element with the specified key; otherwise, false.</returns>
-        public bool TryGetValue(ulong key, out string value)
+        public bool TryGetValue(ulong key,
+#if NETCOREAPP
+            [MaybeNullWhen(false)]
+#endif 
+            out string? value)
         {
             return Current.Entries.TryGetValue(key, out value);
         }
