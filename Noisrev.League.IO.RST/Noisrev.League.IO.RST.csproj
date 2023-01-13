@@ -27,10 +27,6 @@
         <IsNetStandardOrNetFramework>false</IsNetStandardOrNetFramework>
         <IsNetStandardOrNetFramework Condition="('$(TargetFramework.StartsWith(net4))') Or ('$(TargetFramework.StartsWith(netstandard))')">true</IsNetStandardOrNetFramework>
     </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-        <Optimize>true</Optimize>
-    </PropertyGroup>
         
     <ItemGroup>
       <None Include="..\README.md">
