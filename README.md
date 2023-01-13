@@ -27,8 +27,8 @@ A faster BytesReader and a BytesWriter were created to optimize read and write o
 | Method |              Runtime |      Mean | Allocated |
 |------- |--------------------- |----------:|----------:|
 | (Version 3)
-|   Open |             .NET 6.0 |  84.56 ms |     36 MB |
-|  Write |             .NET 6.0 |  62.65 ms |     30 MB |
+|   Open |             .NET 6.0 |  74.13 ms |     36 MB |
+|  Write |             .NET 6.0 |  52.20 ms |     30 MB |
 | (Before)
 |   Open |             .NET 6.0 |  323.0 ms |    120 MB |
 |  Write |             .NET 6.0 |  434.6 ms |     46 MB |
