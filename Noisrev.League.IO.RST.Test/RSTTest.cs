@@ -1,16 +1,17 @@
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
+
 using System.IO;
 
 namespace Noisrev.League.IO.RST.Test
 {
     public class Program
     {
-        [SimpleJob(RuntimeMoniker.Net472)]
-        [SimpleJob(RuntimeMoniker.NetCoreApp31)]
-        [SimpleJob(RuntimeMoniker.Net50)]
+        [SimpleJob(RuntimeMoniker.Net461)]
         [SimpleJob(RuntimeMoniker.Net60)]
+        [SimpleJob(RuntimeMoniker.Net70)]
+        [SimpleJob(RuntimeMoniker.Net80)]
         [MemoryDiagnoser]
         [RPlotExporter]
         [RankColumn]
