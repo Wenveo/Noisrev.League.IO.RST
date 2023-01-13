@@ -276,7 +276,7 @@ namespace Noisrev.League.IO.RST
             {
                 return this;
             }
-            return Add(key, value.ToString()!);
+            return Add(key, value.ToString() ?? string.Empty);
         }
 
         /// <summary>
