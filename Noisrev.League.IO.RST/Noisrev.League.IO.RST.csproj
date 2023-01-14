@@ -8,10 +8,10 @@
         <Description>RST File library of League of Legends.</Description>
         <Copyright>Copyright © 2021 - $([System.DateTime]::Today.ToString(yyyy))</Copyright>
         <Summary>RST File library of League of Legends.</Summary>
-        <Version>3.1.1.0</Version>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <FileVersion>3.1.1.0</FileVersion>
-        <InformationalVersion>3.1.1.0</InformationalVersion>
+        <Version>3.1.2.0</Version>
+        <AssemblyVersion>3.1.2.0</AssemblyVersion>
+        <FileVersion>3.1.2.0</FileVersion>
+        <InformationalVersion>3.1.2.0</InformationalVersion>
         <AssemblyName>Noisrev.League.IO.RST</AssemblyName>
         <Product>Noisrev.League.IO.RST</Product>
         <RootNamespace>Noisrev.League.IO.RST</RootNamespace>
