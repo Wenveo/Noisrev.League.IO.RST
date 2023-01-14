@@ -1,32 +1,80 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net461;net5.0;net6.0;net7.0;</TargetFrameworks>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <Nullable>enable</Nullable>
         <LangVersion>9.0</LangVersion>
         <Authors>Noisrev</Authors>
-        <Product>Noisrev.League.IO.RST</Product>
         <Description>RST File library of League of Legends.</Description>
         <Copyright>Copyright © 2021 - $([System.DateTime]::Today.ToString(yyyy))</Copyright>
-        <PackageTags>League of Legends;RST;RSTFile;String Table;</PackageTags>
+        <Summary>RST File library of League of Legends.</Summary>
         <Version>3.1.1.0</Version>
         <AssemblyVersion>3.1.1.0</AssemblyVersion>
         <FileVersion>3.1.1.0</FileVersion>
         <InformationalVersion>3.1.1.0</InformationalVersion>
+        <AssemblyName>Noisrev.League.IO.RST</AssemblyName>
+        <Product>Noisrev.League.IO.RST</Product>
+        <RootNamespace>Noisrev.League.IO.RST</RootNamespace>
+		<PackageId>Noisrev.League.IO.RST</PackageId>
+        <PackageTags>League of Legends;RST;RSTFile;String Table;</PackageTags>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RepositoryUrl>https://github.com/Noisrev/Noisrev.League.IO.RST</RepositoryUrl>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <DebugType>embedded</DebugType>
+        <DebugSymbols>true</DebugSymbols>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     </PropertyGroup>
 
     <PropertyGroup>
         <IsNetStandardOrNetFramework>false</IsNetStandardOrNetFramework>
         <IsNetStandardOrNetFramework Condition="('$(TargetFramework.StartsWith(net4))') Or ('$(TargetFramework.StartsWith(netstandard))')">true</IsNetStandardOrNetFramework>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+      <Optimize>True</Optimize>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net461|AnyCPU'">
+      <Optimize>True</Optimize>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0|AnyCPU'">
+      <Optimize>True</Optimize>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
+      <Optimize>True</Optimize>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0|AnyCPU'">
+      <Optimize>True</Optimize>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+      <Optimize>True</Optimize>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net461|AnyCPU'">
+      <Optimize>True</Optimize>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net5.0|AnyCPU'">
+      <Optimize>True</Optimize>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
+      <Optimize>True</Optimize>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0|AnyCPU'">
+      <Optimize>True</Optimize>
     </PropertyGroup>
         
     <ItemGroup>
@@ -51,4 +99,8 @@
     <ItemGroup Condition="$(IsNetStandardOrNetFramework) == 'false'">
       <PackageReference Include="Standart.Hash.xxHash" Version="4.0.5" />
     </ItemGroup>
+    
+    <ItemGroup>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+	</ItemGroup>
 </Project>
