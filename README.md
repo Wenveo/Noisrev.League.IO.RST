@@ -37,13 +37,17 @@ A faster BytesReader and a BytesWriter were created to optimize read and write o
 
 # 🎉 Release Note
 
+***3.1.2***
+- Enable `source link` support for the nuget package in project.
+- Improve and optimize the code.
+
 ***3.1.1***
-- Add multi-target framework
-- Update project properties and package references
-- Enable `nullable` for project and improve the code
+- Add multi-target framework.
+- Update project properties and package references.
+- Enable `nullable` for project and improve the code.
 
 ***3.1***
-- Fix a bug (https://github.com/Noisrev/Noisrev.League.IO.RST/issues/4) where the end byte of the written string is not 0
+- Fix a bug (https://github.com/Noisrev/Noisrev.League.IO.RST/issues/4) where the end byte of the written string is not 0.
 
 ***v3.0***
 - Added new RSTBuilder (content to build RSTFile).
@@ -55,38 +59,38 @@ A faster BytesReader and a BytesWriter were created to optimize read and write o
 - Update and fix some code comments.
 
 ***v2.0***
-- Change it to Dictionary for faster retrieval and storage
-- Disabling Hash changes (read only)
+- Change it to Dictionary for faster retrieval and storage.
+- Disabling Hash changes (read only).
 
 ***v1.4.1.2***
-- Update "Equals" Method
+- Update "Equals" Method.
 
 ***v1.4.1.1***
-- Add indexer to RSTFile and add check for duplicates
+- Add indexer to RSTFile and add check for duplicates.
 
 ***v1.4.1***
-- Optimizing the Equals method
-- Add "Load" and "Write" methods to support file path input
+- Optimizing the Equals method.
+- Add "Load" and "Write" methods to support file path input.
 
 ***v1.4.0***
-- Fixed a bug in version 1.3.3 (This bug causes the file contents to not be written out correctly)
-- Changed Framework to ".NET Standard 2.0" to be compatible with ".NET Framework" and ".NET Core"
+- Fixed a bug in version 1.3.3 (This bug causes the file contents to not be written out correctly).
+- Changed Framework to ".NET Standard 2.0" to be compatible with ".NET Framework" and ".NET Core".
 
 ***~~v1.3.3~~*** **[Deprecated]** 🙄
-- Add the RST file version enumeration
+- Add the RST file version enumeration.
 
 ***v1.3.2***
-- Added a new RType extension function that returns the corresponding RType based on the input Version(int or byte)
-- Fixed some code comments
-- Fill in the missing Api documentation
+- Added a new RType extension function that returns the corresponding RType based on the input Version(int or byte).
+- Fixed some code comments.
+- Fill in the missing Api documentation.
 
 ***v1.3.1***
-- Change the get method for "DataOffset"
+- Change the get method for "DataOffset".
 
 ***v1.3.0***
-- Support RST v5
-- Fix some code
-- Correct some code comments
+- Support RST v5.
+- Fix some code.
+- Correct some code comments.
 
 ***v1.2.1***
 - Remove unnecessary code.
@@ -105,7 +109,7 @@ A faster BytesReader and a BytesWriter were created to optimize read and write o
 - Add "RST Hash Algorithm".
 
 # 🚀 Install
-- Install using NuGet Package Manager in Visual Studio.
+- Install in Visual Studio using NuGet Package Manager.
 - .NET CLI : `dotnet add package Noisrev.League.IO.RST`
 
 # 💡 Simple
