@@ -39,7 +39,7 @@ namespace Noisrev.League.IO.RST.Unsafe
         {
             int newPos = checked(_position + count);
             if (newPos >= _buffer.Length)
-                throw new ArgumentOutOfRangeException(nameof(newPos));
+                throw new ArgumentOutOfRangeException(nameof(count));
 
             var span = new ReadOnlySpan<byte>(_buffer, _position, count);
 
@@ -51,7 +51,7 @@ namespace Noisrev.League.IO.RST.Unsafe
         {
             int newPos = checked(offset + count);
             if (newPos >= _buffer.Length)
-                throw new ArgumentOutOfRangeException(nameof(newPos));
+                throw new ArgumentOutOfRangeException(nameof(count));
 
             var span = new ReadOnlySpan<byte>(_buffer, offset, count);
 
