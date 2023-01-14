@@ -437,7 +437,7 @@ namespace Noisrev.League.IO.RST
             {
                 if (other.Entries.TryGetValue(pair.Key, out string? value))
                 {
-                    if (!pair.Value.Equals(value))
+                    if (!StringComparer.Ordinal.Equals(pair.Value, value))
                     {
                         return false;
                     }
