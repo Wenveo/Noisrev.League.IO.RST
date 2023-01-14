@@ -125,7 +125,7 @@ namespace Noisrev.League.IO.RST
                 }
 
                 /* count (4 bytes) +  8 * Count  ***/
-                offset += 4 + (8 * this.Entries.Count);
+                offset += 4 + (8 * Entries.Count);
 
                 /* Version less than 5 */
                 if (Version < RVersion.Ver5)
@@ -158,7 +158,7 @@ namespace Noisrev.League.IO.RST
         /// </summary>
         private RSTFile()
         {
-            this.Entries = new Dictionary<ulong, string>();
+            Entries = new Dictionary<ulong, string>();
         }
 
         /// <summary>
@@ -170,8 +170,8 @@ namespace Noisrev.League.IO.RST
         {
             /* Check the type  */
 
-            this.Type = version.GetRType() ?? throw new ArgumentException($"Invalid Major version {(byte)version}. Must be one of 2, 3, 4, 5"); ;
-            this.Version = version;
+            Type = version.GetRType() ?? throw new ArgumentException($"Invalid Major version {(byte)version}. Must be one of 2, 3, 4, 5"); ;
+            Version = version;
         }
 
         /// <summary>
@@ -287,7 +287,7 @@ namespace Noisrev.League.IO.RST
                     offsetTexts.Add(item.Value, value);
                 }
                 // Add the key and value.
-                this.Entries[item.Key] = value;
+                Entries[item.Key] = value;
             }
 
             if (!leaveOpen) inputStream.Close();
@@ -355,7 +355,7 @@ namespace Noisrev.League.IO.RST
                 }
             }
             // Current Count
-            var count = this.Entries.Count;
+            var count = Entries.Count;
 
             // Write the Count
             bytesWriter.Write(count);
@@ -428,12 +428,12 @@ namespace Noisrev.League.IO.RST
                 return false;
             }
 
-            if (Type != other.Type || Mode != other.Mode || this.Entries.Count != other.Entries.Count)
+            if (Type != other.Type || Mode != other.Mode || Entries.Count != other.Entries.Count)
             {
                 return false;
             }
 
-            foreach (var pair in this.Entries)
+            foreach (var pair in Entries)
             {
                 if (other.Entries.TryGetValue(pair.Key, out string? value))
                 {
