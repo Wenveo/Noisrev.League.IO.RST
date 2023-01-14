@@ -6,28 +6,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-namespace Noisrev.League.IO.RST
+namespace Noisrev.League.IO.RST;
+
+/// <summary>
+/// RST File Version
+/// </summary>
+public enum RVersion : byte
 {
     /// <summary>
-    /// RST File Version
+    /// Version 2
     /// </summary>
-    public enum RVersion : byte
-    {
-        /// <summary>
-        /// Version 2
-        /// </summary>
-        Ver2 = 0x02,
-        /// <summary>
-        /// Version 3
-        /// </summary>
-        Ver3 = 0x03,
-        /// <summary>
-        /// Version 4
-        /// </summary>
-        Ver4 = 0x04,
-        /// <summary>
-        /// Version 5
-        /// </summary>
-        Ver5 = 0x05
-    }
+    Ver2 = 0x02,
+    /// <summary>
+    /// Version 3
+    /// </summary>
+    Ver3 = 0x03,
+    /// <summary>
+    /// Version 4
+    /// </summary>
+    Ver4 = 0x04,
+    /// <summary>
+    /// Version 5
+    /// </summary>
+    Ver5 = 0x05
 }

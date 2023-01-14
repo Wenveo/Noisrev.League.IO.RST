@@ -6,20 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-namespace Noisrev.League.IO.RST
+namespace Noisrev.League.IO.RST;
+
+/// <summary>
+/// RST File Type
+/// </summary>
+public enum RType
 {
     /// <summary>
-    /// RST File Type
+    /// using by RST v2, v3
     /// </summary>
-    public enum RType
-    {
-        /// <summary>
-        /// using by RST v2, v3
-        /// </summary>
-        Complex = 40,
-        /// <summary>
-        /// using by RST v4, v5
-        /// </summary>
-        Simple = 39
-    }
+    Complex = 40,
+    /// <summary>
+    /// using by RST v4, v5
+    /// </summary>
+    Simple = 39
 }

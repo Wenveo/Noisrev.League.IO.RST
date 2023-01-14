@@ -6,21 +6,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-namespace Noisrev.League.IO.RST
+namespace Noisrev.League.IO.RST;
+
+/// <summary>
+/// RST File Mode
+/// </summary>
+public enum RMode : byte
 {
+    /* idk... what is this. maybe use the enum ? */
     /// <summary>
-    /// RST File Mode
+    /// 
     /// </summary>
-    public enum RMode : byte
-    {
-        /* idk... what is this. maybe use the enum ? */
-        /// <summary>
-        /// 
-        /// </summary>
-        None,
-        /// <summary>
-        /// 
-        /// </summary>
-        Default
-    }
+    None,
+    /// <summary>
+    /// 
+    /// </summary>
+    Default
 }

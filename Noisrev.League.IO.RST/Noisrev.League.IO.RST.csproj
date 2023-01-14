@@ -3,7 +3,7 @@
         <TargetFrameworks>netstandard2.0;net461;net5.0;net6.0;net7.0;</TargetFrameworks>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <Nullable>enable</Nullable>
-        <LangVersion>9.0</LangVersion>
+        <LangVersion>10.0</LangVersion>
         <Authors>Noisrev</Authors>
         <Description>RST File library of League of Legends.</Description>
         <Copyright>Copyright © 2021 - $([System.DateTime]::Today.ToString(yyyy))</Copyright>
@@ -15,7 +15,7 @@
         <AssemblyName>Noisrev.League.IO.RST</AssemblyName>
         <Product>Noisrev.League.IO.RST</Product>
         <RootNamespace>Noisrev.League.IO.RST</RootNamespace>
-		<PackageId>Noisrev.League.IO.RST</PackageId>
+        <PackageId>Noisrev.League.IO.RST</PackageId>
         <PackageTags>League of Legends;RST;RSTFile;String Table;</PackageTags>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -101,6 +101,6 @@
     </ItemGroup>
     
     <ItemGroup>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-	</ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    </ItemGroup>
 </Project>

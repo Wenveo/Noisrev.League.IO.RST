@@ -8,31 +8,30 @@
 
 using System.IO;
 
-namespace Noisrev.League.IO.RST.Helpers
+namespace Noisrev.League.IO.RST.Helpers;
+
+/// <summary>
+/// Stream extension class.
+/// </summary>
+public static class StreamHelper
 {
     /// <summary>
-    /// Stream extension class.
+    /// Reads from the current position of the <paramref name="stream"/> to the end, and returns an array of bytes.
     /// </summary>
-    public static class StreamHelper
+    /// <param name="stream">The input stream.</param>
+    /// <returns>An array of bytes that have been read from the stream.</returns>
+    /// <exception cref="EndOfStreamException"></exception>
+    public static byte[] ReadToEnd(this Stream stream)
     {
-        /// <summary>
-        /// Reads from the current position of the <paramref name="stream"/> to the end, and returns an array of bytes.
-        /// </summary>
-        /// <param name="stream">The input stream.</param>
-        /// <returns>An array of bytes that have been read from the stream.</returns>
-        /// <exception cref="EndOfStreamException"></exception>
-        public static byte[] ReadToEnd(this Stream stream)
-        {
-            var position = stream.Position;
-            var rentSize = (int)(stream.Length - position);
+        var position = stream.Position;
+        var rentSize = (int)(stream.Length - position);
 
-            // Maybe use ArrayPool<byte>.Shared.Rent ?
-            var buffer = new byte[rentSize];
-            var result = stream.Read(buffer, 0, rentSize);
-            if (result != rentSize)
-                throw new EndOfStreamException();
+        // Maybe use ArrayPool<byte>.Shared.Rent ?
+        var buffer = new byte[rentSize];
+        var result = stream.Read(buffer, 0, rentSize);
+        if (result != rentSize)
+            throw new EndOfStreamException();
 
-            return buffer;
-        }
+        return buffer;
     }
 }
