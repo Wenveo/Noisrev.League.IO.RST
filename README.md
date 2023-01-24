@@ -2,7 +2,7 @@
 
 ***This is a library that parses and manipulates League of Legends RST files.***
 
-![NetStandard](https://img.shields.io/badge/.Net%20Standard-v2.0-brightgreen) ![LICENSE](https://img.shields.io/github/license/noisrev/noisrev.league.io.rst) ![Downloads](https://img.shields.io/nuget/dt/noisrev.league.io.rst) ![PackageVersion](https://img.shields.io/nuget/v/noisrev.league.io.rst)
+![NetStandard](https://img.shields.io/badge/.Net%20Standard-v2.0-brightgreen) ![LICENSE](https://img.shields.io/github/license/noisrev/noisrev.league.io.rst) [![Downloads](https://img.shields.io/nuget/dt/noisrev.league.io.rst)](https://www.nuget.org/packages/Noisrev.League.IO.RST/#versions-body-tab) [![PackageVersion](https://img.shields.io/nuget/v/noisrev.league.io.rst)](https://www.nuget.org/packages/Noisrev.League.IO.RST/)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FNoisrev%2FNoisrev.League.IO.RST.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FNoisrev%2FNoisrev.League.IO.RST?ref=badge_shield)
 
 ![NetFramework](https://img.shields.io/badge/.Net%20Framework->=4.6.1-green) ![NetCore](https://img.shields.io/badge/.Net%20Core->=v2.0-blue) [![CodeQL](https://github.com/Noisrev/Noisrev.League.IO.RST/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Noisrev/Noisrev.League.IO.RST/actions/workflows/codeql-analysis.yml) [![.NET](https://github.com/Noisrev/Noisrev.League.IO.RST/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Noisrev/Noisrev.League.IO.RST/actions/workflows/dotnet.yml)
