@@ -1,39 +1,40 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net7.0;net8.0</TargetFrameworks>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RootNamespace>Noisrev.League.IO.RST</RootNamespace>
+    <Product>Noisrev.League.IO.RST</Product>
+    <Version>3.1.2.0</Version>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$([MSBuild]::IsTargetFrameworkCompatible($(TargetFramework), net8.0))'">
+    <IsAotCompatible>true</IsAotCompatible>
+  </PropertyGroup>
+
+  <PropertyGroup Label="PackageMetadata">
     <Authors>Noisrev</Authors>
     <Description>RST File library of League of Legends.</Description>
     <Copyright>Copyright © 2021 - $([System.DateTime]::Today.ToString(yyyy))</Copyright>
     <Summary>RST File library of League of Legends.</Summary>
-    <Version>3.1.2.0</Version>
-    <AssemblyVersion>$(Version)</AssemblyVersion>
-    <FileVersion>$(Version)</FileVersion>
-    <InformationalVersion>$(Version)</InformationalVersion>
-    <Product>Noisrev.League.IO.RST</Product>
-    <AssemblyName>$(Product)</AssemblyName>
-    <RootNamespace>$(Product)</RootNamespace>
-    <PackageId>$(Product)</PackageId>
     <PackageTags>League of Legends;RST;RSTFile;String Table;</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RepositoryUrl>https://github.com/Noisrev/Noisrev.League.IO.RST</RepositoryUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <PropertyGroup Label="SourceLink">
     <DebugType>embedded</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$([MSBuild]::IsTargetFrameworkCompatible($(TargetFramework), net8.0))'">
-    <IsAotCompatible>true</IsAotCompatible>
   </PropertyGroup>
   
   <ItemGroup>
