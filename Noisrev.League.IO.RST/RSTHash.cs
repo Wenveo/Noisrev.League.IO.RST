@@ -5,11 +5,11 @@
 // LICENSE file in the root directory of this source tree.
 
 using System;
+using System.IO.Hashing;
 using System.Text;
 
 using Noisrev.League.IO.RST.Helpers;
 
-using Standart.Hash.xxHash;
 
 namespace Noisrev.League.IO.RST;
 
@@ -30,8 +30,9 @@ public static class RSTHash
         if (toHash == null) throw new ArgumentNullException(nameof(toHash));
 
         var buffer = Encoding.UTF8.GetBytes(toHash.ToLower());
-        return xxHash64.ComputeHash(buffer, buffer.Length) & type.ComputeKey();
+        return XxHash64.HashToUInt64(buffer, buffer.Length) & type.ComputeKey();
     }
+
     /// <summary>
     /// Generate a hash with an offset using <paramref name="toHash"/> and <paramref name="offset"/>, as well as <paramref name="type"/>.
     /// </summary>
@@ -47,8 +48,9 @@ public static class RSTHash
         if (offset < 0) throw new ArgumentOutOfRangeException(nameof(offset));
 
         var buffer = Encoding.UTF8.GetBytes(toHash.ToLower());
-        return xxHash64.ComputeHash(buffer, buffer.Length) & type.ComputeKey() + offset.ComputeOffset(type);
+        return XxHash64.HashToUInt64(buffer, buffer.Length) & type.ComputeKey() + offset.ComputeOffset(type);
     }
+
     /// <summary>
     /// Regenerate a hash with an offset using the generated <paramref name="hash"/> and <paramref name="offset"/>, as well as <paramref name="type"/>.
     /// </summary>
