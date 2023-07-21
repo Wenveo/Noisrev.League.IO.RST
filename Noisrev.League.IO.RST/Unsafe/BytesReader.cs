@@ -1,10 +1,8 @@
-﻿/*
- * Copyright (c) 2021 - 2023 Noisrev
- * All rights reserved.
- *
- * This source code is distributed under an MIT license. 
- * LICENSE file in the root directory of this source tree.
- */
+// Copyright (c) 2021 - 2023 Noisrev
+// All rights reserved.
+//
+// This source code is distributed under an MIT license.
+// LICENSE file in the root directory of this source tree.
 
 using System;
 using System.Runtime.CompilerServices;
@@ -37,7 +35,7 @@ internal unsafe class BytesReader
 
     public ReadOnlySpan<byte> Read(int count)
     {
-        int newPos = checked(_position + count);
+        var newPos = checked(_position + count);
         if (newPos >= _buffer.Length)
             throw new ArgumentOutOfRangeException(nameof(count));
 
@@ -49,7 +47,7 @@ internal unsafe class BytesReader
 
     public ReadOnlySpan<byte> Read(int offset, int count)
     {
-        int newPos = checked(offset + count);
+        var newPos = checked(offset + count);
         if (newPos >= _buffer.Length)
             throw new ArgumentOutOfRangeException(nameof(count));
 

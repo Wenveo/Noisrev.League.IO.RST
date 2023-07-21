@@ -1,22 +1,20 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net461;net5.0;net6.0;net70;</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
 
-    <PropertyGroup>
-        <TargetFrameworks>net461;net5.0;net6.0;net70;</TargetFrameworks>
-        <OutputType>Exe</OutputType>
-    </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.3" />
+  </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="BenchmarkDotNet" Version="0.13.3" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Noisrev.League.IO.RST\Noisrev.League.IO.RST.csproj" />
+  </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Noisrev.League.IO.RST\Noisrev.League.IO.RST.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Update="Resources\fontconfig_en_us.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
-
+  <ItemGroup>
+    <None Update="Resources\fontconfig_en_us.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

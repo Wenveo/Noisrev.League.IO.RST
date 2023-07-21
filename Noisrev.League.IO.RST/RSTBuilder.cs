@@ -1,12 +1,8 @@
-﻿/*
- * Copyright (c) 2021 - 2023 Noisrev
- * All rights reserved.
- *
- * This source code is distributed under an MIT license. 
- * LICENSE file in the root directory of this source tree.
- */
-
-using Noisrev.League.IO.RST.Helpers;
+// Copyright (c) 2021 - 2023 Noisrev
+// All rights reserved.
+//
+// This source code is distributed under an MIT license.
+// LICENSE file in the root directory of this source tree.
 
 using System;
 using System.Collections.Generic;
@@ -15,6 +11,8 @@ using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+
+using Noisrev.League.IO.RST.Helpers;
 
 namespace Noisrev.League.IO.RST;
 
