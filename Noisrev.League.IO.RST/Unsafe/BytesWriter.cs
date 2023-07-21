@@ -5,14 +5,19 @@
 // LICENSE file in the root directory of this source tree.
 
 using System;
+using System.Buffers;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Noisrev.League.IO.RST.Unsafe;
 
-internal unsafe class BytesWriter
+internal unsafe class BytesWriter : IDisposable
 {
+    private readonly ArrayPool<byte> _bufferPool;
+    private bool _isDisposed;
+
     private byte[] _buffer;
     private int _position;
     private int _length;
@@ -22,14 +27,10 @@ internal unsafe class BytesWriter
     public int Length => _length;
     public int Capacity => _buffer.Length;
 
-    private BytesWriter()
-    {
-        _buffer = new byte[4];
-    }
-
     private BytesWriter(int capacity)
     {
-        _buffer = new byte[capacity];
+        _bufferPool = ArrayPool<byte>.Shared;
+        _buffer = _bufferPool.Rent(capacity);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -123,9 +124,19 @@ internal unsafe class BytesWriter
             byteCount += 1;
         }
 
-        var bytes = new byte[byteCount];
-        encoding.GetBytes(value, 0, value.Length, bytes, 0);
-        CoreceWrite(bytes);
+        var tempBuffer = _bufferPool.Rent(byteCount);
+        try
+        {
+            var n = encoding.GetBytes(value, 0, value.Length, tempBuffer, 0);
+            Debug.Assert(n <= byteCount);
+
+            tempBuffer[n] = 0;
+            CoreceWrite(new ReadOnlySpan<byte>(tempBuffer, 0, n));
+        }
+        finally
+        {
+            _bufferPool.Return(tempBuffer);
+        }
     }
 
     public void WriteByte(byte value)
@@ -168,19 +179,21 @@ internal unsafe class BytesWriter
             var maxValue = Math.Max(bufferSize, capacity);
             var rentedSize = checked(capacity + maxValue);
 
-            var span = new Span<byte>(_buffer, 0, _length);
+            var buffer = ArrayPool<byte>.Shared.Rent(rentedSize);
+            Array.Copy(_buffer, buffer, _length);
 
-            var newBuffer = new byte[rentedSize];
-            var span2 = new Span<byte>(newBuffer);
-
-            span.CopyTo(span2);
-            _buffer = newBuffer;
+            ArrayPool<byte>.Shared.Return(buffer);
+            _buffer = buffer;
         }
     }
 
-    public static BytesWriter Create()
+    public void Dispose()
     {
-        return new BytesWriter();
+        if (!_isDisposed)
+        {
+            _bufferPool.Return(_buffer);
+            _isDisposed = true;
+        }
     }
 
     public static BytesWriter Create(int capacity)

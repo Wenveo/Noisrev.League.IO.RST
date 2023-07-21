@@ -319,7 +319,7 @@ public class RSTFile : IEquatable<RSTFile>
         if (outputStream.CanWrite == false) throw new ArgumentException("The outputStream does not supports writing!");
 
         // Used to write the header block (DataOffset = HeaderSize). 
-        var bytesWriter = BytesWriter.Create((int)DataOffset);
+        using var bytesWriter = BytesWriter.Create((int)DataOffset);
 
         // Write the Magic Code.
         bytesWriter.Write(new byte[3] { 0x52, 0x53, 0x54 });
@@ -359,7 +359,7 @@ public class RSTFile : IEquatable<RSTFile>
         bytesWriter.Write(count);
 
         // Used to write blocks of data.
-        var dataWriter = BytesWriter.Create(count * 256);
+        using var dataWriter = BytesWriter.Create(4096);
 
         // Use a dictionary to filter duplicate items.
         var textOffsets = new Dictionary<string, long>(count);
