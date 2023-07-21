@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 using BenchmarkDotNet.Running;
 
-namespace Noisrev.League.IO.RST.Test;
+namespace Noisrev.League.IO.RST.BenchmarkTest;
 
 internal sealed class Program
 {

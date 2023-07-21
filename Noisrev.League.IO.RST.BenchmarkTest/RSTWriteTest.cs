@@ -13,26 +13,30 @@ using System.IO;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
 
-namespace Noisrev.League.IO.RST.Test;
+namespace Noisrev.League.IO.RST.BenchmarkTest;
 
 [SimpleJob(RuntimeMoniker.Net462)]
 [SimpleJob(RuntimeMoniker.Net80)]
 [MemoryDiagnoser]
 [RPlotExporter]
 [RankColumn]
-public class RSTReadTest
+public class RSTWriteTest
 {
-    private string _filePath = null!;
+    private RSTFile _rstFile = null!;
+    private string _outputPath = null!;
 
     [GlobalSetup]
     public void Setup()
     {
-        _filePath = Path.Combine("Resources", "fontconfig_en_us.txt");
+        var file = Path.Combine("Resources", "fontconfig_en_us.txt");
+        _rstFile = new RSTFile(File.OpenRead(file), false);
+
+        _outputPath = Path.Combine("Resources", "fontconfig_en_us.output.txt");
     }
 
     [Benchmark]
-    public void Read()
+    public void Write()
     {
-        _ = new RSTFile(File.OpenRead(_filePath), false);
+        _rstFile.Write(File.Create(_outputPath), false);
     }
 }
