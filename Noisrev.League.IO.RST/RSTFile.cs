@@ -190,7 +190,7 @@ public class RSTFile : IEquatable<RSTFile>
 
         // Read magic code
         var magicCode = bytesReader.Read(3);
-        if (magicCode != MagicCode)
+        if (!magicCode.SequenceEqual(MagicCode))
         {
             // Invalid magic code
             throw new InvalidDataException($"Invalid RST file header: '{{ 0x{magicCode[0]:X}, 0x{magicCode[1]:X}, 0x{magicCode[2]:X} }}'");
