@@ -9,13 +9,13 @@
         <Copyright>Copyright © 2021 - $([System.DateTime]::Today.ToString(yyyy))</Copyright>
         <Summary>RST File library of League of Legends.</Summary>
         <Version>3.1.2.0</Version>
-        <AssemblyVersion>3.1.2.0</AssemblyVersion>
-        <FileVersion>3.1.2.0</FileVersion>
-        <InformationalVersion>3.1.2.0</InformationalVersion>
-        <AssemblyName>Noisrev.League.IO.RST</AssemblyName>
+        <AssemblyVersion>$(Version)</AssemblyVersion>
+        <FileVersion>$(Version)</FileVersion>
+        <InformationalVersion>$(Version)</InformationalVersion>
         <Product>Noisrev.League.IO.RST</Product>
-        <RootNamespace>Noisrev.League.IO.RST</RootNamespace>
-        <PackageId>Noisrev.League.IO.RST</PackageId>
+        <AssemblyName>$(Product)</AssemblyName>
+        <RootNamespace>$(Product)</RootNamespace>
+        <PackageId>$(Product)</PackageId>
         <PackageTags>League of Legends;RST;RSTFile;String Table;</PackageTags>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
