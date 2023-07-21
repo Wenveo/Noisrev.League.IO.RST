@@ -78,9 +78,9 @@ public class RSTFile : IEquatable<RSTFile>
     }
 
     /// <summary>
-    /// Magic Code
+    /// The Magic Code
     /// </summary>
-    public const string Magic = "RST";
+    public static readonly byte[] MagicCode = { 0x52, 0x53, 0x54 };
 
     /// <summary>
     /// RST File Version.
@@ -189,11 +189,11 @@ public class RSTFile : IEquatable<RSTFile>
         var bytesReader = BytesReader.Create(inputStream.ReadToEnd(), Encoding.UTF8);
 
         // Read magic code
-        var magic = bytesReader.ReadString(3);
-        if (magic != Magic)
+        var magicCode = bytesReader.Read(3);
+        if (magicCode != MagicCode)
         {
             // Invalid magic code
-            throw new InvalidDataException($"Invalid RST file header: {magic}");
+            throw new InvalidDataException($"Invalid RST file header: '{{ 0x{magicCode[0]:X}, 0x{magicCode[1]:X}, 0x{magicCode[2]:X} }}'");
         }
 
         //Set the Version
@@ -322,7 +322,7 @@ public class RSTFile : IEquatable<RSTFile>
         using var bytesWriter = BytesWriter.Create((int)DataOffset);
 
         // Write the Magic Code.
-        bytesWriter.Write(new byte[3] { 0x52, 0x53, 0x54 });
+        bytesWriter.Write(MagicCode);
 
         // Write the Version.
         bytesWriter.Write((byte)Version);
