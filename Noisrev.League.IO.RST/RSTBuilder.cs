@@ -7,7 +7,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -84,7 +83,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, bool value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -98,7 +96,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, byte value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -112,7 +109,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, sbyte value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -126,7 +122,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, char value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -140,7 +135,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, short value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -154,7 +148,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, int value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -168,7 +161,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, long value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -182,7 +174,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, float value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -196,7 +187,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, double value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -210,7 +200,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, decimal value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -224,7 +213,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, ushort value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -238,7 +226,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, uint value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -252,7 +239,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, ulong value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -266,12 +252,11 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, object? value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
-
         if (null == value)
         {
             return this;
         }
+
         return Add(key, value.ToString() ?? string.Empty);
     }
 
@@ -354,21 +339,30 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException"/>
     public RSTBuilder ReplaceAll(string oldText, string newText, bool caseSensitive = false)
     {
+#if NET7_0_OR_GREATER
+        ArgumentException.ThrowIfNullOrEmpty(oldText);
+#else
         if (oldText == null)
-            throw new ArgumentNullException(nameof(oldText));
+        {
+            throw new ArgumentNullException(nameof(oldText), "The value cannot be an empty string.");
+        }
+#endif
         if (newText == null)
+        {
             return this;
+        }
 
         // Set a list
         var list = caseSensitive
             ? Current.Entries.Where(x => x.Value.Contains(oldText))
-            : Current.Entries.Where(x => x.Value.ToLower().Contains(oldText.ToLower()));
+            : Current.Entries.Where(x => x.Value.IndexOf(oldText, 0, x.Value.Length, StringComparison.CurrentCultureIgnoreCase) >= 0);
 
+        // Set Text
         foreach (var item in list)
         {
-            // Set Text
             Current.Entries[item.Key] = newText;
         }
+
         return this;
     }
 
@@ -405,12 +399,12 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public bool TryAdd(ulong key, string value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         if (!ContainsKey(key))
         {
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -429,6 +423,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -447,6 +442,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -465,6 +461,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -483,6 +480,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -501,6 +499,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -519,6 +518,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -537,6 +537,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -555,6 +556,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -573,6 +575,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -591,6 +594,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -609,6 +613,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -627,6 +632,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -645,6 +651,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -663,6 +670,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 

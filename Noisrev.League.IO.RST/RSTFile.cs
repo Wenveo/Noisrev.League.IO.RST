@@ -69,11 +69,6 @@ public class RSTFile : IEquatable<RSTFile>
     /// <exception cref="FileNotFoundException">File not found.</exception>
     public static RSTFile Load(string filePath)
     {
-        if (string.IsNullOrEmpty(filePath))
-            throw new ArgumentNullException(nameof(filePath));
-        if (!File.Exists(filePath))
-            throw new FileNotFoundException("File not found.", filePath);
-
         return new RSTFile(File.OpenRead(filePath), false);
     }
 
@@ -182,8 +177,19 @@ public class RSTFile : IEquatable<RSTFile>
     /// <exception cref="InvalidDataException"/>
     public RSTFile(Stream inputStream, bool leaveOpen) : this()
     {
-        if (inputStream == null) throw new ArgumentNullException(nameof(inputStream));
-        if (!inputStream.CanRead) throw new ArgumentException("The inputStream does not supports reading!");
+#if NET6_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(nameof(inputStream));
+#else
+        if (inputStream == null)
+        {
+            throw new ArgumentNullException(nameof(inputStream));
+        }
+#endif
+        if (!inputStream.CanRead)
+        {
+            throw new ArgumentException("The inputStream does not supports reading!");
+        }
+
 
         //Read all bytes from the stream and create a reader
         using var bytesReader = BytesReader.Create(inputStream, Encoding.UTF8);
@@ -288,7 +294,10 @@ public class RSTFile : IEquatable<RSTFile>
             Entries[item.Key] = value;
         }
 
-        if (!leaveOpen) inputStream.Close();
+        if (!leaveOpen)
+        {
+            inputStream.Close();
+        }
     }
 
     /// <summary>
@@ -298,7 +307,14 @@ public class RSTFile : IEquatable<RSTFile>
     /// <exception cref="ArgumentNullException">outputPath is null.</exception>
     public void Write(string outputPath)
     {
-        if (string.IsNullOrEmpty(outputPath)) throw new ArgumentNullException(nameof(outputPath));
+#if NET7_0_OR_GREATER
+        ArgumentException.ThrowIfNullOrEmpty(outputPath);
+#else
+        if (string.IsNullOrEmpty(outputPath))
+        {
+            throw new ArgumentNullException(nameof(outputPath), "The value cannot be an empty string.");
+        }
+#endif
 
         using var ms = new MemoryStream();
         // Write to MemoryStream
@@ -306,6 +322,7 @@ public class RSTFile : IEquatable<RSTFile>
         // Write All Bytes
         File.WriteAllBytes(outputPath, ms.ToArray());
     }
+
     /// <summary>
     /// Using an output stream, write the <see cref="RSTFile"/> to that stream.
     /// </summary>
@@ -315,8 +332,18 @@ public class RSTFile : IEquatable<RSTFile>
     /// <exception cref="ArgumentNullException">outputStream is null.</exception>
     public void Write(Stream outputStream, bool leaveOpen)
     {
-        if (outputStream == null) throw new ArgumentNullException(nameof(outputStream));
-        if (outputStream.CanWrite == false) throw new ArgumentException("The outputStream does not supports writing!");
+#if NET6_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(nameof(outputStream));
+#else
+        if (outputStream == null)
+        {
+            throw new ArgumentNullException(nameof(outputStream));
+        }
+#endif
+        if (!outputStream.CanWrite)
+        {
+            throw new ArgumentException("Stream was not writable.", nameof(outputStream));
+        }
 
         // Used to write the header block (DataOffset = HeaderSize). 
         using var bytesWriter = BytesWriter.Create((int)DataOffset);
@@ -433,7 +460,7 @@ public class RSTFile : IEquatable<RSTFile>
 
         foreach (var pair in Entries)
         {
-            if (other.Entries.TryGetValue(pair.Key, out string? value))
+            if (other.Entries.TryGetValue(pair.Key, out var value))
             {
                 if (!StringComparer.Ordinal.Equals(pair.Value, value))
                 {
@@ -450,7 +477,9 @@ public class RSTFile : IEquatable<RSTFile>
 
     /// <inheritdoc />
     public override bool Equals(object? obj)
-    => Equals(obj as RSTFile);
+    {
+        return Equals(obj as RSTFile);
+    }
 
     /// <inheritdoc />
     public override int GetHashCode()

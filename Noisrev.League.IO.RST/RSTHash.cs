@@ -27,8 +27,6 @@ public static class RSTHash
     /// <exception cref="ArgumentNullException"/>
     public static ulong ComputeHash(string toHash, RType type)
     {
-        if (toHash == null) throw new ArgumentNullException(nameof(toHash));
-
         var buffer = Encoding.UTF8.GetBytes(toHash.ToLower());
         return XxHash64.HashToUInt64(buffer, buffer.Length) & type.ComputeKey();
     }
@@ -44,8 +42,14 @@ public static class RSTHash
     /// <exception cref="ArgumentOutOfRangeException"/>
     public static ulong ComputeHash(string toHash, long offset, RType type)
     {
-        if (toHash == null) throw new ArgumentNullException(nameof(toHash));
-        if (offset < 0) throw new ArgumentOutOfRangeException(nameof(offset));
+#if NET8_0_OR_GREATER
+        ArgumentOutOfRangeException.ThrowIfNegative(offset);
+#else
+        if (offset < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(offset));
+        }
+#endif
 
         var buffer = Encoding.UTF8.GetBytes(toHash.ToLower());
         return XxHash64.HashToUInt64(buffer, buffer.Length) & type.ComputeKey() + offset.ComputeOffset(type);
