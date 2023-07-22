@@ -22,6 +22,6 @@ public static class OffsetHelper
     /// <exception cref="OverflowException"/>
     public static ulong ComputeOffset(this long offset, RType type)
     {
-        return Convert.ToUInt64(offset << (byte)type);
+        return (ulong)offset << (byte)type;
     }
 }
