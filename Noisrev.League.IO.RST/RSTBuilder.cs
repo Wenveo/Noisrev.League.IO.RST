@@ -12,8 +12,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 
-using Noisrev.League.IO.RST.Helpers;
-
 namespace Noisrev.League.IO.RST;
 
 /// <summary>
@@ -48,7 +46,7 @@ public sealed class RSTBuilder
     /// </summary>
     public RSTBuilder()
     {
-        Current = new RSTFile(RVersionHelper.GetLatestVersion());
+        Current = new RSTFile(RVersion.Ver5);
     }
 
     /// <summary>
