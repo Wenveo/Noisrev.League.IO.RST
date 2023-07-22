@@ -186,7 +186,7 @@ public class RSTFile : IEquatable<RSTFile>
         if (!inputStream.CanRead) throw new ArgumentException("The inputStream does not supports reading!");
 
         //Read all bytes from the stream and create a reader
-        var bytesReader = BytesReader.Create(inputStream.ReadToEnd(), Encoding.UTF8);
+        using var bytesReader = BytesReader.Create(inputStream, Encoding.UTF8);
 
         // Read magic code
         var magicCode = bytesReader.Read(3);
