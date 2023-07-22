@@ -334,6 +334,37 @@ public sealed class RSTBuilder
     /// </summary>
     /// <param name="oldText">The string to be replaced.</param>
     /// <param name="newText">Replace with a new string.</param>
+    /// <returns>A reference to this instance after the operation is complete.</returns>
+    /// <exception cref="ArgumentNullException"/>
+    public RSTBuilder ReplaceAll(string oldText, string newText)
+    {
+#if NET7_0_OR_GREATER
+        ArgumentException.ThrowIfNullOrEmpty(oldText);
+#else
+        if (oldText == null)
+        {
+            throw new ArgumentNullException(nameof(oldText), "The value cannot be an empty string.");
+        }
+#endif
+        if (newText == null)
+        {
+            return this;
+        }
+
+        foreach (var item in Current.Entries.Where(x => x.Value.Contains(oldText)).ToArray())
+        {
+            Current.Entries[item.Key] = item.Value.Replace(oldText, newText);
+        }
+
+        return this;
+    }
+
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_0_OR_GREATER
+    /// <summary>
+    /// Replaces all matched elements in the <see cref="RSTFile"/>.
+    /// </summary>
+    /// <param name="oldText">The string to be replaced.</param>
+    /// <param name="newText">Replace with a new string.</param>
     /// <param name="caseSensitive">Whether to enable case-sensitive comparison. Compares lowercase strings by default.</param>
     /// <returns>A reference to this instance after the operation is complete.</returns>
     /// <exception cref="ArgumentNullException"/>
@@ -352,19 +383,24 @@ public sealed class RSTBuilder
             return this;
         }
 
-        // Set a list
-        var list = caseSensitive
-            ? Current.Entries.Where(x => x.Value.Contains(oldText))
-            : Current.Entries.Where(x => x.Value.IndexOf(oldText, 0, x.Value.Length, StringComparison.CurrentCultureIgnoreCase) >= 0);
-
-        // Set Text
-        foreach (var item in list)
+        if (caseSensitive)
         {
-            Current.Entries[item.Key] = newText;
+            foreach (var item in Current.Entries.Where(x => x.Value.Contains(oldText)).ToArray())
+            {
+                Current.Entries[item.Key] = item.Value.Replace(oldText, newText, StringComparison.CurrentCulture);
+            }
+        }
+        else
+        {
+            foreach (var item in Current.Entries.Where(x => x.Value.IndexOf(oldText, 0, x.Value.Length, StringComparison.CurrentCultureIgnoreCase) >= 0).ToArray())
+            {
+                Current.Entries[item.Key] = item.Value.Replace(oldText, newText, StringComparison.CurrentCulture);
+            }
         }
 
         return this;
     }
+#endif
 
     /// <summary>
     /// Set the config of <see cref="RSTFile"/>.
