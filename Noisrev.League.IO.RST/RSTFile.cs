@@ -454,9 +454,14 @@ public class RSTFile : IEquatable<RSTFile>
 
     /// <inheritdoc />
     public override int GetHashCode()
-    => Version.GetHashCode() ^
-           Type.GetHashCode() ^
-                Mode.GetHashCode() ^
-                    Entries.GetHashCode();
-
+    {
+        if (Version > RVersion.Ver2)
+        {
+            return HashCode.Combine(Version, Type, Mode, Entries);
+        }
+        else
+        {
+            return HashCode.Combine(Config, Version, Type, Mode, Entries);
+        }
+    }
 }
