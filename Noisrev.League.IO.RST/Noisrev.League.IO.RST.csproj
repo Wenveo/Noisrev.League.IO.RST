@@ -32,7 +32,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <None Include="..\LICENSE">
       <Pack>true</Pack>
@@ -42,6 +42,10 @@
       <Pack>true</Pack>
       <PackagePath>\</PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup Label="NETCoreApp2.0_Or_Lower" Condition="'$(TargetFramework)' != 'netstandard2.1' and '$([MSBuild]::IsTargetFrameworkCompatible($(TargetFramework), netcoreapp2.1))' == 'false'">
+    <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
   </ItemGroup>
 
   <ItemGroup Label="Not_NETCoreApp" Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
