@@ -5,21 +5,19 @@
 // LICENSE file in the root directory of this source tree.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-
-using Noisrev.League.IO.RST.Helpers;
 
 namespace Noisrev.League.IO.RST;
 
 /// <summary>
 /// Used to build <see cref="RSTFile"/>. This class cannot be inherited.
 /// </summary>
-public sealed class RSTBuilder
+public sealed class RSTBuilder : IDictionary<ulong, string>
 {
     /// <summary>
     /// Gets or sets the value associated with the specified key.
@@ -48,7 +46,7 @@ public sealed class RSTBuilder
     /// </summary>
     public RSTBuilder()
     {
-        Current = new RSTFile(RVersionHelper.GetLatestVersion());
+        Current = new RSTFile(RVersion.Ver5);
     }
 
     /// <summary>
@@ -86,7 +84,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, bool value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -100,7 +97,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, byte value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -114,7 +110,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, sbyte value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -128,7 +123,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, char value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -142,7 +136,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, short value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -156,7 +149,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, int value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -170,7 +162,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, long value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -184,7 +175,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, float value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -198,7 +188,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, double value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -212,7 +201,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, decimal value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -226,7 +214,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, ushort value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -240,7 +227,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, uint value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -254,7 +240,6 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, ulong value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
@@ -268,12 +253,11 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public RSTBuilder Add(ulong key, object? value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
-
         if (null == value)
         {
             return this;
         }
+
         return Add(key, value.ToString() ?? string.Empty);
     }
 
@@ -351,41 +335,86 @@ public sealed class RSTBuilder
     /// </summary>
     /// <param name="oldText">The string to be replaced.</param>
     /// <param name="newText">Replace with a new string.</param>
+    /// <returns>A reference to this instance after the operation is complete.</returns>
+    /// <exception cref="ArgumentNullException"/>
+    public RSTBuilder ReplaceAll(string oldText, string newText)
+    {
+#if NET7_0_OR_GREATER
+        ArgumentException.ThrowIfNullOrEmpty(oldText);
+#else
+        if (oldText == null)
+        {
+            throw new ArgumentNullException(nameof(oldText), "The value cannot be an empty string.");
+        }
+#endif
+        if (newText == null)
+        {
+            return this;
+        }
+
+        foreach (var item in Current.Entries.Where(x => x.Value.Contains(oldText)).ToArray())
+        {
+            Current.Entries[item.Key] = item.Value.Replace(oldText, newText);
+        }
+
+        return this;
+    }
+
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_0_OR_GREATER
+    /// <summary>
+    /// Replaces all matched texts in the <see cref="RSTFile"/>.
+    /// </summary>
+    /// <param name="oldText">The string to replaced.</param>
+    /// <param name="newText">Replace with a new string.</param>
     /// <param name="caseSensitive">Whether to enable case-sensitive comparison. Compares lowercase strings by default.</param>
     /// <returns>A reference to this instance after the operation is complete.</returns>
     /// <exception cref="ArgumentNullException"/>
     public RSTBuilder ReplaceAll(string oldText, string newText, bool caseSensitive = false)
     {
+#if NET7_0_OR_GREATER
+        ArgumentException.ThrowIfNullOrEmpty(oldText);
+#else
         if (oldText == null)
-            throw new ArgumentNullException(nameof(oldText));
-        if (newText == null)
-            return this;
-
-        // Set a list
-        var list = caseSensitive
-            ? Current.Entries.Where(x => x.Value.Contains(oldText))
-            : Current.Entries.Where(x => x.Value.ToLower().Contains(oldText.ToLower()));
-
-        foreach (var item in list)
         {
-            // Set Text
-            Current.Entries[item.Key] = newText;
+            throw new ArgumentNullException(nameof(oldText), "The value cannot be an empty string.");
         }
+#endif
+        if (newText == null)
+        {
+            return this;
+        }
+
+        if (caseSensitive)
+        {
+            foreach (var item in Current.Entries.Where(x => x.Value.Contains(oldText)).ToArray())
+            {
+                Current.Entries[item.Key] = item.Value.Replace(oldText, newText, StringComparison.CurrentCulture);
+            }
+        }
+        else
+        {
+            foreach (var item in Current.Entries.Where(x => x.Value.IndexOf(oldText, 0, x.Value.Length, StringComparison.CurrentCultureIgnoreCase) >= 0).ToArray())
+            {
+                Current.Entries[item.Key] = item.Value.Replace(oldText, newText, StringComparison.CurrentCulture);
+            }
+        }
+
         return this;
     }
+#endif
 
     /// <summary>
-    /// Set the config of <see cref="RSTFile"/>.
+    /// Sets the font config for the current <see cref="RSTFile"/>. Only supported in <see cref="RVersion.Ver2"/>.
     /// </summary>
-    /// <param name="conf">The config.</param>
-    /// <returns>It must be version 2 to set the config. Set to return true on success or false on failure.</returns>
-    public bool SetConfig(string conf)
+    /// <param name="fontConfig">The font config to set.</param>
+    /// <returns>True if the font config was successfully sets; otherwise, false.</returns>
+    public bool SetConfig(string fontConfig)
     {
         // Version 2
         if (Current.Version == RVersion.Ver2)
         {
             // Set the config
-            Current.Config = conf;
+            Current.Config = fontConfig;
             // Return
             return true;
         }
@@ -407,12 +436,12 @@ public sealed class RSTBuilder
     /// <exception cref="ArgumentNullException">key is null.</exception>
     public bool TryAdd(ulong key, string value)
     {
-        Contract.Ensures(Contract.Result<RSTBuilder>() != null);
         if (!ContainsKey(key))
         {
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -431,6 +460,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -449,6 +479,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -467,6 +498,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -485,6 +517,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -503,6 +536,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -521,6 +555,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -539,6 +574,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -557,6 +593,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -575,6 +612,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -593,6 +631,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -611,6 +650,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -629,6 +669,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -647,6 +688,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -665,6 +707,7 @@ public sealed class RSTBuilder
             Add(key, value);
             return true;
         }
+
         return false;
     }
 
@@ -680,5 +723,84 @@ public sealed class RSTBuilder
     public bool TryGetValue(ulong key, [NotNullWhen(true)] out string? value)
     {
         return Current.Entries.TryGetValue(key, out value);
+    }
+
+    ICollection<ulong> IDictionary<ulong, string>.Keys
+    {
+        get
+        {
+            return Current.Entries.Keys;
+        }
+    }
+
+    ICollection<string> IDictionary<ulong, string>.Values
+    {
+        get
+        {
+            return Current.Entries.Values;
+        }
+    }
+
+    int ICollection<KeyValuePair<ulong, string>>.Count
+    {
+        get
+        {
+            return ((ICollection<KeyValuePair<ulong, string>>)Current.Entries).Count;
+        }
+    }
+
+    bool ICollection<KeyValuePair<ulong, string>>.IsReadOnly
+    {
+        get
+        {
+            return ((ICollection<KeyValuePair<ulong, string>>)Current.Entries).IsReadOnly;
+        }
+    }
+
+    void IDictionary<ulong, string>.Add(ulong key, string value)
+    {
+        Current.Entries.Add(key, value);
+    }
+
+    void ICollection<KeyValuePair<ulong, string>>.Add(KeyValuePair<ulong, string> item)
+    {
+        ((ICollection<KeyValuePair<ulong, string>>)Current.Entries).Add(item);
+    }
+
+    void ICollection<KeyValuePair<ulong, string>>.Clear()
+    {
+        ((ICollection<KeyValuePair<ulong, string>>)Current.Entries).Clear();
+    }
+
+    bool ICollection<KeyValuePair<ulong, string>>.Contains(KeyValuePair<ulong, string> item)
+    {
+        return ((ICollection<KeyValuePair<ulong, string>>)Current.Entries).Contains(item);
+    }
+
+    void ICollection<KeyValuePair<ulong, string>>.CopyTo(KeyValuePair<ulong, string>[] array, int arrayIndex)
+    {
+        ((ICollection<KeyValuePair<ulong, string>>)Current.Entries).CopyTo(array, arrayIndex);
+    }
+
+    bool ICollection<KeyValuePair<ulong, string>>.Remove(KeyValuePair<ulong, string> item)
+    {
+        return ((ICollection<KeyValuePair<ulong, string>>)Current.Entries).Remove(item);
+    }
+
+#if !NETCOREAPP
+    bool IDictionary<ulong, string>.TryGetValue(ulong key, out string value)
+    {
+        return Current.Entries.TryGetValue(key, out value);
+    }
+#endif
+
+    IEnumerator<KeyValuePair<ulong, string>> IEnumerable<KeyValuePair<ulong, string>>.GetEnumerator()
+    {
+        return ((IEnumerable<KeyValuePair<ulong, string>>)Current.Entries).GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return ((IEnumerable)Current.Entries).GetEnumerator();
     }
 }
