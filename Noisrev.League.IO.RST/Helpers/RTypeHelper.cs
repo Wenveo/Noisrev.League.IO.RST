@@ -4,6 +4,8 @@
 // This source code is distributed under an MIT license.
 // LICENSE file in the root directory of this source tree.
 
+using System.Runtime.CompilerServices;
+
 namespace Noisrev.League.IO.RST.Helpers;
 
 /// <summary>
@@ -16,10 +18,12 @@ public static class RTypeHelper
     /// </summary>
     /// <param name="type">The RType</param>
     /// <returns>Returns the computed value.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static ulong ComputeKey(this RType type)
     {
         return (1UL << (int)type) - 1;
     }
+
     /// <summary>
     /// Gets the specified RType based on version.
     /// </summary>

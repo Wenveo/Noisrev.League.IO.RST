@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 
 using System;
+using System.Runtime.CompilerServices;
 
 namespace Noisrev.League.IO.RST.Helpers;
 
@@ -20,6 +21,7 @@ public static class OffsetHelper
     /// <param name="type">The type of that <see cref="RSTFile"/>.</param>
     /// <returns>Returns the generated offset.</returns>
     /// <exception cref="OverflowException"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static ulong ComputeOffset(this long offset, RType type)
     {
         return (ulong)offset << (byte)type;
