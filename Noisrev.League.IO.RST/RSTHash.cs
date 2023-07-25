@@ -33,11 +33,7 @@ public static class RSTHash
             var length = toHash.Length;
             var ch = stackalloc char[length];
 
-#if NET7_0_OR_GREATER
-            MemoryExtensions.ToLower(
-                new ReadOnlySpan<char>(in toHash.GetPinnableReference()),
-                new Span<char>(ch, length), CultureInfo.CurrentCulture);
-#elif NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_1_OR_GREATER
+#if NETCOREAPP || NETSTANDARD2_1_OR_GREATER
             MemoryExtensions.ToLower(toHash.AsSpan(), new(ch, length), CultureInfo.CurrentCulture);
 #else
             // This code was tested to perform better than string.ToLower on .Net Framework
