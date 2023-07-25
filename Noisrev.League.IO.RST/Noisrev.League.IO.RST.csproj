@@ -1,66 +1,67 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;net461;net5.0;net6.0;net7.0;</TargetFrameworks>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <Nullable>enable</Nullable>
-        <LangVersion>10.0</LangVersion>
-        <Authors>Noisrev</Authors>
-        <Description>RST File library of League of Legends.</Description>
-        <Copyright>Copyright © 2021 - $([System.DateTime]::Today.ToString(yyyy))</Copyright>
-        <Summary>RST File library of League of Legends.</Summary>
-        <Version>3.1.2.0</Version>
-        <AssemblyVersion>3.1.2.0</AssemblyVersion>
-        <FileVersion>3.1.2.0</FileVersion>
-        <InformationalVersion>3.1.2.0</InformationalVersion>
-        <AssemblyName>Noisrev.League.IO.RST</AssemblyName>
-        <Product>Noisrev.League.IO.RST</Product>
-        <RootNamespace>Noisrev.League.IO.RST</RootNamespace>
-        <PackageId>Noisrev.League.IO.RST</PackageId>
-        <PackageTags>League of Legends;RST;RSTFile;String Table;</PackageTags>
-        <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <RepositoryUrl>https://github.com/Noisrev/Noisrev.League.IO.RST</RepositoryUrl>
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <DebugType>embedded</DebugType>
-        <DebugSymbols>true</DebugSymbols>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net7.0;net8.0</TargetFrameworks>
+    <RootNamespace>Noisrev.League.IO.RST</RootNamespace>
+    <Product>Noisrev.League.IO.RST</Product>
+    <Version>3.1.2.0</Version>
+    <Nullable>enable</Nullable>
+    <LangVersion>preview</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
 
-    <PropertyGroup>
-        <IsNetStandardOrNetFramework>false</IsNetStandardOrNetFramework>
-        <IsNetStandardOrNetFramework Condition="('$(TargetFramework.StartsWith(net4))') Or ('$(TargetFramework.StartsWith(netstandard))')">true</IsNetStandardOrNetFramework>
-    </PropertyGroup>
+  <PropertyGroup Label="PackageMetadata">
+    <Authors>Noisrev</Authors>
+    <Description>RST File library of League of Legends.</Description>
+    <Copyright>Copyright © 2021 - $([System.DateTime]::Today.ToString(yyyy))</Copyright>
+    <Summary>RST File library of League of Legends.</Summary>
+    <PackageTags>League of Legends;RST;RSTFile;String Table;</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Noisrev/Noisrev.League.IO.RST</RepositoryUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
 
-    <ItemGroup>
-      <None Include="..\LICENSE">
-        <Pack>true</Pack>
-        <PackagePath>\</PackagePath>
-      </None>
-      <None Include="..\README.md">
-        <Pack>true</Pack>
-        <PackagePath>\</PackagePath>
-      </None>
-    </ItemGroup>
+  <PropertyGroup Label="SourceLink">
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
 
-    <ItemGroup Condition="$(IsNetStandardOrNetFramework) == 'true' ">
-      <PackageReference Include="Standart.Hash.xxHash" Version="3.1.0" />
-      <PackageReference Include="Nullable" Version="1.3.1">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-    </ItemGroup>
+  <PropertyGroup>
+    <IsNetStandardOrNetFramework>false</IsNetStandardOrNetFramework>
+    <IsNetStandardOrNetFramework Condition="('$(TargetFramework.StartsWith(net4))') Or ('$(TargetFramework.StartsWith(netstandard))')">true</IsNetStandardOrNetFramework>
+  </PropertyGroup>
 
-    <ItemGroup Condition="$(IsNetStandardOrNetFramework) == 'false'">
-      <PackageReference Include="Standart.Hash.xxHash" Version="4.0.5" />
-    </ItemGroup>
-    
-    <ItemGroup>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-    </ItemGroup>
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>true</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>true</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup Condition="$(IsNetStandardOrNetFramework) == 'true' ">
+    <PackageReference Include="Standart.Hash.xxHash" Version="3.1.0" />
+    <PackageReference Include="Nullable" Version="1.3.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="$(IsNetStandardOrNetFramework) == 'false'">
+    <PackageReference Include="Standart.Hash.xxHash" Version="4.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
 </Project>
