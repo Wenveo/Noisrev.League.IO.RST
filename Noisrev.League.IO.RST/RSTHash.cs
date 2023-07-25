@@ -5,21 +5,22 @@
 // LICENSE file in the root directory of this source tree.
 
 using System;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO.Hashing;
 using System.Text;
 
 using Noisrev.League.IO.RST.Helpers;
 
-using Standart.Hash.xxHash;
-
 namespace Noisrev.League.IO.RST;
 
 /// <summary>
-/// RST hashes Compute class.
+/// RST hashes compute class.
 /// </summary>
 public static class RSTHash
 {
     /// <summary>
-    /// Use <paramref name="toHash"/> and <paramref name="type"/> to generate a hash with no offset.
+    /// Generate a hash without offset based on the <see cref="string"/> and <see cref="RType"/>.
     /// </summary>
     /// <param name="toHash">The string used to generate the hash.</param>
     /// <param name="type">The type of <see cref="RSTFile"/>.</param>
@@ -27,13 +28,38 @@ public static class RSTHash
     /// <exception cref="ArgumentNullException"/>
     public static ulong ComputeHash(string toHash, RType type)
     {
-        if (toHash == null) throw new ArgumentNullException(nameof(toHash));
+        unsafe
+        {
+            var length = toHash.Length;
+            var ch = stackalloc char[length];
 
-        var buffer = Encoding.UTF8.GetBytes(toHash.ToLower());
-        return xxHash64.ComputeHash(buffer, buffer.Length) & type.ComputeKey();
+#if NET7_0_OR_GREATER
+            MemoryExtensions.ToLower(
+                new ReadOnlySpan<char>(in toHash.GetPinnableReference()),
+                new Span<char>(ch, length), CultureInfo.CurrentCulture);
+#elif NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_1_OR_GREATER
+            MemoryExtensions.ToLower(toHash.AsSpan(), new(ch, length), CultureInfo.CurrentCulture);
+#else
+            // This code was tested to perform better than string.ToLower on .Net Framework
+            var textInfo = CultureInfo.CurrentCulture.TextInfo;
+            for (var i = 0; i < length; i++)
+            {
+                ch[i] = textInfo.ToLower(toHash[i]);
+            }
+#endif
+
+            var byteCount = Encoding.UTF8.GetByteCount(ch, length);
+            var bytes = stackalloc byte[byteCount];
+
+            var bytesReceived = Encoding.UTF8.GetBytes(ch, length, bytes, byteCount);
+            Debug.Assert(byteCount == bytesReceived);
+
+            return XxHash64.HashToUInt64(new ReadOnlySpan<byte>(bytes, bytesReceived)) & type.ComputeKey();
+        }
     }
+
     /// <summary>
-    /// Generate a hash with an offset using <paramref name="toHash"/> and <paramref name="offset"/>, as well as <paramref name="type"/>.
+    /// Generate a hash based on the <see cref="string"/> and <paramref name="offset"/> and <see cref="RType"/>.
     /// </summary>
     /// <param name="toHash">The string used to generate the hash.</param>
     /// <param name="offset">The offset of the text.</param>
@@ -43,19 +69,24 @@ public static class RSTHash
     /// <exception cref="ArgumentOutOfRangeException"/>
     public static ulong ComputeHash(string toHash, long offset, RType type)
     {
-        if (toHash == null) throw new ArgumentNullException(nameof(toHash));
-        if (offset < 0) throw new ArgumentOutOfRangeException(nameof(offset));
-
-        var buffer = Encoding.UTF8.GetBytes(toHash.ToLower());
-        return xxHash64.ComputeHash(buffer, buffer.Length) & type.ComputeKey() + offset.ComputeOffset(type);
+#if NET8_0_OR_GREATER
+        ArgumentOutOfRangeException.ThrowIfNegative(offset);
+#else
+        if (offset < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(offset));
+        }
+#endif
+        return ComputeHash(toHash, type) + offset.ComputeOffset(type);
     }
+
     /// <summary>
-    /// Regenerate a hash with an offset using the generated <paramref name="hash"/> and <paramref name="offset"/>, as well as <paramref name="type"/>.
+    /// Regenerate a new hash with <paramref name="offset"/> using the generated <paramref name="hash"/> and <paramref name="type"/>.
     /// </summary>
     /// <param name="hash">A hash used to merge offset.</param>
     /// <param name="offset">The offset of the text.</param>
     /// <param name="type">The type of <see cref="RSTFile"/>.</param>
-    /// <returns>The generated hash.</returns>
+    /// <returns>The regenerated hash with offset</returns>
     public static ulong ComputeHash(ulong hash, long offset, RType type)
     {
         return hash + offset.ComputeOffset(type);
