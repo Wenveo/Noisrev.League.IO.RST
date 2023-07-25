@@ -1,10 +1,8 @@
-﻿/*
- * Copyright (c) 2021 - 2023 Noisrev
- * All rights reserved.
- *
- * This source code is distributed under an MIT license. 
- * LICENSE file in the root directory of this source tree.
- */
+// Copyright (c) 2021 - 2023 Noisrev
+// All rights reserved.
+//
+// This source code is distributed under an MIT license.
+// LICENSE file in the root directory of this source tree.
 
 /*  This is a RST (Riot String Table) file class.
  *  
@@ -47,13 +45,13 @@
  *                                                                                                       ---DateTime : 7.2.2021 --13:14
  */
 
-using Noisrev.League.IO.RST.Helpers;
-using Noisrev.League.IO.RST.Unsafe;
-
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+
+using Noisrev.League.IO.RST.Helpers;
+using Noisrev.League.IO.RST.Unsafe;
 
 namespace Noisrev.League.IO.RST;
 

@@ -1,17 +1,15 @@
-﻿/*
- * Copyright (c) 2021 - 2023 Noisrev
- * All rights reserved.
- *
- * This source code is distributed under an MIT license. 
- * LICENSE file in the root directory of this source tree.
- */
+// Copyright (c) 2021 - 2023 Noisrev
+// All rights reserved.
+//
+// This source code is distributed under an MIT license.
+// LICENSE file in the root directory of this source tree.
+
+using System;
+using System.Text;
 
 using Noisrev.League.IO.RST.Helpers;
 
 using Standart.Hash.xxHash;
-
-using System;
-using System.Text;
 
 namespace Noisrev.League.IO.RST;
 
