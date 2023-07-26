@@ -13,7 +13,7 @@ using System.Text;
 
 namespace Noisrev.League.IO.RST.Internal;
 
-internal unsafe class BytesWriter : IDisposable
+internal unsafe struct BytesWriter : IDisposable
 {
     private readonly ArrayPool<byte> _bufferPool;
     private readonly Encoding _encoding;
@@ -24,13 +24,13 @@ internal unsafe class BytesWriter : IDisposable
 
     private bool _isDisposed;
 
-    public byte[] Buffer => _buffer;
+    public readonly byte[] Buffer => _buffer;
 
-    public int Position => _position;
+    public readonly int Position => _position;
 
-    public int Length => _length;
+    public readonly int Length => _length;
 
-    public int Capacity => _buffer.Length;
+    public readonly int Capacity => _buffer.Length;
 
     private BytesWriter(int capacity, Encoding encoding)
     {

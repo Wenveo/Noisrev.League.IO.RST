@@ -12,7 +12,7 @@ using System.Text;
 
 namespace Noisrev.League.IO.RST.Internal;
 
-internal unsafe class BytesReader : IDisposable
+internal unsafe struct BytesReader : IDisposable
 {
     private const byte Empty = 0;
 
@@ -24,9 +24,9 @@ internal unsafe class BytesReader : IDisposable
 
     private int _position;
 
-    public int Position => _position;
+    public readonly int Position => _position;
 
-    public int Length => _length;
+    public readonly int Length => _length;
 
     private BytesReader(byte* pointer, int length, Encoding encoding, object? managedObject = null, Action<object?>? disposeAction = null)
     {
