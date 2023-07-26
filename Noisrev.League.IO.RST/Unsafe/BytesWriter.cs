@@ -148,54 +148,20 @@ internal unsafe class BytesWriter : IDisposable
             var length = value.Length;
             var byteCount = _encoding.GetByteCount(ch, length);
 
-            // Max Stack Limit 
-            Debug.Assert(byteCount <= 1024);
-            var tempBuffer = stackalloc byte[byteCount];
-            var n = _encoding.GetBytes(ch, length, tempBuffer, byteCount);
-            Debug.Assert(n <= byteCount);
-
-            CoreceWrite(new ReadOnlySpan<byte>(tempBuffer, byteCount));
+            // Max Stack Limit
+            if (byteCount <= 1024)
+            {
+                WriteStringThroughStackAlloc(ch, length, byteCount);
+            }
+            else
+            {
+                WriteStringThroughArrayPool(ch, length, byteCount);
+            }
         }
     }
 
     public void WriteStringWithEndByte(string value)
     {
-#if NET5_0_OR_GREATER
-        [SkipLocalsInit]
-#endif
-        void WriteStringViaStackAlloc(char* ch, int length, int byteCount)
-        {
-            var tempBuffer = stackalloc byte[byteCount];
-            var n = _encoding.GetBytes(ch, length, tempBuffer, byteCount);
-            Debug.Assert(n <= byteCount);
-
-            tempBuffer[n] = 0;
-            CoreceWrite(new ReadOnlySpan<byte>(tempBuffer, byteCount));
-        }
-
-#if NET5_0_OR_GREATER
-        [SkipLocalsInit]
-#endif
-        void WriteStringViaArrayPool(char* ch, int length, int byteCount)
-        {
-            var tempBuffer = ArrayPool<byte>.Shared.Rent(byteCount);
-            try
-            {
-                fixed (byte* bytes = tempBuffer)
-                {
-                    var n = _encoding.GetBytes(ch, length, bytes, byteCount);
-                    Debug.Assert(n <= byteCount);
-
-                    bytes[n] = 0;
-                    CoreceWrite(new ReadOnlySpan<byte>(bytes, byteCount));
-                }
-            }
-            finally
-            {
-                ArrayPool<byte>.Shared.Return(tempBuffer);
-            }
-        }
-
         fixed (char* ch = value)
         {
             var length = value.Length;
@@ -204,12 +170,82 @@ internal unsafe class BytesWriter : IDisposable
             // Max Stack Limit
             if (byteCount <= 1024)
             {
-                WriteStringViaStackAlloc(ch, length, byteCount);
+                WriteStringWithEndByteThroughStackAlloc(ch, length, byteCount);
             }
             else
             {
-                WriteStringViaArrayPool(ch, length, byteCount);
+                WriteStringWithEndByteThroughArrayPool(ch, length, byteCount);
             }
+        }
+    }
+
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
+    private void WriteStringThroughStackAlloc(char* ch, int length, int byteCount)
+    {
+        var tempBuffer = stackalloc byte[byteCount];
+        var n = _encoding.GetBytes(ch, length, tempBuffer, byteCount);
+        Debug.Assert(n <= byteCount);
+
+        CoreceWrite(new ReadOnlySpan<byte>(tempBuffer, byteCount));
+    }
+
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
+    private void WriteStringWithEndByteThroughStackAlloc(char* ch, int length, int byteCount)
+    {
+        var tempBuffer = stackalloc byte[byteCount];
+        var n = _encoding.GetBytes(ch, length, tempBuffer, byteCount);
+        Debug.Assert(n <= byteCount);
+
+        tempBuffer[n] = 0;
+        CoreceWrite(new ReadOnlySpan<byte>(tempBuffer, byteCount));
+    }
+
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
+    private void WriteStringThroughArrayPool(char* ch, int length, int byteCount)
+    {
+        var tempBuffer = ArrayPool<byte>.Shared.Rent(byteCount);
+        try
+        {
+            fixed (byte* bytes = tempBuffer)
+            {
+                var n = _encoding.GetBytes(ch, length, bytes, byteCount);
+                Debug.Assert(n <= byteCount);
+
+                CoreceWrite(new ReadOnlySpan<byte>(bytes, byteCount));
+            }
+        }
+        finally
+        {
+            ArrayPool<byte>.Shared.Return(tempBuffer);
+        }
+    }
+
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
+    private void WriteStringWithEndByteThroughArrayPool(char* ch, int length, int byteCount)
+    {
+        var tempBuffer = ArrayPool<byte>.Shared.Rent(byteCount);
+        try
+        {
+            fixed (byte* bytes = tempBuffer)
+            {
+                var n = _encoding.GetBytes(ch, length, bytes, byteCount);
+                Debug.Assert(n <= byteCount);
+
+                bytes[n] = 0;
+                CoreceWrite(new ReadOnlySpan<byte>(bytes, byteCount));
+            }
+        }
+        finally
+        {
+            ArrayPool<byte>.Shared.Return(tempBuffer);
         }
     }
 
