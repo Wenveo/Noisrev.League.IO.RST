@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Noisrev.League.IO.RST.Unsafe;
+namespace Noisrev.League.IO.RST.Internal;
 
 internal unsafe class BytesReader : IDisposable
 {
@@ -130,9 +130,7 @@ internal unsafe class BytesReader : IDisposable
 #else
         var length = new ReadOnlySpan<byte>(_byRef + offset, _length - offset).IndexOf(Empty);
         if (length > 0)
-        {
             return _encoding.GetString(_byRef + offset, length);
-        }
 
         return string.Empty;
 #endif
@@ -142,15 +140,11 @@ internal unsafe class BytesReader : IDisposable
     {
         var managedObject = _managedObject;
         if (managedObject is null)
-        {
             return;
-        }
 
         var disposeAction = _disposeAction;
         if (disposeAction is null)
-        {
             return;
-        }
 
         _managedObject = null;
         _disposeAction = null;
@@ -206,7 +200,7 @@ internal unsafe class BytesReader : IDisposable
 
         return new BytesReader((byte*)bufferPtr, length, encoding, bufferPtr, (obj) =>
         {
-            if (obj is IntPtr ptr) Marshal.FreeHGlobal(ptr);
+            if (obj is nint ptr) Marshal.FreeHGlobal(ptr);
         });
     }
 #endif
@@ -227,9 +221,7 @@ internal unsafe class BytesReader : IDisposable
             {
                 var read = stream.Read(tempBuffer, 0, Math.Min(4096, length - position));
                 if (read == 0)
-                {
                     break;
-                }
 
                 new Span<byte>(tempBuffer, 0, read).CopyTo(buffer.Slice(position, read));
                 position += read;
@@ -247,7 +239,7 @@ internal unsafe class BytesReader : IDisposable
 
         return new BytesReader((byte*)bufferPtr, length, encoding, bufferPtr, (obj) =>
         {
-            if (obj is IntPtr ptr) Marshal.FreeHGlobal(ptr);
+            if (obj is nint ptr) Marshal.FreeHGlobal(ptr);
         });
     }
 }

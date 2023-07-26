@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Noisrev.League.IO.RST.Unsafe;
+namespace Noisrev.League.IO.RST.Internal;
 
 internal unsafe class BytesWriter : IDisposable
 {
@@ -150,9 +150,7 @@ internal unsafe class BytesWriter : IDisposable
 
             // Max Stack Limit
             if (byteCount <= 1024)
-            {
                 WriteStringThroughStackAlloc(ch, length, byteCount);
-            }
             else
             {
                 WriteStringThroughArrayPool(ch, length, byteCount);
@@ -180,7 +178,7 @@ internal unsafe class BytesWriter : IDisposable
     }
 
 #if NET5_0_OR_GREATER
-        [SkipLocalsInit]
+    [SkipLocalsInit]
 #endif
     private void WriteStringThroughStackAlloc(char* ch, int length, int byteCount)
     {
@@ -192,7 +190,7 @@ internal unsafe class BytesWriter : IDisposable
     }
 
 #if NET5_0_OR_GREATER
-        [SkipLocalsInit]
+    [SkipLocalsInit]
 #endif
     private void WriteStringWithEndByteThroughStackAlloc(char* ch, int length, int byteCount)
     {
@@ -205,7 +203,7 @@ internal unsafe class BytesWriter : IDisposable
     }
 
 #if NET5_0_OR_GREATER
-        [SkipLocalsInit]
+    [SkipLocalsInit]
 #endif
     private void WriteStringThroughArrayPool(char* ch, int length, int byteCount)
     {
@@ -227,7 +225,7 @@ internal unsafe class BytesWriter : IDisposable
     }
 
 #if NET5_0_OR_GREATER
-        [SkipLocalsInit]
+    [SkipLocalsInit]
 #endif
     private void WriteStringWithEndByteThroughArrayPool(char* ch, int length, int byteCount)
     {
@@ -275,7 +273,7 @@ internal unsafe class BytesWriter : IDisposable
 
 #if NET6_0_OR_GREATER
         buffer.Slice(index, count).CopyTo(
-            new((byte*)System.Runtime.CompilerServices.Unsafe.AsPointer(
+            new((byte*)Unsafe.AsPointer(
                 ref MemoryMarshal.GetArrayDataReference(_buffer)) + _position, count));
 #else
         buffer.Slice(index, count).CopyTo(new Span<byte>(_buffer, _position, count));
@@ -304,9 +302,7 @@ internal unsafe class BytesWriter : IDisposable
     public void Dispose()
     {
         if (_isDisposed)
-        {
             return;
-        }
 
         _isDisposed = true;
         _bufferPool.Return(_buffer);
