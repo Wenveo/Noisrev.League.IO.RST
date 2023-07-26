@@ -9,6 +9,19 @@
 
 [![Bilibili](https://img.shields.io/badge/dynamic/json?color=ff69b4&label=bilibili&query=%24.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dbilibili%26queryKey%3D176863848)](https://space.bilibili.com/176863848)
 
+# 🔥 Version 4 - Preview!
+Improved performance for Read/Write, Less time/op and lower memory allocation. ^^
+
+| Method |              Runtime |      Mean | Allocated |
+|------- |--------------------- |----------:|----------:|
+| (Version 4)
+|   Open |             .NET 8.0 |  56.04 ms |     24 MB |
+|  Write |             .NET 8.0 |  38.48 ms |     28 MB |
+| (Version 3)
+|   Open |             .NET 6.0 |  74.13 ms |     36 MB |
+|  Write |             .NET 6.0 |  52.20 ms |     30 MB |
+
+
 # ✨ RST (Riot String Table) 
 The file is used to store strings of in-game text.
 - Champion name, skill description, skin name, etc...
