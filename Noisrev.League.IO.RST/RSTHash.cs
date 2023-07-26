@@ -136,6 +136,53 @@ public static class RSTHash
     }
 
     /// <summary>
+    /// Generate a hash based on the <see cref="string"/> and <paramref name="offset"/> and <see cref="RType"/>.
+    /// </summary>
+    /// <param name="toHash">The string used to generate the hash.</param>
+    /// <param name="offset">The offset of the text.</param>
+    /// <param name="type">The type of <see cref="RSTFile"/>.</param>
+    /// <param name="encoding">The character encoding to use.</param>
+    /// <returns>The generated hash.</returns>
+    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="ArgumentOutOfRangeException"/>
+    public static ulong ComputeHash(string toHash, long offset, RType type, Encoding encoding)
+    {
+#if NET8_0_OR_GREATER
+        ArgumentOutOfRangeException.ThrowIfNegative(offset);
+#else
+        if (offset < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(offset));
+        }
+#endif
+        return ComputeHash(toHash, type, encoding, CultureInfo.CurrentCulture) + offset.ComputeOffset(type);
+    }
+
+    /// <summary>
+    /// Generate a hash based on the <see cref="string"/> and <paramref name="offset"/> and <see cref="RType"/>.
+    /// </summary>
+    /// <param name="toHash">The string used to generate the hash.</param>
+    /// <param name="offset">The offset of the text.</param>
+    /// <param name="type">The type of <see cref="RSTFile"/>.</param>
+    /// <param name="encoding">The character encoding to use.</param>
+    /// <param name="cultureInfo">An object that supplies culture-specific casing rules.</param>
+    /// <returns>The generated hash.</returns>
+    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="ArgumentOutOfRangeException"/>
+    public static ulong ComputeHash(string toHash, long offset, RType type, Encoding encoding, CultureInfo cultureInfo)
+    {
+#if NET8_0_OR_GREATER
+        ArgumentOutOfRangeException.ThrowIfNegative(offset);
+#else
+        if (offset < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(offset));
+        }
+#endif
+        return ComputeHash(toHash, type, encoding, cultureInfo) + offset.ComputeOffset(type);
+    }
+
+    /// <summary>
     /// Regenerate a new hash with <paramref name="offset"/> using the generated <paramref name="hash"/> and <paramref name="type"/>.
     /// </summary>
     /// <param name="hash">A hash used to merge offset.</param>
