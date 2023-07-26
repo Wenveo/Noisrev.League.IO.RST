@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Noisrev.League.IO.RST.Unsafe;
+namespace Noisrev.League.IO.RST.Internal;
 
 internal unsafe class BytesReader : IDisposable
 {
