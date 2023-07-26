@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Noisrev.League.IO.RST.Unsafe;
+namespace Noisrev.League.IO.RST.Internal;
 
 internal unsafe class BytesWriter : IDisposable
 {
@@ -180,7 +180,7 @@ internal unsafe class BytesWriter : IDisposable
     }
 
 #if NET5_0_OR_GREATER
-        [SkipLocalsInit]
+    [SkipLocalsInit]
 #endif
     private void WriteStringThroughStackAlloc(char* ch, int length, int byteCount)
     {
@@ -192,7 +192,7 @@ internal unsafe class BytesWriter : IDisposable
     }
 
 #if NET5_0_OR_GREATER
-        [SkipLocalsInit]
+    [SkipLocalsInit]
 #endif
     private void WriteStringWithEndByteThroughStackAlloc(char* ch, int length, int byteCount)
     {
@@ -205,7 +205,7 @@ internal unsafe class BytesWriter : IDisposable
     }
 
 #if NET5_0_OR_GREATER
-        [SkipLocalsInit]
+    [SkipLocalsInit]
 #endif
     private void WriteStringThroughArrayPool(char* ch, int length, int byteCount)
     {
@@ -227,7 +227,7 @@ internal unsafe class BytesWriter : IDisposable
     }
 
 #if NET5_0_OR_GREATER
-        [SkipLocalsInit]
+    [SkipLocalsInit]
 #endif
     private void WriteStringWithEndByteThroughArrayPool(char* ch, int length, int byteCount)
     {

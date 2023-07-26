@@ -53,7 +53,7 @@ using System.Linq;
 using System.Text;
 
 using Noisrev.League.IO.RST.Helpers;
-using Noisrev.League.IO.RST.Unsafe;
+using Noisrev.League.IO.RST.Internal;
 
 namespace Noisrev.League.IO.RST;
 
