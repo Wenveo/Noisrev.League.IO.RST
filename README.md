@@ -1,6 +1,6 @@
 # 📖 Noisrev.League.IO.RST
 
-***This is a library for parsing and editing League of Legends RST files.***
+***This is a library for parsing and editing RST files of League of Legends.***
 
 ![NetStandard](https://img.shields.io/badge/.Net%20Standard-v2.0-brightgreen) ![LICENSE](https://img.shields.io/github/license/noisrev/noisrev.league.io.rst) ![Downloads](https://img.shields.io/nuget/dt/noisrev.league.io.rst) ![PackageVersion](https://img.shields.io/nuget/v/noisrev.league.io.rst)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FNoisrev%2FNoisrev.League.IO.RST.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FNoisrev%2FNoisrev.League.IO.RST?ref=badge_shield)
@@ -11,17 +11,15 @@
 
 # ✨ RST (Riot String Table) 
 This file is used to store strings of in-game text.
-- champion name, skill description, skin name, etc...
+- Champion name, skill description, skin name, etc...
 - *Like:* **"Riven"**, **"Championship Riven 2016"**, **"\<mainText>\<stats>\<attention>%i:scaleAP% 25\</attention> Ability Power\<br>\<attention>%i:scaleMPen% 15%\</attention> Magic Penetration\</stats>\</mainText>\<br>"**
 - And more...
 
 ***If you would like to see more details about the RST file, please see: [RSTFile.cs](Noisrev.League.IO.RST/RSTFile.cs).***
 
-# 🚀 Install
+# 🚀 Quick Start
 - Install via **Nuget Package Manager** in **Visual Studio**
 - .NET CLI : `dotnet add package Noisrev.League.IO.RST`
-
-# 💡 Quick Start
 ```
 using Noisrev.League.IO.RST;
 
