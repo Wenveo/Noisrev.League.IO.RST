@@ -93,7 +93,7 @@ public static class RSTHash
                     return XxHash64.HashToUInt64(new ReadOnlySpan<byte>(bytes, bytesReceived)) & type.ComputeKey();
                 }
 
-                var tempBuffer = ArrayPool<byte>.Shared.Rent(byteCount);
+                var tempBuffer = Utilities.LargeByteArrayPool.Rent(byteCount);
                 try
                 {
                     fixed (byte* bytes = tempBuffer)
@@ -106,7 +106,7 @@ public static class RSTHash
                 }
                 finally
                 {
-                    ArrayPool<byte>.Shared.Return(tempBuffer);
+                    Utilities.LargeByteArrayPool.Return(tempBuffer);
                 }
             }
 

@@ -6,6 +6,7 @@
 // LICENSE file in the root directory of this source tree.
 
 using System;
+using System.Buffers;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 
@@ -13,6 +14,8 @@ namespace Noisrev.League.IO.RST.Internal;
 
 internal static class Utilities
 {
+    public static readonly ArrayPool<byte> LargeByteArrayPool = ArrayPool<byte>.Create(1024 * 1024 * 1024, 50);
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ToLower(ReadOnlySpan<char> source, Span<char> destination, CultureInfo cultureInfo)
     {
