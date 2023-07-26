@@ -5,12 +5,14 @@
 // LICENSE file in the root directory of this source tree.
 
 using System;
+using System.Buffers;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO.Hashing;
 using System.Text;
 
 using Noisrev.League.IO.RST.Helpers;
+using Noisrev.League.IO.RST.Internal;
 
 namespace Noisrev.League.IO.RST;
 
@@ -28,29 +30,86 @@ public static class RSTHash
     /// <exception cref="ArgumentNullException"/>
     public static ulong ComputeHash(string toHash, RType type)
     {
+        return ComputeHash(toHash, type, Encoding.UTF8, CultureInfo.CurrentCulture);
+    }
+
+    /// <summary>
+    /// Generate a hash without offset based on the <see cref="string"/> and <see cref="RType"/>.
+    /// </summary>
+    /// <param name="toHash">The string used to generate the hash.</param>
+    /// <param name="type">The type of <see cref="RSTFile"/>.</param>
+    /// <param name="encoding">The character encoding to use.</param>
+    /// <returns>The generated hash.</returns>
+    /// <exception cref="ArgumentNullException"/>
+    public static ulong ComputeHash(string toHash, RType type, Encoding encoding)
+    {
+        return ComputeHash(toHash, type, encoding, CultureInfo.CurrentCulture);
+    }
+
+    /// <summary>
+    /// Generate a hash without offset based on the <see cref="string"/> and <see cref="RType"/>.
+    /// </summary>
+    /// <param name="toHash">The string used to generate the hash.</param>
+    /// <param name="type">The type of <see cref="RSTFile"/>.</param>
+    /// <param name="encoding">The character encoding to use.</param>
+    /// <param name="cultureInfo">An object that supplies culture-specific casing rules.</param>
+    /// <returns>The generated hash.</returns>
+    /// <exception cref="ArgumentNullException"/>
+    public static ulong ComputeHash(string toHash, RType type, Encoding encoding, CultureInfo cultureInfo)
+    {
         unsafe
         {
             var length = toHash.Length;
-            var ch = stackalloc char[length];
-
-#if NETCOREAPP || NETSTANDARD2_1_OR_GREATER
-            MemoryExtensions.ToLower(toHash.AsSpan(), new(ch, length), CultureInfo.CurrentCulture);
-#else
-            // This code was tested to perform better than string.ToLower on .Net Framework
-            var textInfo = CultureInfo.CurrentCulture.TextInfo;
-            for (var i = 0; i < length; i++)
+            if (length <= 1024)
             {
-                ch[i] = textInfo.ToLower(toHash[i]);
+                var ch = stackalloc char[length];
+                Utilities.ToLower(toHash.AsSpan(), new(ch, length), cultureInfo);
+                return ComputeHashCore(ch, length, type, encoding);
             }
-#endif
 
-            var byteCount = Encoding.UTF8.GetByteCount(ch, length);
-            var bytes = stackalloc byte[byteCount];
+            var charArray = ArrayPool<char>.Shared.Rent(length);
+            try
+            {
+                fixed (char* ch = charArray)
+                {
+                    Utilities.ToLower(toHash.AsSpan(), new(ch, length), cultureInfo);
+                    return ComputeHashCore(ch, length, type, encoding);
+                }
+            }
+            finally
+            {
+                ArrayPool<char>.Shared.Return(charArray);
+            }
 
-            var bytesReceived = Encoding.UTF8.GetBytes(ch, length, bytes, byteCount);
-            Debug.Assert(byteCount == bytesReceived);
+            static ulong ComputeHashCore(char* ch, int length, RType type, Encoding encoding)
+            {
+                var byteCount = encoding.GetByteCount(ch, length);
+                if (byteCount <= 1024)
+                {
+                    var bytes = stackalloc byte[byteCount];
+                    var bytesReceived = encoding.GetBytes(ch, length, bytes, byteCount);
+                    Debug.Assert(byteCount <= bytesReceived);
 
-            return XxHash64.HashToUInt64(new ReadOnlySpan<byte>(bytes, bytesReceived)) & type.ComputeKey();
+                    return XxHash64.HashToUInt64(new ReadOnlySpan<byte>(bytes, bytesReceived)) & type.ComputeKey();
+                }
+
+                var tempBuffer = ArrayPool<byte>.Shared.Rent(byteCount);
+                try
+                {
+                    fixed (byte* bytes = tempBuffer)
+                    {
+                        var bytesReceived = encoding.GetBytes(ch, length, bytes, byteCount);
+                        Debug.Assert(byteCount <= bytesReceived);
+
+                        return XxHash64.HashToUInt64(new ReadOnlySpan<byte>(bytes, bytesReceived)) & type.ComputeKey();
+                    }
+                }
+                finally
+                {
+                    ArrayPool<byte>.Shared.Return(tempBuffer);
+                }
+            }
+
         }
     }
 
