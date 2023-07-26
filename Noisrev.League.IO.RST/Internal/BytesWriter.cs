@@ -34,7 +34,7 @@ internal unsafe class BytesWriter : IDisposable
 
     private BytesWriter(int capacity, Encoding encoding)
     {
-        _bufferPool = ArrayPool<byte>.Shared;
+        _bufferPool = Utilities.LargeByteArrayPool;
         _buffer = _bufferPool.Rent(capacity);
 
         _encoding = encoding;
@@ -209,7 +209,7 @@ internal unsafe class BytesWriter : IDisposable
 #endif
     private void WriteStringThroughArrayPool(char* ch, int length, int byteCount)
     {
-        var tempBuffer = ArrayPool<byte>.Shared.Rent(byteCount);
+        var tempBuffer = _bufferPool.Rent(byteCount);
         try
         {
             fixed (byte* bytes = tempBuffer)
@@ -222,7 +222,7 @@ internal unsafe class BytesWriter : IDisposable
         }
         finally
         {
-            ArrayPool<byte>.Shared.Return(tempBuffer);
+            _bufferPool.Return(tempBuffer);
         }
     }
 
@@ -231,7 +231,7 @@ internal unsafe class BytesWriter : IDisposable
 #endif
     private void WriteStringWithEndByteThroughArrayPool(char* ch, int length, int byteCount)
     {
-        var tempBuffer = ArrayPool<byte>.Shared.Rent(byteCount);
+        var tempBuffer = _bufferPool.Rent(byteCount);
         try
         {
             fixed (byte* bytes = tempBuffer)
@@ -245,7 +245,7 @@ internal unsafe class BytesWriter : IDisposable
         }
         finally
         {
-            ArrayPool<byte>.Shared.Return(tempBuffer);
+            _bufferPool.Return(tempBuffer);
         }
     }
 

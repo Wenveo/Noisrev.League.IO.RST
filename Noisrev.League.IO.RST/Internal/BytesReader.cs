@@ -5,7 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 
 using System;
-using System.Buffers;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -219,7 +218,7 @@ internal unsafe class BytesReader : IDisposable
         var bufferPtr = Marshal.AllocHGlobal(length);
         var buffer = new Span<byte>((byte*)bufferPtr, length);
 
-        var tempBuffer = ArrayPool<byte>.Shared.Rent(4096);
+        var tempBuffer = Utilities.LargeByteArrayPool.Rent(4096);
         try
         {
             var position = 0;
@@ -242,7 +241,7 @@ internal unsafe class BytesReader : IDisposable
         }
         finally
         {
-            ArrayPool<byte>.Shared.Return(tempBuffer);
+            Utilities.LargeByteArrayPool.Return(tempBuffer);
         }
 
         return new BytesReader((byte*)bufferPtr, length, encoding, bufferPtr, (obj) =>
