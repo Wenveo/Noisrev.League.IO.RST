@@ -1,0 +1,46 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [
+            "src/Noisrev.League.IO.RST/Noisrev.League.IO.RST.csproj"
+          ],
+          "src": "../"
+        }
+      ],
+      "dest": "api"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "**/*.{md,yml}"
+        ],
+        "exclude": [
+          "_site/**"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "**/images/**"
+        ],
+        "exclude": [
+          "_site/**"
+        ]
+      }
+    ],
+    "postProcessors": [
+      "ExtractSearchIndex"
+    ],
+    "output": "_site",
+    "template": [
+      "default",
+      "modern",
+      "template"
+    ]
+  }
+}
