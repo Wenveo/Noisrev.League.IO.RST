@@ -11,7 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       security-events: write
-      
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'csharp' ]
+        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
+        # Learn more about CodeQL language support at https://git.io/codeql-language-support
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -20,13 +27,13 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         global-json-file: global.json
-        
+
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
-        languages: [ 'csharp' ]
-        
+        languages: ${{ matrix.language }}
+
     - run: dotnet build -c Release
-    
+
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
