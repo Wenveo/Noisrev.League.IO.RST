@@ -22,13 +22,13 @@ Improved performance for Read/Write, Less time/op and lower memory allocation. ^
 |  Write |             .NET 6.0 |  52.20 ms |     30 MB |
 
 
-# ✨ RST (Riot String Table) 
+# ✨ RST (Riot String Table)
 The file is used to store strings of in-game text.
 - Champion name, skill description, skin name, etc...
 - *Like:* **"Riven"**, **"Championship Riven 2016"**, **"\<mainText>\<stats>\<attention>%i:scaleAP% 25\</attention> Ability Power\<br>\<attention>%i:scaleMPen% 15%\</attention> Magic Penetration\</stats>\</mainText>\<br>"**
 - And more...
 
-***If you would like to see more details about the RST file, please see: [RSTFile.cs](Noisrev.League.IO.RST/RSTFile.cs).***
+***If you would like to see more details about the RST file, please see: [RSTFile.cs](src/Noisrev.League.IO.RST/RSTFile.cs).***
 
 # 🚀 Quick Start
 
