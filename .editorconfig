@@ -172,6 +172,10 @@ indent_size = 2
 [*.{yml,yaml}]
 indent_size = 2
 
+# JavaScript files
+[*.{js,json,ts,scss}]
+indent_size = 2
+
 # Shell scripts
 [*.sh]
 end_of_line = lf
