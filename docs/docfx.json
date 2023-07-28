@@ -9,7 +9,12 @@
           "src": "../"
         }
       ],
-      "dest": "api"
+      "dest": "api",
+      "properties": {
+        "TargetFramework": "net8.0"
+      },
+      "namespaceLayout": "nested",
+      "memberLayout": "separatePages"
     }
   ],
   "build": {
@@ -33,6 +38,10 @@
         ]
       }
     ],
+    "globalMetadata": {
+      "_enableSearch": true
+    },
+    "markdownEngineName": "markdig",
     "postProcessors": [
       "ExtractSearchIndex"
     ],
