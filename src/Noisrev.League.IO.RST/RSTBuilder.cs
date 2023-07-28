@@ -28,7 +28,7 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     /// <para>a get operation throws a <see cref="KeyNotFoundException"/>, and</para>
     /// <para>a set operation creates a new element with the specified key.</para>
     /// </returns>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The key is null.</exception>
     /// <exception cref="KeyNotFoundException">The property is retrieved and key does not exist in the collection.</exception>
     public string this[ulong key]
     {
@@ -37,7 +37,7 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Current RST file.
+    /// Current <see cref="RSTFile"/>.
     /// </summary>
     public RSTFile Current { get; }
 
@@ -53,20 +53,20 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     /// Initializes a new instance of the <see cref="RSTBuilder"/> class using the specified <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="input">The <see cref="RSTFile"/> used to initialize the value of the instance.</param>
-    /// <exception cref="ArgumentNullException">input is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="input"/> is null.</exception>
     public RSTBuilder(RSTFile input)
     {
         Current = input ?? throw new ArgumentNullException(nameof(input));
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>A reference to this instance after the add operation has completed.</returns>
     /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public RSTBuilder Add(ulong key, string value)
     {
         Current.Entries.Add(key, value);
@@ -75,182 +75,182 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
 
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>A reference to this instance after the add operation has completed.</returns>
     /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public RSTBuilder Add(ulong key, bool value)
     {
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>A reference to this instance after the add operation has completed.</returns>
     /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public RSTBuilder Add(ulong key, byte value)
     {
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>A reference to this instance after the add operation has completed.</returns>
     /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public RSTBuilder Add(ulong key, sbyte value)
     {
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>A reference to this instance after the add operation has completed.</returns>
     /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public RSTBuilder Add(ulong key, char value)
     {
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>A reference to this instance after the add operation has completed.</returns>
     /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public RSTBuilder Add(ulong key, short value)
     {
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>A reference to this instance after the add operation has completed.</returns>
     /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public RSTBuilder Add(ulong key, int value)
     {
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>A reference to this instance after the add operation has completed.</returns>
     /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public RSTBuilder Add(ulong key, long value)
     {
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>A reference to this instance after the add operation has completed.</returns>
     /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public RSTBuilder Add(ulong key, float value)
     {
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>A reference to this instance after the add operation has completed.</returns>
     /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public RSTBuilder Add(ulong key, double value)
     {
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>A reference to this instance after the add operation has completed.</returns>
     /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public RSTBuilder Add(ulong key, decimal value)
     {
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>A reference to this instance after the add operation has completed.</returns>
     /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public RSTBuilder Add(ulong key, ushort value)
     {
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>A reference to this instance after the add operation has completed.</returns>
     /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public RSTBuilder Add(ulong key, uint value)
     {
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>A reference to this instance after the add operation has completed.</returns>
     /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public RSTBuilder Add(ulong key, ulong value)
     {
         return Add(key, value.ToString(CultureInfo.CurrentCulture));
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>A reference to this instance after the add operation has completed.</returns>
-    /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentException">An element with the same key already exists in the current <see cref="RSTFile"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public RSTBuilder Add(ulong key, object? value)
     {
         if (null == value)
@@ -262,25 +262,25 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Build the Current RST file.
+    /// Build the current <see cref="RSTFile"/>.
     /// </summary>
-    /// <param name="fileLocation">Output path of the RST file.</param>
+    /// <param name="path">The path used to save the current <see cref="RSTFile"/>.</param>
     /// <returns>A reference to this instance after the operation is complete.</returns>
-    /// <exception cref="ArgumentNullException">fileLocation is null.</exception>
-    public RSTBuilder Build(string fileLocation)
+    /// <exception cref="ArgumentNullException">The <paramref name="path"/> is null.</exception>
+    public RSTBuilder Build(string path)
     {
-        Current.Write(fileLocation);
+        Current.Write(path);
         return this;
     }
 
     /// <summary>
-    /// Build the Current RST file.
+    /// Build the current <see cref="RSTFile"/>.
     /// </summary>
-    /// <param name="outputStream">The stream used to output RST file.</param>
+    /// <param name="outputStream">The stream used to output <see cref="RSTFile"/>.</param>
     /// <param name="leaveOpen">true to leave the stream open after the <see cref="BinaryWriter"/> object is disposed; otherwise, false.</param>
     /// <returns>A reference to this instance after the operation is complete.</returns>
-    /// <exception cref="ArgumentException">The outputStream does not support writes.</exception>
-    /// <exception cref="ArgumentNullException">outputStream is null.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="outputStream"/> does not support writes.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="outputStream"/> is null.</exception>
     public RSTBuilder Build(Stream outputStream, bool leaveOpen)
     {
         Current.Write(outputStream, leaveOpen);
@@ -288,7 +288,7 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Removes all elements from the <see cref="RSTFile"/>.
+    /// Removes all elements in the current <see cref="RSTFile"/>.
     /// </summary>
     /// <returns>A reference to this instance after the operation is complete.</returns>
     public RSTBuilder Clear()
@@ -298,45 +298,45 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Determines whether the <see cref="RSTFile"/> contains the specified key.
+    /// Determines whether the current <see cref="RSTFile"/> contains the specified key.
     /// </summary>
     /// <param name="key">The key to locate in the <see cref="RSTFile"/>.</param>
-    /// <returns>true if the <see cref="RSTFile"/> contains an element with the specified key; otherwise, false.</returns>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <returns>True if the current <see cref="RSTFile"/> contains an element with the specified key; otherwise, false.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public bool ContainsKey(ulong key)
     {
         return Current.Entries.ContainsKey(key);
     }
 
     /// <summary>
-    /// Determines whether the <see cref="RSTFile"/> contains the specified value.
+    /// Determines whether the current <see cref="RSTFile"/> contains the specified value.
     /// </summary>
     /// <param name="value">The value to locate in the <see cref="RSTFile"/>.</param>
-    /// <returns>true if the <see cref="RSTFile"/> contains an element with the specified value; otherwise, false.</returns>
-    /// <exception cref="ArgumentNullException">value is null.</exception>
+    /// <returns>True if the <see cref="RSTFile"/> contains an element with the specified value; otherwise, false.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is null.</exception>
     public bool ContainsValue(string value)
     {
         return Current.Entries.ContainsValue(value);
     }
 
     /// <summary>
-    /// Removes the value with the specified key from the <see cref="RSTFile"/>.
+    /// Removes the value with the specified key in the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to remove.</param>
-    /// <returns>true if the element is successfully found and removed; otherwise, false. This method returns false if key is not found in the <see cref="RSTFile"/>.</returns>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <returns>True if the element is successfully found and removed; otherwise, false. This method returns false if key is not found in the <see cref="RSTFile"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public bool Remove(ulong key)
     {
         return Current.Entries.Remove(key);
     }
 
     /// <summary>
-    /// Replaces all matched elements in the <see cref="RSTFile"/>.
+    /// Replaces all matched elements in the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="oldText">The string to be replaced.</param>
     /// <param name="newText">Replace with a new string.</param>
     /// <returns>A reference to this instance after the operation is complete.</returns>
-    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="ArgumentNullException">The <paramref name="oldText"/> or <paramref name="newText"/> is null.</exception>
     public RSTBuilder ReplaceAll(string oldText, string newText)
     {
 #if NET7_0_OR_GREATER
@@ -362,13 +362,13 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
 
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_0_OR_GREATER
     /// <summary>
-    /// Replaces all matched texts in the <see cref="RSTFile"/>.
+    /// Replaces all matched texts in the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="oldText">The string to replaced.</param>
     /// <param name="newText">Replace with a new string.</param>
     /// <param name="caseSensitive">Whether to enable case-sensitive comparison. Compares lowercase strings by default.</param>
     /// <returns>A reference to this instance after the operation is complete.</returns>
-    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="ArgumentNullException">The <paramref name="oldText"/> or <paramref name="newText"/> is null.</exception>
     public RSTBuilder ReplaceAll(string oldText, string newText, bool caseSensitive = false)
     {
 #if NET7_0_OR_GREATER
@@ -427,13 +427,12 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>True if the element with the specified key was successfully added; otherwise, false.</returns>
-    /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public bool TryAdd(ulong key, string value)
     {
         if (!ContainsKey(key))
@@ -446,13 +445,12 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>True if the element with the specified key was successfully added; otherwise, false.</returns>
-    /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public bool TryAdd(ulong key, bool value)
     {
         if (!ContainsKey(key))
@@ -465,13 +463,12 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>True if the element with the specified key was successfully added; otherwise, false.</returns>
-    /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public bool TryAdd(ulong key, byte value)
     {
         if (!ContainsKey(key))
@@ -484,13 +481,12 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>True if the element with the specified key was successfully added; otherwise, false.</returns>
-    /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public bool TryAdd(ulong key, sbyte value)
     {
         if (!ContainsKey(key))
@@ -503,13 +499,12 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>True if the element with the specified key was successfully added; otherwise, false.</returns>
-    /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public bool TryAdd(ulong key, char value)
     {
         if (!ContainsKey(key))
@@ -522,13 +517,12 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>True if the element with the specified key was successfully added; otherwise, false.</returns>
-    /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public bool TryAdd(ulong key, short value)
     {
         if (!ContainsKey(key))
@@ -541,13 +535,12 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>True if the element with the specified key was successfully added; otherwise, false.</returns>
-    /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public bool TryAdd(ulong key, int value)
     {
         if (!ContainsKey(key))
@@ -560,13 +553,12 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>True if the element with the specified key was successfully added; otherwise, false.</returns>
-    /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public bool TryAdd(ulong key, long value)
     {
         if (!ContainsKey(key))
@@ -579,13 +571,12 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>True if the element with the specified key was successfully added; otherwise, false.</returns>
-    /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public bool TryAdd(ulong key, float value)
     {
         if (!ContainsKey(key))
@@ -598,13 +589,12 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>True if the element with the specified key was successfully added; otherwise, false.</returns>
-    /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public bool TryAdd(ulong key, double value)
     {
         if (!ContainsKey(key))
@@ -617,13 +607,12 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>True if the element with the specified key was successfully added; otherwise, false.</returns>
-    /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public bool TryAdd(ulong key, decimal value)
     {
         if (!ContainsKey(key))
@@ -636,13 +625,12 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>True if the element with the specified key was successfully added; otherwise, false.</returns>
-    /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public bool TryAdd(ulong key, ushort value)
     {
         if (!ContainsKey(key))
@@ -655,13 +643,12 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>True if the element with the specified key was successfully added; otherwise, false.</returns>
-    /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public bool TryAdd(ulong key, uint value)
     {
         if (!ContainsKey(key))
@@ -674,13 +661,12 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     }
 
     /// <summary>
-    /// Adds the specified key and value to the <see cref="RSTFile"/>.
+    /// Adds the specified key and value to the current <see cref="RSTFile"/>.
     /// </summary>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>True if the element with the specified key was successfully added; otherwise, false.</returns>
-    /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public bool TryAdd(ulong key, ulong value)
     {
         if (!ContainsKey(key))
@@ -698,8 +684,7 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     /// <param name="key">The key of the element to add.</param>
     /// <param name="value">The value of the element to add.</param>
     /// <returns>True if the element with the specified key was successfully added; otherwise, false.</returns>
-    /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="RSTFile"/>.</exception>
-    /// <exception cref="ArgumentNullException">key is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is null.</exception>
     public bool TryAdd(ulong key, object value)
     {
         if (!ContainsKey(key))
@@ -719,7 +704,7 @@ public sealed class RSTBuilder : IDictionary<ulong, string>
     /// <para>When this method returns, contains the value associated with the specified key,</para>
     /// <para>if the key is found; otherwise, the default value for the type of the value parameter.</para>
     /// </param>
-    /// <returns>true if the <see cref="RSTFile"/> contains an element with the specified key; otherwise, false.</returns>
+    /// <returns>True if the current <see cref="RSTFile"/> contains an element with the specified key; otherwise, false.</returns>
     public bool TryGetValue(ulong key, [NotNullWhen(true)] out string? value)
     {
         return Current.Entries.TryGetValue(key, out value);

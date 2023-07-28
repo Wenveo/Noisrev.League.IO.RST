@@ -25,9 +25,9 @@ public static class RSTHash
     /// Generate a hash without offset based on the <see cref="string"/> and <see cref="RType"/>.
     /// </summary>
     /// <param name="toHash">The string used to generate the hash.</param>
-    /// <param name="type">The type of <see cref="RSTFile"/>.</param>
+    /// <param name="type">The type of that <see cref="RSTFile"/>.</param>
     /// <returns>The generated hash.</returns>
-    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="ArgumentNullException">The <paramref name="toHash"/> is null.</exception>
     public static ulong ComputeHash(string toHash, RType type)
     {
         return ComputeHash(toHash, type, Encoding.UTF8, CultureInfo.CurrentCulture);
@@ -37,10 +37,10 @@ public static class RSTHash
     /// Generate a hash without offset based on the <see cref="string"/> and <see cref="RType"/>.
     /// </summary>
     /// <param name="toHash">The string used to generate the hash.</param>
-    /// <param name="type">The type of <see cref="RSTFile"/>.</param>
+    /// <param name="type">The type of that <see cref="RSTFile"/>.</param>
     /// <param name="encoding">The character encoding to use.</param>
     /// <returns>The generated hash.</returns>
-    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="ArgumentNullException">The <paramref name="toHash"/> is null.</exception>
     public static ulong ComputeHash(string toHash, RType type, Encoding encoding)
     {
         return ComputeHash(toHash, type, encoding, CultureInfo.CurrentCulture);
@@ -50,11 +50,11 @@ public static class RSTHash
     /// Generate a hash without offset based on the <see cref="string"/> and <see cref="RType"/>.
     /// </summary>
     /// <param name="toHash">The string used to generate the hash.</param>
-    /// <param name="type">The type of <see cref="RSTFile"/>.</param>
+    /// <param name="type">The type of that <see cref="RSTFile"/>.</param>
     /// <param name="encoding">The character encoding to use.</param>
     /// <param name="cultureInfo">An object that supplies culture-specific casing rules.</param>
     /// <returns>The generated hash.</returns>
-    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="ArgumentNullException">The <paramref name="toHash"/> or <paramref name="encoding"/> or <paramref name="cultureInfo"/> is null.</exception>
     public static ulong ComputeHash(string toHash, RType type, Encoding encoding, CultureInfo cultureInfo)
     {
         unsafe
@@ -117,11 +117,11 @@ public static class RSTHash
     /// Generate a hash based on the <see cref="string"/> and <paramref name="offset"/> and <see cref="RType"/>.
     /// </summary>
     /// <param name="toHash">The string used to generate the hash.</param>
-    /// <param name="offset">The offset of the text.</param>
-    /// <param name="type">The type of <see cref="RSTFile"/>.</param>
+    /// <param name="offset">The offset of that text.</param>
+    /// <param name="type">The type of that <see cref="RSTFile"/>.</param>
     /// <returns>The generated hash.</returns>
-    /// <exception cref="ArgumentNullException"/>
-    /// <exception cref="ArgumentOutOfRangeException"/>
+    /// <exception cref="ArgumentNullException">The <paramref name="toHash"/> is null.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="offset"/> is less than 0.</exception>
     public static ulong ComputeHash(string toHash, long offset, RType type)
     {
 #if NET8_0_OR_GREATER
@@ -139,12 +139,12 @@ public static class RSTHash
     /// Generate a hash based on the <see cref="string"/> and <paramref name="offset"/> and <see cref="RType"/>.
     /// </summary>
     /// <param name="toHash">The string used to generate the hash.</param>
-    /// <param name="offset">The offset of the text.</param>
-    /// <param name="type">The type of <see cref="RSTFile"/>.</param>
+    /// <param name="offset">The offset of that text.</param>
+    /// <param name="type">The type of that <see cref="RSTFile"/>.</param>
     /// <param name="encoding">The character encoding to use.</param>
     /// <returns>The generated hash.</returns>
-    /// <exception cref="ArgumentNullException"/>
-    /// <exception cref="ArgumentOutOfRangeException"/>
+    /// <exception cref="ArgumentNullException">The <paramref name="toHash"/> or <paramref name="encoding"/> is null.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="offset"/> is less than 0.</exception>
     public static ulong ComputeHash(string toHash, long offset, RType type, Encoding encoding)
     {
 #if NET8_0_OR_GREATER
@@ -167,8 +167,8 @@ public static class RSTHash
     /// <param name="encoding">The character encoding to use.</param>
     /// <param name="cultureInfo">An object that supplies culture-specific casing rules.</param>
     /// <returns>The generated hash.</returns>
-    /// <exception cref="ArgumentNullException"/>
-    /// <exception cref="ArgumentOutOfRangeException"/>
+    /// <exception cref="ArgumentNullException">The <paramref name="toHash"/> or <paramref name="encoding"/> or <paramref name="cultureInfo"/> is null.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="offset"/> is less than 0.</exception>
     public static ulong ComputeHash(string toHash, long offset, RType type, Encoding encoding, CultureInfo cultureInfo)
     {
 #if NET8_0_OR_GREATER

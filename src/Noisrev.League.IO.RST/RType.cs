@@ -7,7 +7,7 @@
 namespace Noisrev.League.IO.RST;
 
 /// <summary>
-/// RST File Type
+/// RST File Type.
 /// </summary>
 public enum RType
 {

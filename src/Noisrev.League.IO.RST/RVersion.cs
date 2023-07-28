@@ -7,7 +7,7 @@
 namespace Noisrev.League.IO.RST;
 
 /// <summary>
-/// RST File Version
+/// RST File Version.
 /// </summary>
 public enum RVersion : byte
 {

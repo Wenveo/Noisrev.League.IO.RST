@@ -15,7 +15,7 @@ var rst = RSTFile.Load("your rst file path");
 
 ## Build RST files with RSTBuilder
 
-**RSTBuilder** provides some methods to easily change the entries of **RSTFile**.
+**RSTBuilder** provides some methods to easily editing the entries of **RSTFile**.
 
 Example:
 

@@ -19,7 +19,7 @@ public static class OffsetHelper
     /// </summary>
     /// <param name="offset">The offset of that text.</param>
     /// <param name="type">The type of that <see cref="RSTFile"/>.</param>
-    /// <returns>Returns the generated offset.</returns>
+    /// <returns>The generated offset.</returns>
     /// <exception cref="OverflowException"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static ulong ComputeOffset(this long offset, RType type)

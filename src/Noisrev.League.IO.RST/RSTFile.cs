@@ -65,32 +65,32 @@ public class RSTFile : IEquatable<RSTFile>
     /// <summary>
     /// Load <see cref="RSTFile"/> from the local file.
     /// </summary>
-    /// <param name="filePath">The local file path.</param>
+    /// <param name="path">The local file path.</param>
     /// <returns>Instance of the <see cref="RSTFile"/> that was read successfully.</returns>
-    /// <exception cref="ArgumentNullException">filePath is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="path"/> is null.</exception>
     /// <exception cref="FileNotFoundException">File not found.</exception>
-    public static RSTFile Load(string filePath)
+    public static RSTFile Load(string path)
     {
-        return new RSTFile(File.OpenRead(filePath), false);
+        return new RSTFile(File.OpenRead(path), false);
     }
 
     /// <summary>
     /// The magic code of <see cref="RSTFile"/>.
     /// </summary>
-    public static readonly byte[] MagicCode = { 0x52, 0x53, 0x54 };
+    public static readonly byte[] MagicCode = { 0x52, 0x53, 0x54 }; // { 0x52: 'R', 0x53: 'S', 0x54: 'T' }
 
     /// <summary>
-    /// File version of the rst file.
+    /// The version of this <see cref="RSTFile"/>.
     /// </summary>
     public RVersion Version { get; }
 
     /// <summary>
-    /// Font config of the rst file. using by RST v2.
+    /// The font config of this <see cref="RSTFile"/>. using by RST v2.
     /// </summary>
     public string? Config { get; set; }
 
     /// <summary>
-    /// The offset of the string data in the rst file.
+    /// The offset of the string data in this <see cref="RSTFile"/>.
     /// </summary>
     public int DataOffset
     {
@@ -133,17 +133,17 @@ public class RSTFile : IEquatable<RSTFile>
     }
 
     /// <summary>
-    /// The type of the <see cref="RSTFile"/> used to generate the hash.
+    /// The type of this <see cref="RSTFile"/>. Used to generate hashes.
     /// </summary>
     public RType Type { get; }
 
     /// <summary>
-    /// The mode of the <see cref="RSTFile"/>.
+    /// The mode of this <see cref="RSTFile"/>.
     /// </summary>
     public RMode Mode { get; }
 
     /// <summary>
-    /// The entries for hashes and strings of the <see cref="RSTFile"/>.
+    /// The collection of hashes and strings of this <see cref="RSTFile"/>.
     /// </summary>
     public Dictionary<ulong, string> Entries { get; }
 
@@ -172,7 +172,7 @@ public class RSTFile : IEquatable<RSTFile>
     /// Initializes a new instance of the <see cref="RSTFile"/> class based on the specified <see cref="Stream"/>.
     /// </summary>
     /// <param name="inputStream">The input stream.</param>
-    /// <param name="leaveOpen">true to leave the stream open after the <see cref="BinaryReader"/> object is disposed; otherwise, false.</param>
+    /// <param name="leaveOpen">True to leave the stream open after the <see cref="BinaryReader"/> object is disposed; otherwise, false.</param>
     /// <exception cref="ArgumentException">"The <paramref name="inputStream"/> does not supports reading!"</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="inputStream"/> is null.</exception>
     /// <exception cref="InvalidDataException">Invalid RST file header.</exception>
@@ -312,7 +312,7 @@ public class RSTFile : IEquatable<RSTFile>
     }
 
     /// <summary>
-    /// Creates a new file, writes the binary data of the <see cref="RSTFile"/> to the file, and then closes the file. If the target file already exists, it is overwritten.
+    /// Creates a new file, writes the binary data of this <see cref="RSTFile"/> to the file, and then closes the file. If the target file already exists, it is overwritten.
     /// </summary>
     /// <param name="outputPath">The file to write to.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="outputPath"/> is null.</exception>
@@ -322,7 +322,7 @@ public class RSTFile : IEquatable<RSTFile>
     }
 
     /// <summary>
-    /// Using an output stream, write the <see cref="RSTFile"/> to that <see cref="Stream"/>.
+    /// Using an output stream, write this <see cref="RSTFile"/> to that <see cref="Stream"/>.
     /// </summary>
     /// <param name="outputStream">The output stream.</param>
     /// <param name="leaveOpen">true to leave the stream open after the <see cref="BinaryWriter"/> object is disposed; otherwise, false.</param>
@@ -436,7 +436,7 @@ public class RSTFile : IEquatable<RSTFile>
     /// Indicates whether the current object is equal to another object of the same type.
     /// </summary>
     /// <param name="other">An object to compare with this object.</param>
-    /// <returns>true if the current object is equal to the other parameter; otherwise, false.</returns>
+    /// <returns>True if the current object is equal to the other parameter; otherwise, false.</returns>
     public bool Equals(RSTFile? other)
     {
         if (other == null)
