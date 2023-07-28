@@ -1,0 +1,873 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: Noisrev.League.IO.RST
+  name: Noisrev.League.IO.RST
+  href: api/Noisrev.League.IO.RST.html
+  commentId: N:Noisrev.League.IO.RST
+  fullName: Noisrev.League.IO.RST
+  nameWithType: Noisrev.League.IO.RST
+- uid: Noisrev.League.IO.RST.Helpers
+  name: Noisrev.League.IO.RST.Helpers
+  href: api/Noisrev.League.IO.RST.Helpers.html
+  commentId: N:Noisrev.League.IO.RST.Helpers
+  fullName: Noisrev.League.IO.RST.Helpers
+  nameWithType: Noisrev.League.IO.RST.Helpers
+- uid: Noisrev.League.IO.RST.Helpers.OffsetHelper
+  name: OffsetHelper
+  href: api/Noisrev.League.IO.RST.Helpers.OffsetHelper.html
+  commentId: T:Noisrev.League.IO.RST.Helpers.OffsetHelper
+  fullName: Noisrev.League.IO.RST.Helpers.OffsetHelper
+  nameWithType: OffsetHelper
+- uid: Noisrev.League.IO.RST.Helpers.OffsetHelper.ComputeOffset(System.Int64,Noisrev.League.IO.RST.RType)
+  name: ComputeOffset(long, RType)
+  href: api/Noisrev.League.IO.RST.Helpers.OffsetHelper.ComputeOffset.html#Noisrev_League_IO_RST_Helpers_OffsetHelper_ComputeOffset_System_Int64_Noisrev_League_IO_RST_RType_
+  commentId: M:Noisrev.League.IO.RST.Helpers.OffsetHelper.ComputeOffset(System.Int64,Noisrev.League.IO.RST.RType)
+  name.vb: ComputeOffset(Long, RType)
+  fullName: Noisrev.League.IO.RST.Helpers.OffsetHelper.ComputeOffset(long, Noisrev.League.IO.RST.RType)
+  fullName.vb: Noisrev.League.IO.RST.Helpers.OffsetHelper.ComputeOffset(Long, Noisrev.League.IO.RST.RType)
+  nameWithType: OffsetHelper.ComputeOffset(long, RType)
+  nameWithType.vb: OffsetHelper.ComputeOffset(Long, RType)
+- uid: Noisrev.League.IO.RST.Helpers.OffsetHelper.ComputeOffset*
+  name: ComputeOffset
+  href: api/Noisrev.League.IO.RST.Helpers.OffsetHelper.ComputeOffset.html
+  commentId: Overload:Noisrev.League.IO.RST.Helpers.OffsetHelper.ComputeOffset
+  fullName: Noisrev.League.IO.RST.Helpers.OffsetHelper.ComputeOffset
+  nameWithType: OffsetHelper.ComputeOffset
+- uid: Noisrev.League.IO.RST.Helpers.RTypeHelper
+  name: RTypeHelper
+  href: api/Noisrev.League.IO.RST.Helpers.RTypeHelper.html
+  commentId: T:Noisrev.League.IO.RST.Helpers.RTypeHelper
+  fullName: Noisrev.League.IO.RST.Helpers.RTypeHelper
+  nameWithType: RTypeHelper
+- uid: Noisrev.League.IO.RST.Helpers.RTypeHelper.ComputeKey(Noisrev.League.IO.RST.RType)
+  name: ComputeKey(RType)
+  href: api/Noisrev.League.IO.RST.Helpers.RTypeHelper.ComputeKey.html#Noisrev_League_IO_RST_Helpers_RTypeHelper_ComputeKey_Noisrev_League_IO_RST_RType_
+  commentId: M:Noisrev.League.IO.RST.Helpers.RTypeHelper.ComputeKey(Noisrev.League.IO.RST.RType)
+  fullName: Noisrev.League.IO.RST.Helpers.RTypeHelper.ComputeKey(Noisrev.League.IO.RST.RType)
+  nameWithType: RTypeHelper.ComputeKey(RType)
+- uid: Noisrev.League.IO.RST.Helpers.RTypeHelper.ComputeKey*
+  name: ComputeKey
+  href: api/Noisrev.League.IO.RST.Helpers.RTypeHelper.ComputeKey.html
+  commentId: Overload:Noisrev.League.IO.RST.Helpers.RTypeHelper.ComputeKey
+  fullName: Noisrev.League.IO.RST.Helpers.RTypeHelper.ComputeKey
+  nameWithType: RTypeHelper.ComputeKey
+- uid: Noisrev.League.IO.RST.Helpers.RTypeHelper.GetRType(Noisrev.League.IO.RST.RVersion)
+  name: GetRType(RVersion)
+  href: api/Noisrev.League.IO.RST.Helpers.RTypeHelper.GetRType.html#Noisrev_League_IO_RST_Helpers_RTypeHelper_GetRType_Noisrev_League_IO_RST_RVersion_
+  commentId: M:Noisrev.League.IO.RST.Helpers.RTypeHelper.GetRType(Noisrev.League.IO.RST.RVersion)
+  fullName: Noisrev.League.IO.RST.Helpers.RTypeHelper.GetRType(Noisrev.League.IO.RST.RVersion)
+  nameWithType: RTypeHelper.GetRType(RVersion)
+- uid: Noisrev.League.IO.RST.Helpers.RTypeHelper.GetRType*
+  name: GetRType
+  href: api/Noisrev.League.IO.RST.Helpers.RTypeHelper.GetRType.html
+  commentId: Overload:Noisrev.League.IO.RST.Helpers.RTypeHelper.GetRType
+  fullName: Noisrev.League.IO.RST.Helpers.RTypeHelper.GetRType
+  nameWithType: RTypeHelper.GetRType
+- uid: Noisrev.League.IO.RST.RMode
+  name: RMode
+  href: api/Noisrev.League.IO.RST.RMode.html
+  commentId: T:Noisrev.League.IO.RST.RMode
+  fullName: Noisrev.League.IO.RST.RMode
+  nameWithType: RMode
+- uid: Noisrev.League.IO.RST.RMode.Default
+  name: Default
+  href: api/Noisrev.League.IO.RST.RMode.html#Noisrev_League_IO_RST_RMode_Default
+  commentId: F:Noisrev.League.IO.RST.RMode.Default
+  fullName: Noisrev.League.IO.RST.RMode.Default
+  nameWithType: RMode.Default
+- uid: Noisrev.League.IO.RST.RMode.None
+  name: None
+  href: api/Noisrev.League.IO.RST.RMode.html#Noisrev_League_IO_RST_RMode_None
+  commentId: F:Noisrev.League.IO.RST.RMode.None
+  fullName: Noisrev.League.IO.RST.RMode.None
+  nameWithType: RMode.None
+- uid: Noisrev.League.IO.RST.RSTBuilder
+  name: RSTBuilder
+  href: api/Noisrev.League.IO.RST.RSTBuilder.html
+  commentId: T:Noisrev.League.IO.RST.RSTBuilder
+  fullName: Noisrev.League.IO.RST.RSTBuilder
+  nameWithType: RSTBuilder
+- uid: Noisrev.League.IO.RST.RSTBuilder.#ctor
+  name: RSTBuilder()
+  href: api/Noisrev.League.IO.RST.RSTBuilder.-ctor.html#Noisrev_League_IO_RST_RSTBuilder__ctor
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.#ctor
+  name.vb: New()
+  fullName: Noisrev.League.IO.RST.RSTBuilder.RSTBuilder()
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.New()
+  nameWithType: RSTBuilder.RSTBuilder()
+  nameWithType.vb: RSTBuilder.New()
+- uid: Noisrev.League.IO.RST.RSTBuilder.#ctor(Noisrev.League.IO.RST.RSTFile)
+  name: RSTBuilder(RSTFile)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.-ctor.html#Noisrev_League_IO_RST_RSTBuilder__ctor_Noisrev_League_IO_RST_RSTFile_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.#ctor(Noisrev.League.IO.RST.RSTFile)
+  name.vb: New(RSTFile)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.RSTBuilder(Noisrev.League.IO.RST.RSTFile)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.New(Noisrev.League.IO.RST.RSTFile)
+  nameWithType: RSTBuilder.RSTBuilder(RSTFile)
+  nameWithType.vb: RSTBuilder.New(RSTFile)
+- uid: Noisrev.League.IO.RST.RSTBuilder.#ctor*
+  name: RSTBuilder
+  href: api/Noisrev.League.IO.RST.RSTBuilder.-ctor.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTBuilder.#ctor
+  name.vb: New
+  fullName: Noisrev.League.IO.RST.RSTBuilder.RSTBuilder
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.New
+  nameWithType: RSTBuilder.RSTBuilder
+  nameWithType.vb: RSTBuilder.New
+- uid: Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Boolean)
+  name: Add(ulong, bool)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Add.html#Noisrev_League_IO_RST_RSTBuilder_Add_System_UInt64_System_Boolean_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Boolean)
+  name.vb: Add(ULong, Boolean)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Add(ulong, bool)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Add(ULong, Boolean)
+  nameWithType: RSTBuilder.Add(ulong, bool)
+  nameWithType.vb: RSTBuilder.Add(ULong, Boolean)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Byte)
+  name: Add(ulong, byte)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Add.html#Noisrev_League_IO_RST_RSTBuilder_Add_System_UInt64_System_Byte_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Byte)
+  name.vb: Add(ULong, Byte)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Add(ulong, byte)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Add(ULong, Byte)
+  nameWithType: RSTBuilder.Add(ulong, byte)
+  nameWithType.vb: RSTBuilder.Add(ULong, Byte)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Char)
+  name: Add(ulong, char)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Add.html#Noisrev_League_IO_RST_RSTBuilder_Add_System_UInt64_System_Char_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Char)
+  name.vb: Add(ULong, Char)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Add(ulong, char)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Add(ULong, Char)
+  nameWithType: RSTBuilder.Add(ulong, char)
+  nameWithType.vb: RSTBuilder.Add(ULong, Char)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Decimal)
+  name: Add(ulong, decimal)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Add.html#Noisrev_League_IO_RST_RSTBuilder_Add_System_UInt64_System_Decimal_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Decimal)
+  name.vb: Add(ULong, Decimal)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Add(ulong, decimal)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Add(ULong, Decimal)
+  nameWithType: RSTBuilder.Add(ulong, decimal)
+  nameWithType.vb: RSTBuilder.Add(ULong, Decimal)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Double)
+  name: Add(ulong, double)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Add.html#Noisrev_League_IO_RST_RSTBuilder_Add_System_UInt64_System_Double_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Double)
+  name.vb: Add(ULong, Double)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Add(ulong, double)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Add(ULong, Double)
+  nameWithType: RSTBuilder.Add(ulong, double)
+  nameWithType.vb: RSTBuilder.Add(ULong, Double)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Int16)
+  name: Add(ulong, short)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Add.html#Noisrev_League_IO_RST_RSTBuilder_Add_System_UInt64_System_Int16_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Int16)
+  name.vb: Add(ULong, Short)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Add(ulong, short)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Add(ULong, Short)
+  nameWithType: RSTBuilder.Add(ulong, short)
+  nameWithType.vb: RSTBuilder.Add(ULong, Short)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Int32)
+  name: Add(ulong, int)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Add.html#Noisrev_League_IO_RST_RSTBuilder_Add_System_UInt64_System_Int32_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Int32)
+  name.vb: Add(ULong, Integer)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Add(ulong, int)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Add(ULong, Integer)
+  nameWithType: RSTBuilder.Add(ulong, int)
+  nameWithType.vb: RSTBuilder.Add(ULong, Integer)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Int64)
+  name: Add(ulong, long)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Add.html#Noisrev_League_IO_RST_RSTBuilder_Add_System_UInt64_System_Int64_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Int64)
+  name.vb: Add(ULong, Long)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Add(ulong, long)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Add(ULong, Long)
+  nameWithType: RSTBuilder.Add(ulong, long)
+  nameWithType.vb: RSTBuilder.Add(ULong, Long)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Object)
+  name: Add(ulong, object?)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Add.html#Noisrev_League_IO_RST_RSTBuilder_Add_System_UInt64_System_Object_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Object)
+  name.vb: Add(ULong, Object)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Add(ulong, object?)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Add(ULong, Object)
+  nameWithType: RSTBuilder.Add(ulong, object?)
+  nameWithType.vb: RSTBuilder.Add(ULong, Object)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.SByte)
+  name: Add(ulong, sbyte)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Add.html#Noisrev_League_IO_RST_RSTBuilder_Add_System_UInt64_System_SByte_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.SByte)
+  name.vb: Add(ULong, SByte)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Add(ulong, sbyte)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Add(ULong, SByte)
+  nameWithType: RSTBuilder.Add(ulong, sbyte)
+  nameWithType.vb: RSTBuilder.Add(ULong, SByte)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Single)
+  name: Add(ulong, float)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Add.html#Noisrev_League_IO_RST_RSTBuilder_Add_System_UInt64_System_Single_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.Single)
+  name.vb: Add(ULong, Single)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Add(ulong, float)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Add(ULong, Single)
+  nameWithType: RSTBuilder.Add(ulong, float)
+  nameWithType.vb: RSTBuilder.Add(ULong, Single)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.String)
+  name: Add(ulong, string)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Add.html#Noisrev_League_IO_RST_RSTBuilder_Add_System_UInt64_System_String_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.String)
+  name.vb: Add(ULong, String)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Add(ulong, string)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Add(ULong, String)
+  nameWithType: RSTBuilder.Add(ulong, string)
+  nameWithType.vb: RSTBuilder.Add(ULong, String)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.UInt16)
+  name: Add(ulong, ushort)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Add.html#Noisrev_League_IO_RST_RSTBuilder_Add_System_UInt64_System_UInt16_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.UInt16)
+  name.vb: Add(ULong, UShort)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Add(ulong, ushort)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Add(ULong, UShort)
+  nameWithType: RSTBuilder.Add(ulong, ushort)
+  nameWithType.vb: RSTBuilder.Add(ULong, UShort)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.UInt32)
+  name: Add(ulong, uint)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Add.html#Noisrev_League_IO_RST_RSTBuilder_Add_System_UInt64_System_UInt32_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.UInt32)
+  name.vb: Add(ULong, UInteger)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Add(ulong, uint)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Add(ULong, UInteger)
+  nameWithType: RSTBuilder.Add(ulong, uint)
+  nameWithType.vb: RSTBuilder.Add(ULong, UInteger)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.UInt64)
+  name: Add(ulong, ulong)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Add.html#Noisrev_League_IO_RST_RSTBuilder_Add_System_UInt64_System_UInt64_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Add(System.UInt64,System.UInt64)
+  name.vb: Add(ULong, ULong)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Add(ulong, ulong)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Add(ULong, ULong)
+  nameWithType: RSTBuilder.Add(ulong, ulong)
+  nameWithType.vb: RSTBuilder.Add(ULong, ULong)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Add*
+  name: Add
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Add.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTBuilder.Add
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Add
+  nameWithType: RSTBuilder.Add
+- uid: Noisrev.League.IO.RST.RSTBuilder.Build(System.IO.Stream,System.Boolean)
+  name: Build(Stream, bool)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Build.html#Noisrev_League_IO_RST_RSTBuilder_Build_System_IO_Stream_System_Boolean_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Build(System.IO.Stream,System.Boolean)
+  name.vb: Build(Stream, Boolean)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Build(System.IO.Stream, bool)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Build(System.IO.Stream, Boolean)
+  nameWithType: RSTBuilder.Build(Stream, bool)
+  nameWithType.vb: RSTBuilder.Build(Stream, Boolean)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Build(System.String)
+  name: Build(string)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Build.html#Noisrev_League_IO_RST_RSTBuilder_Build_System_String_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Build(System.String)
+  name.vb: Build(String)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Build(string)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Build(String)
+  nameWithType: RSTBuilder.Build(string)
+  nameWithType.vb: RSTBuilder.Build(String)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Build*
+  name: Build
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Build.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTBuilder.Build
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Build
+  nameWithType: RSTBuilder.Build
+- uid: Noisrev.League.IO.RST.RSTBuilder.Clear
+  name: Clear()
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Clear.html#Noisrev_League_IO_RST_RSTBuilder_Clear
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Clear
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Clear()
+  nameWithType: RSTBuilder.Clear()
+- uid: Noisrev.League.IO.RST.RSTBuilder.Clear*
+  name: Clear
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Clear.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTBuilder.Clear
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Clear
+  nameWithType: RSTBuilder.Clear
+- uid: Noisrev.League.IO.RST.RSTBuilder.ContainsKey(System.UInt64)
+  name: ContainsKey(ulong)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.ContainsKey.html#Noisrev_League_IO_RST_RSTBuilder_ContainsKey_System_UInt64_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.ContainsKey(System.UInt64)
+  name.vb: ContainsKey(ULong)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.ContainsKey(ulong)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.ContainsKey(ULong)
+  nameWithType: RSTBuilder.ContainsKey(ulong)
+  nameWithType.vb: RSTBuilder.ContainsKey(ULong)
+- uid: Noisrev.League.IO.RST.RSTBuilder.ContainsKey*
+  name: ContainsKey
+  href: api/Noisrev.League.IO.RST.RSTBuilder.ContainsKey.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTBuilder.ContainsKey
+  fullName: Noisrev.League.IO.RST.RSTBuilder.ContainsKey
+  nameWithType: RSTBuilder.ContainsKey
+- uid: Noisrev.League.IO.RST.RSTBuilder.ContainsValue(System.String)
+  name: ContainsValue(string)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.ContainsValue.html#Noisrev_League_IO_RST_RSTBuilder_ContainsValue_System_String_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.ContainsValue(System.String)
+  name.vb: ContainsValue(String)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.ContainsValue(string)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.ContainsValue(String)
+  nameWithType: RSTBuilder.ContainsValue(string)
+  nameWithType.vb: RSTBuilder.ContainsValue(String)
+- uid: Noisrev.League.IO.RST.RSTBuilder.ContainsValue*
+  name: ContainsValue
+  href: api/Noisrev.League.IO.RST.RSTBuilder.ContainsValue.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTBuilder.ContainsValue
+  fullName: Noisrev.League.IO.RST.RSTBuilder.ContainsValue
+  nameWithType: RSTBuilder.ContainsValue
+- uid: Noisrev.League.IO.RST.RSTBuilder.Current
+  name: Current
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Current.html#Noisrev_League_IO_RST_RSTBuilder_Current
+  commentId: P:Noisrev.League.IO.RST.RSTBuilder.Current
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Current
+  nameWithType: RSTBuilder.Current
+- uid: Noisrev.League.IO.RST.RSTBuilder.Current*
+  name: Current
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Current.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTBuilder.Current
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Current
+  nameWithType: RSTBuilder.Current
+- uid: Noisrev.League.IO.RST.RSTBuilder.Item(System.UInt64)
+  name: this[ulong]
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Item.html#Noisrev_League_IO_RST_RSTBuilder_Item_System_UInt64_
+  commentId: P:Noisrev.League.IO.RST.RSTBuilder.Item(System.UInt64)
+  name.vb: this[](ULong)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.this[ulong]
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.this[](ULong)
+  nameWithType: RSTBuilder.this[ulong]
+  nameWithType.vb: RSTBuilder.this[](ULong)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Item*
+  name: this
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Item.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTBuilder.Item
+  name.vb: this[]
+  fullName: Noisrev.League.IO.RST.RSTBuilder.this
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.this[]
+  nameWithType: RSTBuilder.this
+  nameWithType.vb: RSTBuilder.this[]
+- uid: Noisrev.League.IO.RST.RSTBuilder.Remove(System.UInt64)
+  name: Remove(ulong)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Remove.html#Noisrev_League_IO_RST_RSTBuilder_Remove_System_UInt64_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.Remove(System.UInt64)
+  name.vb: Remove(ULong)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Remove(ulong)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.Remove(ULong)
+  nameWithType: RSTBuilder.Remove(ulong)
+  nameWithType.vb: RSTBuilder.Remove(ULong)
+- uid: Noisrev.League.IO.RST.RSTBuilder.Remove*
+  name: Remove
+  href: api/Noisrev.League.IO.RST.RSTBuilder.Remove.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTBuilder.Remove
+  fullName: Noisrev.League.IO.RST.RSTBuilder.Remove
+  nameWithType: RSTBuilder.Remove
+- uid: Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(System.String,System.String,System.Boolean)
+  name: ReplaceAll(string, string, bool)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.ReplaceAll.html#Noisrev_League_IO_RST_RSTBuilder_ReplaceAll_System_String_System_String_System_Boolean_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(System.String,System.String,System.Boolean)
+  name.vb: ReplaceAll(String, String, Boolean)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(string, string, bool)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(String, String, Boolean)
+  nameWithType: RSTBuilder.ReplaceAll(string, string, bool)
+  nameWithType.vb: RSTBuilder.ReplaceAll(String, String, Boolean)
+- uid: Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(System.String,System.String)
+  name: ReplaceAll(string, string)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.ReplaceAll.html#Noisrev_League_IO_RST_RSTBuilder_ReplaceAll_System_String_System_String_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(System.String,System.String)
+  name.vb: ReplaceAll(String, String)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(string, string)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(String, String)
+  nameWithType: RSTBuilder.ReplaceAll(string, string)
+  nameWithType.vb: RSTBuilder.ReplaceAll(String, String)
+- uid: Noisrev.League.IO.RST.RSTBuilder.ReplaceAll*
+  name: ReplaceAll
+  href: api/Noisrev.League.IO.RST.RSTBuilder.ReplaceAll.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTBuilder.ReplaceAll
+  fullName: Noisrev.League.IO.RST.RSTBuilder.ReplaceAll
+  nameWithType: RSTBuilder.ReplaceAll
+- uid: Noisrev.League.IO.RST.RSTBuilder.SetConfig(System.String)
+  name: SetConfig(string)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.SetConfig.html#Noisrev_League_IO_RST_RSTBuilder_SetConfig_System_String_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.SetConfig(System.String)
+  name.vb: SetConfig(String)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.SetConfig(string)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.SetConfig(String)
+  nameWithType: RSTBuilder.SetConfig(string)
+  nameWithType.vb: RSTBuilder.SetConfig(String)
+- uid: Noisrev.League.IO.RST.RSTBuilder.SetConfig*
+  name: SetConfig
+  href: api/Noisrev.League.IO.RST.RSTBuilder.SetConfig.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTBuilder.SetConfig
+  fullName: Noisrev.League.IO.RST.RSTBuilder.SetConfig
+  nameWithType: RSTBuilder.SetConfig
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Boolean)
+  name: TryAdd(ulong, bool)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html#Noisrev_League_IO_RST_RSTBuilder_TryAdd_System_UInt64_System_Boolean_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Boolean)
+  name.vb: TryAdd(ULong, Boolean)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ulong, bool)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ULong, Boolean)
+  nameWithType: RSTBuilder.TryAdd(ulong, bool)
+  nameWithType.vb: RSTBuilder.TryAdd(ULong, Boolean)
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Byte)
+  name: TryAdd(ulong, byte)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html#Noisrev_League_IO_RST_RSTBuilder_TryAdd_System_UInt64_System_Byte_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Byte)
+  name.vb: TryAdd(ULong, Byte)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ulong, byte)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ULong, Byte)
+  nameWithType: RSTBuilder.TryAdd(ulong, byte)
+  nameWithType.vb: RSTBuilder.TryAdd(ULong, Byte)
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Char)
+  name: TryAdd(ulong, char)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html#Noisrev_League_IO_RST_RSTBuilder_TryAdd_System_UInt64_System_Char_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Char)
+  name.vb: TryAdd(ULong, Char)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ulong, char)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ULong, Char)
+  nameWithType: RSTBuilder.TryAdd(ulong, char)
+  nameWithType.vb: RSTBuilder.TryAdd(ULong, Char)
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Decimal)
+  name: TryAdd(ulong, decimal)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html#Noisrev_League_IO_RST_RSTBuilder_TryAdd_System_UInt64_System_Decimal_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Decimal)
+  name.vb: TryAdd(ULong, Decimal)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ulong, decimal)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ULong, Decimal)
+  nameWithType: RSTBuilder.TryAdd(ulong, decimal)
+  nameWithType.vb: RSTBuilder.TryAdd(ULong, Decimal)
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Double)
+  name: TryAdd(ulong, double)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html#Noisrev_League_IO_RST_RSTBuilder_TryAdd_System_UInt64_System_Double_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Double)
+  name.vb: TryAdd(ULong, Double)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ulong, double)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ULong, Double)
+  nameWithType: RSTBuilder.TryAdd(ulong, double)
+  nameWithType.vb: RSTBuilder.TryAdd(ULong, Double)
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Int16)
+  name: TryAdd(ulong, short)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html#Noisrev_League_IO_RST_RSTBuilder_TryAdd_System_UInt64_System_Int16_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Int16)
+  name.vb: TryAdd(ULong, Short)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ulong, short)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ULong, Short)
+  nameWithType: RSTBuilder.TryAdd(ulong, short)
+  nameWithType.vb: RSTBuilder.TryAdd(ULong, Short)
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Int32)
+  name: TryAdd(ulong, int)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html#Noisrev_League_IO_RST_RSTBuilder_TryAdd_System_UInt64_System_Int32_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Int32)
+  name.vb: TryAdd(ULong, Integer)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ulong, int)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ULong, Integer)
+  nameWithType: RSTBuilder.TryAdd(ulong, int)
+  nameWithType.vb: RSTBuilder.TryAdd(ULong, Integer)
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Int64)
+  name: TryAdd(ulong, long)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html#Noisrev_League_IO_RST_RSTBuilder_TryAdd_System_UInt64_System_Int64_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Int64)
+  name.vb: TryAdd(ULong, Long)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ulong, long)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ULong, Long)
+  nameWithType: RSTBuilder.TryAdd(ulong, long)
+  nameWithType.vb: RSTBuilder.TryAdd(ULong, Long)
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Object)
+  name: TryAdd(ulong, object)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html#Noisrev_League_IO_RST_RSTBuilder_TryAdd_System_UInt64_System_Object_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Object)
+  name.vb: TryAdd(ULong, Object)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ulong, object)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ULong, Object)
+  nameWithType: RSTBuilder.TryAdd(ulong, object)
+  nameWithType.vb: RSTBuilder.TryAdd(ULong, Object)
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.SByte)
+  name: TryAdd(ulong, sbyte)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html#Noisrev_League_IO_RST_RSTBuilder_TryAdd_System_UInt64_System_SByte_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.SByte)
+  name.vb: TryAdd(ULong, SByte)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ulong, sbyte)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ULong, SByte)
+  nameWithType: RSTBuilder.TryAdd(ulong, sbyte)
+  nameWithType.vb: RSTBuilder.TryAdd(ULong, SByte)
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Single)
+  name: TryAdd(ulong, float)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html#Noisrev_League_IO_RST_RSTBuilder_TryAdd_System_UInt64_System_Single_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.Single)
+  name.vb: TryAdd(ULong, Single)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ulong, float)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ULong, Single)
+  nameWithType: RSTBuilder.TryAdd(ulong, float)
+  nameWithType.vb: RSTBuilder.TryAdd(ULong, Single)
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.String)
+  name: TryAdd(ulong, string)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html#Noisrev_League_IO_RST_RSTBuilder_TryAdd_System_UInt64_System_String_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.String)
+  name.vb: TryAdd(ULong, String)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ulong, string)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ULong, String)
+  nameWithType: RSTBuilder.TryAdd(ulong, string)
+  nameWithType.vb: RSTBuilder.TryAdd(ULong, String)
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.UInt16)
+  name: TryAdd(ulong, ushort)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html#Noisrev_League_IO_RST_RSTBuilder_TryAdd_System_UInt64_System_UInt16_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.UInt16)
+  name.vb: TryAdd(ULong, UShort)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ulong, ushort)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ULong, UShort)
+  nameWithType: RSTBuilder.TryAdd(ulong, ushort)
+  nameWithType.vb: RSTBuilder.TryAdd(ULong, UShort)
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.UInt32)
+  name: TryAdd(ulong, uint)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html#Noisrev_League_IO_RST_RSTBuilder_TryAdd_System_UInt64_System_UInt32_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.UInt32)
+  name.vb: TryAdd(ULong, UInteger)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ulong, uint)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ULong, UInteger)
+  nameWithType: RSTBuilder.TryAdd(ulong, uint)
+  nameWithType.vb: RSTBuilder.TryAdd(ULong, UInteger)
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.UInt64)
+  name: TryAdd(ulong, ulong)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html#Noisrev_League_IO_RST_RSTBuilder_TryAdd_System_UInt64_System_UInt64_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.TryAdd(System.UInt64,System.UInt64)
+  name.vb: TryAdd(ULong, ULong)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ulong, ulong)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.TryAdd(ULong, ULong)
+  nameWithType: RSTBuilder.TryAdd(ulong, ulong)
+  nameWithType.vb: RSTBuilder.TryAdd(ULong, ULong)
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryAdd*
+  name: TryAdd
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTBuilder.TryAdd
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryAdd
+  nameWithType: RSTBuilder.TryAdd
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryGetValue(System.UInt64,System.String@)
+  name: TryGetValue(ulong, out string?)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryGetValue.html#Noisrev_League_IO_RST_RSTBuilder_TryGetValue_System_UInt64_System_String__
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.TryGetValue(System.UInt64,System.String@)
+  name.vb: TryGetValue(ULong, String)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryGetValue(ulong, out string?)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.TryGetValue(ULong, String)
+  nameWithType: RSTBuilder.TryGetValue(ulong, out string?)
+  nameWithType.vb: RSTBuilder.TryGetValue(ULong, String)
+- uid: Noisrev.League.IO.RST.RSTBuilder.TryGetValue*
+  name: TryGetValue
+  href: api/Noisrev.League.IO.RST.RSTBuilder.TryGetValue.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTBuilder.TryGetValue
+  fullName: Noisrev.League.IO.RST.RSTBuilder.TryGetValue
+  nameWithType: RSTBuilder.TryGetValue
+- uid: Noisrev.League.IO.RST.RSTFile
+  name: RSTFile
+  href: api/Noisrev.League.IO.RST.RSTFile.html
+  commentId: T:Noisrev.League.IO.RST.RSTFile
+  fullName: Noisrev.League.IO.RST.RSTFile
+  nameWithType: RSTFile
+- uid: Noisrev.League.IO.RST.RSTFile.#ctor(Noisrev.League.IO.RST.RVersion)
+  name: RSTFile(RVersion)
+  href: api/Noisrev.League.IO.RST.RSTFile.-ctor.html#Noisrev_League_IO_RST_RSTFile__ctor_Noisrev_League_IO_RST_RVersion_
+  commentId: M:Noisrev.League.IO.RST.RSTFile.#ctor(Noisrev.League.IO.RST.RVersion)
+  name.vb: New(RVersion)
+  fullName: Noisrev.League.IO.RST.RSTFile.RSTFile(Noisrev.League.IO.RST.RVersion)
+  fullName.vb: Noisrev.League.IO.RST.RSTFile.New(Noisrev.League.IO.RST.RVersion)
+  nameWithType: RSTFile.RSTFile(RVersion)
+  nameWithType.vb: RSTFile.New(RVersion)
+- uid: Noisrev.League.IO.RST.RSTFile.#ctor(System.IO.Stream,System.Boolean)
+  name: RSTFile(Stream, bool)
+  href: api/Noisrev.League.IO.RST.RSTFile.-ctor.html#Noisrev_League_IO_RST_RSTFile__ctor_System_IO_Stream_System_Boolean_
+  commentId: M:Noisrev.League.IO.RST.RSTFile.#ctor(System.IO.Stream,System.Boolean)
+  name.vb: New(Stream, Boolean)
+  fullName: Noisrev.League.IO.RST.RSTFile.RSTFile(System.IO.Stream, bool)
+  fullName.vb: Noisrev.League.IO.RST.RSTFile.New(System.IO.Stream, Boolean)
+  nameWithType: RSTFile.RSTFile(Stream, bool)
+  nameWithType.vb: RSTFile.New(Stream, Boolean)
+- uid: Noisrev.League.IO.RST.RSTFile.#ctor*
+  name: RSTFile
+  href: api/Noisrev.League.IO.RST.RSTFile.-ctor.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTFile.#ctor
+  name.vb: New
+  fullName: Noisrev.League.IO.RST.RSTFile.RSTFile
+  fullName.vb: Noisrev.League.IO.RST.RSTFile.New
+  nameWithType: RSTFile.RSTFile
+  nameWithType.vb: RSTFile.New
+- uid: Noisrev.League.IO.RST.RSTFile.Config
+  name: Config
+  href: api/Noisrev.League.IO.RST.RSTFile.Config.html#Noisrev_League_IO_RST_RSTFile_Config
+  commentId: P:Noisrev.League.IO.RST.RSTFile.Config
+  fullName: Noisrev.League.IO.RST.RSTFile.Config
+  nameWithType: RSTFile.Config
+- uid: Noisrev.League.IO.RST.RSTFile.Config*
+  name: Config
+  href: api/Noisrev.League.IO.RST.RSTFile.Config.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTFile.Config
+  fullName: Noisrev.League.IO.RST.RSTFile.Config
+  nameWithType: RSTFile.Config
+- uid: Noisrev.League.IO.RST.RSTFile.DataOffset
+  name: DataOffset
+  href: api/Noisrev.League.IO.RST.RSTFile.DataOffset.html#Noisrev_League_IO_RST_RSTFile_DataOffset
+  commentId: P:Noisrev.League.IO.RST.RSTFile.DataOffset
+  fullName: Noisrev.League.IO.RST.RSTFile.DataOffset
+  nameWithType: RSTFile.DataOffset
+- uid: Noisrev.League.IO.RST.RSTFile.DataOffset*
+  name: DataOffset
+  href: api/Noisrev.League.IO.RST.RSTFile.DataOffset.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTFile.DataOffset
+  fullName: Noisrev.League.IO.RST.RSTFile.DataOffset
+  nameWithType: RSTFile.DataOffset
+- uid: Noisrev.League.IO.RST.RSTFile.Entries
+  name: Entries
+  href: api/Noisrev.League.IO.RST.RSTFile.Entries.html#Noisrev_League_IO_RST_RSTFile_Entries
+  commentId: P:Noisrev.League.IO.RST.RSTFile.Entries
+  fullName: Noisrev.League.IO.RST.RSTFile.Entries
+  nameWithType: RSTFile.Entries
+- uid: Noisrev.League.IO.RST.RSTFile.Entries*
+  name: Entries
+  href: api/Noisrev.League.IO.RST.RSTFile.Entries.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTFile.Entries
+  fullName: Noisrev.League.IO.RST.RSTFile.Entries
+  nameWithType: RSTFile.Entries
+- uid: Noisrev.League.IO.RST.RSTFile.Equals(Noisrev.League.IO.RST.RSTFile)
+  name: Equals(RSTFile?)
+  href: api/Noisrev.League.IO.RST.RSTFile.Equals.html#Noisrev_League_IO_RST_RSTFile_Equals_Noisrev_League_IO_RST_RSTFile_
+  commentId: M:Noisrev.League.IO.RST.RSTFile.Equals(Noisrev.League.IO.RST.RSTFile)
+  name.vb: Equals(RSTFile)
+  fullName: Noisrev.League.IO.RST.RSTFile.Equals(Noisrev.League.IO.RST.RSTFile?)
+  fullName.vb: Noisrev.League.IO.RST.RSTFile.Equals(Noisrev.League.IO.RST.RSTFile)
+  nameWithType: RSTFile.Equals(RSTFile?)
+  nameWithType.vb: RSTFile.Equals(RSTFile)
+- uid: Noisrev.League.IO.RST.RSTFile.Equals(System.Object)
+  name: Equals(object?)
+  href: api/Noisrev.League.IO.RST.RSTFile.Equals.html#Noisrev_League_IO_RST_RSTFile_Equals_System_Object_
+  commentId: M:Noisrev.League.IO.RST.RSTFile.Equals(System.Object)
+  name.vb: Equals(Object)
+  fullName: Noisrev.League.IO.RST.RSTFile.Equals(object?)
+  fullName.vb: Noisrev.League.IO.RST.RSTFile.Equals(Object)
+  nameWithType: RSTFile.Equals(object?)
+  nameWithType.vb: RSTFile.Equals(Object)
+- uid: Noisrev.League.IO.RST.RSTFile.Equals*
+  name: Equals
+  href: api/Noisrev.League.IO.RST.RSTFile.Equals.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTFile.Equals
+  fullName: Noisrev.League.IO.RST.RSTFile.Equals
+  nameWithType: RSTFile.Equals
+- uid: Noisrev.League.IO.RST.RSTFile.GetHashCode
+  name: GetHashCode()
+  href: api/Noisrev.League.IO.RST.RSTFile.GetHashCode.html#Noisrev_League_IO_RST_RSTFile_GetHashCode
+  commentId: M:Noisrev.League.IO.RST.RSTFile.GetHashCode
+  fullName: Noisrev.League.IO.RST.RSTFile.GetHashCode()
+  nameWithType: RSTFile.GetHashCode()
+- uid: Noisrev.League.IO.RST.RSTFile.GetHashCode*
+  name: GetHashCode
+  href: api/Noisrev.League.IO.RST.RSTFile.GetHashCode.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTFile.GetHashCode
+  fullName: Noisrev.League.IO.RST.RSTFile.GetHashCode
+  nameWithType: RSTFile.GetHashCode
+- uid: Noisrev.League.IO.RST.RSTFile.Load(System.String)
+  name: Load(string)
+  href: api/Noisrev.League.IO.RST.RSTFile.Load.html#Noisrev_League_IO_RST_RSTFile_Load_System_String_
+  commentId: M:Noisrev.League.IO.RST.RSTFile.Load(System.String)
+  name.vb: Load(String)
+  fullName: Noisrev.League.IO.RST.RSTFile.Load(string)
+  fullName.vb: Noisrev.League.IO.RST.RSTFile.Load(String)
+  nameWithType: RSTFile.Load(string)
+  nameWithType.vb: RSTFile.Load(String)
+- uid: Noisrev.League.IO.RST.RSTFile.Load*
+  name: Load
+  href: api/Noisrev.League.IO.RST.RSTFile.Load.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTFile.Load
+  fullName: Noisrev.League.IO.RST.RSTFile.Load
+  nameWithType: RSTFile.Load
+- uid: Noisrev.League.IO.RST.RSTFile.MagicCode
+  name: MagicCode
+  href: api/Noisrev.League.IO.RST.RSTFile.MagicCode.html
+  commentId: F:Noisrev.League.IO.RST.RSTFile.MagicCode
+  fullName: Noisrev.League.IO.RST.RSTFile.MagicCode
+  nameWithType: RSTFile.MagicCode
+- uid: Noisrev.League.IO.RST.RSTFile.Mode
+  name: Mode
+  href: api/Noisrev.League.IO.RST.RSTFile.Mode.html#Noisrev_League_IO_RST_RSTFile_Mode
+  commentId: P:Noisrev.League.IO.RST.RSTFile.Mode
+  fullName: Noisrev.League.IO.RST.RSTFile.Mode
+  nameWithType: RSTFile.Mode
+- uid: Noisrev.League.IO.RST.RSTFile.Mode*
+  name: Mode
+  href: api/Noisrev.League.IO.RST.RSTFile.Mode.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTFile.Mode
+  fullName: Noisrev.League.IO.RST.RSTFile.Mode
+  nameWithType: RSTFile.Mode
+- uid: Noisrev.League.IO.RST.RSTFile.Type
+  name: Type
+  href: api/Noisrev.League.IO.RST.RSTFile.Type.html#Noisrev_League_IO_RST_RSTFile_Type
+  commentId: P:Noisrev.League.IO.RST.RSTFile.Type
+  fullName: Noisrev.League.IO.RST.RSTFile.Type
+  nameWithType: RSTFile.Type
+- uid: Noisrev.League.IO.RST.RSTFile.Type*
+  name: Type
+  href: api/Noisrev.League.IO.RST.RSTFile.Type.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTFile.Type
+  fullName: Noisrev.League.IO.RST.RSTFile.Type
+  nameWithType: RSTFile.Type
+- uid: Noisrev.League.IO.RST.RSTFile.Version
+  name: Version
+  href: api/Noisrev.League.IO.RST.RSTFile.Version.html#Noisrev_League_IO_RST_RSTFile_Version
+  commentId: P:Noisrev.League.IO.RST.RSTFile.Version
+  fullName: Noisrev.League.IO.RST.RSTFile.Version
+  nameWithType: RSTFile.Version
+- uid: Noisrev.League.IO.RST.RSTFile.Version*
+  name: Version
+  href: api/Noisrev.League.IO.RST.RSTFile.Version.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTFile.Version
+  fullName: Noisrev.League.IO.RST.RSTFile.Version
+  nameWithType: RSTFile.Version
+- uid: Noisrev.League.IO.RST.RSTFile.Write(System.IO.Stream,System.Boolean)
+  name: Write(Stream, bool)
+  href: api/Noisrev.League.IO.RST.RSTFile.Write.html#Noisrev_League_IO_RST_RSTFile_Write_System_IO_Stream_System_Boolean_
+  commentId: M:Noisrev.League.IO.RST.RSTFile.Write(System.IO.Stream,System.Boolean)
+  name.vb: Write(Stream, Boolean)
+  fullName: Noisrev.League.IO.RST.RSTFile.Write(System.IO.Stream, bool)
+  fullName.vb: Noisrev.League.IO.RST.RSTFile.Write(System.IO.Stream, Boolean)
+  nameWithType: RSTFile.Write(Stream, bool)
+  nameWithType.vb: RSTFile.Write(Stream, Boolean)
+- uid: Noisrev.League.IO.RST.RSTFile.Write(System.String)
+  name: Write(string)
+  href: api/Noisrev.League.IO.RST.RSTFile.Write.html#Noisrev_League_IO_RST_RSTFile_Write_System_String_
+  commentId: M:Noisrev.League.IO.RST.RSTFile.Write(System.String)
+  name.vb: Write(String)
+  fullName: Noisrev.League.IO.RST.RSTFile.Write(string)
+  fullName.vb: Noisrev.League.IO.RST.RSTFile.Write(String)
+  nameWithType: RSTFile.Write(string)
+  nameWithType.vb: RSTFile.Write(String)
+- uid: Noisrev.League.IO.RST.RSTFile.Write*
+  name: Write
+  href: api/Noisrev.League.IO.RST.RSTFile.Write.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTFile.Write
+  fullName: Noisrev.League.IO.RST.RSTFile.Write
+  nameWithType: RSTFile.Write
+- uid: Noisrev.League.IO.RST.RSTHash
+  name: RSTHash
+  href: api/Noisrev.League.IO.RST.RSTHash.html
+  commentId: T:Noisrev.League.IO.RST.RSTHash
+  fullName: Noisrev.League.IO.RST.RSTHash
+  nameWithType: RSTHash
+- uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,Noisrev.League.IO.RST.RType,System.Text.Encoding,System.Globalization.CultureInfo)
+  name: ComputeHash(string, RType, Encoding, CultureInfo)
+  href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_String_Noisrev_League_IO_RST_RType_System_Text_Encoding_System_Globalization_CultureInfo_
+  commentId: M:Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,Noisrev.League.IO.RST.RType,System.Text.Encoding,System.Globalization.CultureInfo)
+  name.vb: ComputeHash(String, RType, Encoding, CultureInfo)
+  fullName: Noisrev.League.IO.RST.RSTHash.ComputeHash(string, Noisrev.League.IO.RST.RType, System.Text.Encoding, System.Globalization.CultureInfo)
+  fullName.vb: Noisrev.League.IO.RST.RSTHash.ComputeHash(String, Noisrev.League.IO.RST.RType, System.Text.Encoding, System.Globalization.CultureInfo)
+  nameWithType: RSTHash.ComputeHash(string, RType, Encoding, CultureInfo)
+  nameWithType.vb: RSTHash.ComputeHash(String, RType, Encoding, CultureInfo)
+- uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,Noisrev.League.IO.RST.RType,System.Text.Encoding)
+  name: ComputeHash(string, RType, Encoding)
+  href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_String_Noisrev_League_IO_RST_RType_System_Text_Encoding_
+  commentId: M:Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,Noisrev.League.IO.RST.RType,System.Text.Encoding)
+  name.vb: ComputeHash(String, RType, Encoding)
+  fullName: Noisrev.League.IO.RST.RSTHash.ComputeHash(string, Noisrev.League.IO.RST.RType, System.Text.Encoding)
+  fullName.vb: Noisrev.League.IO.RST.RSTHash.ComputeHash(String, Noisrev.League.IO.RST.RType, System.Text.Encoding)
+  nameWithType: RSTHash.ComputeHash(string, RType, Encoding)
+  nameWithType.vb: RSTHash.ComputeHash(String, RType, Encoding)
+- uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,Noisrev.League.IO.RST.RType)
+  name: ComputeHash(string, RType)
+  href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_String_Noisrev_League_IO_RST_RType_
+  commentId: M:Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,Noisrev.League.IO.RST.RType)
+  name.vb: ComputeHash(String, RType)
+  fullName: Noisrev.League.IO.RST.RSTHash.ComputeHash(string, Noisrev.League.IO.RST.RType)
+  fullName.vb: Noisrev.League.IO.RST.RSTHash.ComputeHash(String, Noisrev.League.IO.RST.RType)
+  nameWithType: RSTHash.ComputeHash(string, RType)
+  nameWithType.vb: RSTHash.ComputeHash(String, RType)
+- uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,System.Int64,Noisrev.League.IO.RST.RType,System.Text.Encoding,System.Globalization.CultureInfo)
+  name: ComputeHash(string, long, RType, Encoding, CultureInfo)
+  href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_String_System_Int64_Noisrev_League_IO_RST_RType_System_Text_Encoding_System_Globalization_CultureInfo_
+  commentId: M:Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,System.Int64,Noisrev.League.IO.RST.RType,System.Text.Encoding,System.Globalization.CultureInfo)
+  name.vb: ComputeHash(String, Long, RType, Encoding, CultureInfo)
+  fullName: Noisrev.League.IO.RST.RSTHash.ComputeHash(string, long, Noisrev.League.IO.RST.RType, System.Text.Encoding, System.Globalization.CultureInfo)
+  fullName.vb: Noisrev.League.IO.RST.RSTHash.ComputeHash(String, Long, Noisrev.League.IO.RST.RType, System.Text.Encoding, System.Globalization.CultureInfo)
+  nameWithType: RSTHash.ComputeHash(string, long, RType, Encoding, CultureInfo)
+  nameWithType.vb: RSTHash.ComputeHash(String, Long, RType, Encoding, CultureInfo)
+- uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,System.Int64,Noisrev.League.IO.RST.RType,System.Text.Encoding)
+  name: ComputeHash(string, long, RType, Encoding)
+  href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_String_System_Int64_Noisrev_League_IO_RST_RType_System_Text_Encoding_
+  commentId: M:Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,System.Int64,Noisrev.League.IO.RST.RType,System.Text.Encoding)
+  name.vb: ComputeHash(String, Long, RType, Encoding)
+  fullName: Noisrev.League.IO.RST.RSTHash.ComputeHash(string, long, Noisrev.League.IO.RST.RType, System.Text.Encoding)
+  fullName.vb: Noisrev.League.IO.RST.RSTHash.ComputeHash(String, Long, Noisrev.League.IO.RST.RType, System.Text.Encoding)
+  nameWithType: RSTHash.ComputeHash(string, long, RType, Encoding)
+  nameWithType.vb: RSTHash.ComputeHash(String, Long, RType, Encoding)
+- uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,System.Int64,Noisrev.League.IO.RST.RType)
+  name: ComputeHash(string, long, RType)
+  href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_String_System_Int64_Noisrev_League_IO_RST_RType_
+  commentId: M:Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,System.Int64,Noisrev.League.IO.RST.RType)
+  name.vb: ComputeHash(String, Long, RType)
+  fullName: Noisrev.League.IO.RST.RSTHash.ComputeHash(string, long, Noisrev.League.IO.RST.RType)
+  fullName.vb: Noisrev.League.IO.RST.RSTHash.ComputeHash(String, Long, Noisrev.League.IO.RST.RType)
+  nameWithType: RSTHash.ComputeHash(string, long, RType)
+  nameWithType.vb: RSTHash.ComputeHash(String, Long, RType)
+- uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.UInt64,System.Int64,Noisrev.League.IO.RST.RType)
+  name: ComputeHash(ulong, long, RType)
+  href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_UInt64_System_Int64_Noisrev_League_IO_RST_RType_
+  commentId: M:Noisrev.League.IO.RST.RSTHash.ComputeHash(System.UInt64,System.Int64,Noisrev.League.IO.RST.RType)
+  name.vb: ComputeHash(ULong, Long, RType)
+  fullName: Noisrev.League.IO.RST.RSTHash.ComputeHash(ulong, long, Noisrev.League.IO.RST.RType)
+  fullName.vb: Noisrev.League.IO.RST.RSTHash.ComputeHash(ULong, Long, Noisrev.League.IO.RST.RType)
+  nameWithType: RSTHash.ComputeHash(ulong, long, RType)
+  nameWithType.vb: RSTHash.ComputeHash(ULong, Long, RType)
+- uid: Noisrev.League.IO.RST.RSTHash.ComputeHash*
+  name: ComputeHash
+  href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html
+  commentId: Overload:Noisrev.League.IO.RST.RSTHash.ComputeHash
+  fullName: Noisrev.League.IO.RST.RSTHash.ComputeHash
+  nameWithType: RSTHash.ComputeHash
+- uid: Noisrev.League.IO.RST.RType
+  name: RType
+  href: api/Noisrev.League.IO.RST.RType.html
+  commentId: T:Noisrev.League.IO.RST.RType
+  fullName: Noisrev.League.IO.RST.RType
+  nameWithType: RType
+- uid: Noisrev.League.IO.RST.RType.Complex
+  name: Complex
+  href: api/Noisrev.League.IO.RST.RType.html#Noisrev_League_IO_RST_RType_Complex
+  commentId: F:Noisrev.League.IO.RST.RType.Complex
+  fullName: Noisrev.League.IO.RST.RType.Complex
+  nameWithType: RType.Complex
+- uid: Noisrev.League.IO.RST.RType.Simple
+  name: Simple
+  href: api/Noisrev.League.IO.RST.RType.html#Noisrev_League_IO_RST_RType_Simple
+  commentId: F:Noisrev.League.IO.RST.RType.Simple
+  fullName: Noisrev.League.IO.RST.RType.Simple
+  nameWithType: RType.Simple
+- uid: Noisrev.League.IO.RST.RVersion
+  name: RVersion
+  href: api/Noisrev.League.IO.RST.RVersion.html
+  commentId: T:Noisrev.League.IO.RST.RVersion
+  fullName: Noisrev.League.IO.RST.RVersion
+  nameWithType: RVersion
+- uid: Noisrev.League.IO.RST.RVersion.Ver2
+  name: Ver2
+  href: api/Noisrev.League.IO.RST.RVersion.html#Noisrev_League_IO_RST_RVersion_Ver2
+  commentId: F:Noisrev.League.IO.RST.RVersion.Ver2
+  fullName: Noisrev.League.IO.RST.RVersion.Ver2
+  nameWithType: RVersion.Ver2
+- uid: Noisrev.League.IO.RST.RVersion.Ver3
+  name: Ver3
+  href: api/Noisrev.League.IO.RST.RVersion.html#Noisrev_League_IO_RST_RVersion_Ver3
+  commentId: F:Noisrev.League.IO.RST.RVersion.Ver3
+  fullName: Noisrev.League.IO.RST.RVersion.Ver3
+  nameWithType: RVersion.Ver3
+- uid: Noisrev.League.IO.RST.RVersion.Ver4
+  name: Ver4
+  href: api/Noisrev.League.IO.RST.RVersion.html#Noisrev_League_IO_RST_RVersion_Ver4
+  commentId: F:Noisrev.League.IO.RST.RVersion.Ver4
+  fullName: Noisrev.League.IO.RST.RVersion.Ver4
+  nameWithType: RVersion.Ver4
+- uid: Noisrev.League.IO.RST.RVersion.Ver5
+  name: Ver5
+  href: api/Noisrev.League.IO.RST.RVersion.html#Noisrev_League_IO_RST_RVersion_Ver5
+  commentId: F:Noisrev.League.IO.RST.RVersion.Ver5
+  fullName: Noisrev.League.IO.RST.RVersion.Ver5
+  nameWithType: RVersion.Ver5
