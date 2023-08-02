@@ -4,7 +4,7 @@
 
 ## Quick Start
 
-- Install via **Nuget Package Manager** in **Visual Studio**
+- Install via **NuGet Package Manager** in **Visual Studio**
 - .NET CLI : `dotnet add package Noisrev.League.IO.RST`
 
 ``` C#

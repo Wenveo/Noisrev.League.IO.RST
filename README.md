@@ -33,7 +33,7 @@ The file is used to store strings of in-game text.
 ## 🔖 Getting Started
 
 1. Use the NuGet Libaray
->- Install via **Nuget Package Manager** in **Visual Studio**
+>- Install via **NuGet Package Manager** in **Visual Studio**
 >- .NET CLI : `dotnet add package Noisrev.League.IO.RST`
 
 2. Then load a RSTFile using:

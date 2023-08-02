@@ -285,8 +285,8 @@ public class RSTFile : IEquatable<RSTFile>
                 var hashAndOffset = hashesOffsets[j];
 
                 // Try to get a string from the dictionary.
-                // If false, the string is read and added to the dictionary.
-                // But if true, get the same text from the dictionary (to avoid reading the string multiple times).
+                // If false, read the string and add to the dictionary.
+                // But if true, get the same text from the dictionary (Avoid reading duplicate strings).
                 if (!offsetToText.TryGetValue(hashAndOffset.Item2, out var value))
                 {
                     // Reads the string from position + offset
