@@ -60,7 +60,7 @@ public static class RSTHash
         unsafe
         {
             var length = toHash.Length;
-            if (length <= 1024)
+            if (length <= 768)
             {
                 var ch = stackalloc char[length];
                 Utilities.ToLower(toHash.AsSpan(), new(ch, length), cultureInfo);
@@ -84,7 +84,7 @@ public static class RSTHash
             static ulong ComputeHashCore(char* ch, int length, RType type, Encoding encoding)
             {
                 var byteCount = encoding.GetByteCount(ch, length);
-                if (byteCount <= 1024)
+                if (byteCount <= 768)
                 {
                     var bytes = stackalloc byte[byteCount];
                     var bytesReceived = encoding.GetBytes(ch, length, bytes, byteCount);
