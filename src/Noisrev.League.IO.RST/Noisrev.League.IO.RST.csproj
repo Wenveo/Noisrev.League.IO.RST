@@ -3,7 +3,7 @@
     <TargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net7.0;net8.0</TargetFrameworks>
     <RootNamespace>Noisrev.League.IO.RST</RootNamespace>
     <Product>Noisrev.League.IO.RST</Product>
-    <Version>4.0.0.0-rc1</Version>
+    <Version>4.0.0.0-rc2</Version>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
