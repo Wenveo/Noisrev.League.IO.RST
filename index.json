@@ -1,9 +1,4 @@
 {
-  "api/Noisrev.League.IO.RST.Helpers.html": {
-    "href": "api/Noisrev.League.IO.RST.Helpers.html",
-    "title": "Namespace Noisrev.League.IO.RST.Helpers",
-    "keywords": "Namespace Noisrev.League.IO.RST.Helpers Classes OffsetHelper Offset extension class. RTypeHelper RType extension class."
-  },
   "api/Noisrev.League.IO.RST.Helpers.OffsetHelper.ComputeOffset.html": {
     "href": "api/Noisrev.League.IO.RST.Helpers.OffsetHelper.ComputeOffset.html",
     "title": "Method ComputeOffset",
@@ -29,10 +24,10 @@
     "title": "Class RTypeHelper",
     "keywords": "Class RTypeHelper Namespace Noisrev.League.IO.RST.Helpers Assembly Noisrev.League.IO.RST.dll RType extension class. public static class RTypeHelper Inheritance object RTypeHelper Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods ComputeKey(RType) Compute the key used to generate the hash. GetRType(RVersion) Gets the specified RType based on RVersion."
   },
-  "api/Noisrev.League.IO.RST.html": {
-    "href": "api/Noisrev.League.IO.RST.html",
-    "title": "Namespace Noisrev.League.IO.RST",
-    "keywords": "Namespace Noisrev.League.IO.RST Namespaces Noisrev.League.IO.RST.Helpers Classes RSTBuilder Used to build RSTFile. This class cannot be inherited. RSTFile Riot String Table File. RSTHash RST hashes compute class. Enums RMode RST File Mode. RType RST File Type. RVersion RST File Version."
+  "api/Noisrev.League.IO.RST.Helpers.html": {
+    "href": "api/Noisrev.League.IO.RST.Helpers.html",
+    "title": "Namespace Noisrev.League.IO.RST.Helpers",
+    "keywords": "Namespace Noisrev.League.IO.RST.Helpers Classes OffsetHelper Offset extension class. RTypeHelper RType extension class."
   },
   "api/Noisrev.League.IO.RST.RMode.html": {
     "href": "api/Noisrev.League.IO.RST.RMode.html",
@@ -74,11 +69,6 @@
     "title": "Property Current",
     "keywords": "Property Current Namespace Noisrev.League.IO.RST Assembly Noisrev.League.IO.RST.dll Current Current RSTFile. public RSTFile Current { get; } Property Value RSTFile"
   },
-  "api/Noisrev.League.IO.RST.RSTBuilder.html": {
-    "href": "api/Noisrev.League.IO.RST.RSTBuilder.html",
-    "title": "Class RSTBuilder",
-    "keywords": "Class RSTBuilder Namespace Noisrev.League.IO.RST Assembly Noisrev.League.IO.RST.dll Used to build RSTFile. This class cannot be inherited. public sealed class RSTBuilder : IDictionary<ulong, string>, ICollection<KeyValuePair<ulong, string>>, IEnumerable<KeyValuePair<ulong, string>>, IEnumerable Inheritance object RSTBuilder Implements IDictionary<ulong, string> ICollection<KeyValuePair<ulong, string>> IEnumerable<KeyValuePair<ulong, string>> IEnumerable Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Constructors RSTBuilder() Initializes a new instance of the RSTBuilder class. RSTBuilder(RSTFile) Initializes a new instance of the RSTBuilder class using the specified RSTFile. Properties Current Current RSTFile. this[ulong] Gets or sets the value associated with the specified key. Methods Add(ulong, bool) Adds the specified key and value to the current RSTFile. Add(ulong, byte) Adds the specified key and value to the current RSTFile. Add(ulong, char) Adds the specified key and value to the current RSTFile. Add(ulong, decimal) Adds the specified key and value to the current RSTFile. Add(ulong, double) Adds the specified key and value to the current RSTFile. Add(ulong, short) Adds the specified key and value to the current RSTFile. Add(ulong, int) Adds the specified key and value to the current RSTFile. Add(ulong, long) Adds the specified key and value to the current RSTFile. Add(ulong, object?) Adds the specified key and value to the current RSTFile. Add(ulong, sbyte) Adds the specified key and value to the current RSTFile. Add(ulong, float) Adds the specified key and value to the current RSTFile. Add(ulong, string) Adds the specified key and value to the current RSTFile. Add(ulong, ushort) Adds the specified key and value to the current RSTFile. Add(ulong, uint) Adds the specified key and value to the current RSTFile. Add(ulong, ulong) Adds the specified key and value to the current RSTFile. Build(Stream, bool) Build the current RSTFile. Build(string) Build the current RSTFile. Clear() Removes all elements in the current RSTFile. ContainsKey(ulong) Determines whether the current RSTFile contains the specified key. ContainsValue(string) Determines whether the current RSTFile contains the specified value. Remove(ulong) Removes the value with the specified key in the current RSTFile. ReplaceAll(string, string) Replaces all matched elements in the current RSTFile. ReplaceAll(string, string, bool) Replaces all matched texts in the current RSTFile. SetConfig(string) Sets the font config for the current RSTFile. Only supported in Ver2. TryAdd(ulong, bool) Adds the specified key and value to the current RSTFile. TryAdd(ulong, byte) Adds the specified key and value to the current RSTFile. TryAdd(ulong, char) Adds the specified key and value to the current RSTFile. TryAdd(ulong, decimal) Adds the specified key and value to the current RSTFile. TryAdd(ulong, double) Adds the specified key and value to the current RSTFile. TryAdd(ulong, short) Adds the specified key and value to the current RSTFile. TryAdd(ulong, int) Adds the specified key and value to the current RSTFile. TryAdd(ulong, long) Adds the specified key and value to the current RSTFile. TryAdd(ulong, object) Adds the specified key and value to the RSTFile. TryAdd(ulong, sbyte) Adds the specified key and value to the current RSTFile. TryAdd(ulong, float) Adds the specified key and value to the current RSTFile. TryAdd(ulong, string) Adds the specified key and value to the current RSTFile. TryAdd(ulong, ushort) Adds the specified key and value to the current RSTFile. TryAdd(ulong, uint) Adds the specified key and value to the current RSTFile. TryAdd(ulong, ulong) Adds the specified key and value to the current RSTFile. TryGetValue(ulong, out string?) Gets the value associated with the specified key."
-  },
   "api/Noisrev.League.IO.RST.RSTBuilder.Item.html": {
     "href": "api/Noisrev.League.IO.RST.RSTBuilder.Item.html",
     "title": "Property this",
@@ -108,6 +98,11 @@
     "href": "api/Noisrev.League.IO.RST.RSTBuilder.TryGetValue.html",
     "title": "Method TryGetValue",
     "keywords": "Method TryGetValue Namespace Noisrev.League.IO.RST Assembly Noisrev.League.IO.RST.dll TryGetValue(ulong, out string?) Gets the value associated with the specified key. public bool TryGetValue(ulong key, out string? value) Parameters key ulong The key of the value to get. value string When this method returns, contains the value associated with the specified key, if the key is found; otherwise, the default value for the type of the value parameter. Returns bool True if the current RSTFile contains an element with the specified key; otherwise, false."
+  },
+  "api/Noisrev.League.IO.RST.RSTBuilder.html": {
+    "href": "api/Noisrev.League.IO.RST.RSTBuilder.html",
+    "title": "Class RSTBuilder",
+    "keywords": "Class RSTBuilder Namespace Noisrev.League.IO.RST Assembly Noisrev.League.IO.RST.dll Used to build RSTFile. This class cannot be inherited. public sealed class RSTBuilder : IDictionary<ulong, string>, ICollection<KeyValuePair<ulong, string>>, IEnumerable<KeyValuePair<ulong, string>>, IEnumerable Inheritance object RSTBuilder Implements IDictionary<ulong, string> ICollection<KeyValuePair<ulong, string>> IEnumerable<KeyValuePair<ulong, string>> IEnumerable Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Constructors RSTBuilder() Initializes a new instance of the RSTBuilder class. RSTBuilder(RSTFile) Initializes a new instance of the RSTBuilder class using the specified RSTFile. Properties Current Current RSTFile. this[ulong] Gets or sets the value associated with the specified key. Methods Add(ulong, bool) Adds the specified key and value to the current RSTFile. Add(ulong, byte) Adds the specified key and value to the current RSTFile. Add(ulong, char) Adds the specified key and value to the current RSTFile. Add(ulong, decimal) Adds the specified key and value to the current RSTFile. Add(ulong, double) Adds the specified key and value to the current RSTFile. Add(ulong, short) Adds the specified key and value to the current RSTFile. Add(ulong, int) Adds the specified key and value to the current RSTFile. Add(ulong, long) Adds the specified key and value to the current RSTFile. Add(ulong, object?) Adds the specified key and value to the current RSTFile. Add(ulong, sbyte) Adds the specified key and value to the current RSTFile. Add(ulong, float) Adds the specified key and value to the current RSTFile. Add(ulong, string) Adds the specified key and value to the current RSTFile. Add(ulong, ushort) Adds the specified key and value to the current RSTFile. Add(ulong, uint) Adds the specified key and value to the current RSTFile. Add(ulong, ulong) Adds the specified key and value to the current RSTFile. Build(Stream, bool) Build the current RSTFile. Build(string) Build the current RSTFile. Clear() Removes all elements in the current RSTFile. ContainsKey(ulong) Determines whether the current RSTFile contains the specified key. ContainsValue(string) Determines whether the current RSTFile contains the specified value. Remove(ulong) Removes the value with the specified key in the current RSTFile. ReplaceAll(string, string) Replaces all matched elements in the current RSTFile. ReplaceAll(string, string, bool) Replaces all matched texts in the current RSTFile. SetConfig(string) Sets the font config for the current RSTFile. Only supported in Ver2. TryAdd(ulong, bool) Adds the specified key and value to the current RSTFile. TryAdd(ulong, byte) Adds the specified key and value to the current RSTFile. TryAdd(ulong, char) Adds the specified key and value to the current RSTFile. TryAdd(ulong, decimal) Adds the specified key and value to the current RSTFile. TryAdd(ulong, double) Adds the specified key and value to the current RSTFile. TryAdd(ulong, short) Adds the specified key and value to the current RSTFile. TryAdd(ulong, int) Adds the specified key and value to the current RSTFile. TryAdd(ulong, long) Adds the specified key and value to the current RSTFile. TryAdd(ulong, object) Adds the specified key and value to the RSTFile. TryAdd(ulong, sbyte) Adds the specified key and value to the current RSTFile. TryAdd(ulong, float) Adds the specified key and value to the current RSTFile. TryAdd(ulong, string) Adds the specified key and value to the current RSTFile. TryAdd(ulong, ushort) Adds the specified key and value to the current RSTFile. TryAdd(ulong, uint) Adds the specified key and value to the current RSTFile. TryAdd(ulong, ulong) Adds the specified key and value to the current RSTFile. TryGetValue(ulong, out string?) Gets the value associated with the specified key."
   },
   "api/Noisrev.League.IO.RST.RSTFile.-ctor.html": {
     "href": "api/Noisrev.League.IO.RST.RSTFile.-ctor.html",
@@ -139,11 +134,6 @@
     "title": "Method GetHashCode",
     "keywords": "Method GetHashCode Namespace Noisrev.League.IO.RST Assembly Noisrev.League.IO.RST.dll GetHashCode() Serves as the default hash function. public override int GetHashCode() Returns int A hash code for the current object."
   },
-  "api/Noisrev.League.IO.RST.RSTFile.html": {
-    "href": "api/Noisrev.League.IO.RST.RSTFile.html",
-    "title": "Class RSTFile",
-    "keywords": "Class RSTFile Namespace Noisrev.League.IO.RST Assembly Noisrev.League.IO.RST.dll Riot String Table File. public class RSTFile : IEquatable<RSTFile> Inheritance object RSTFile Implements IEquatable<RSTFile> Inherited Members object.Equals(object, object) object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors RSTFile(RVersion) Initializes a new instance of the RSTFile class based on the specified RVersion. RSTFile(Stream, bool) Initializes a new instance of the RSTFile class based on the specified Stream. Fields MagicCode The magic code of RSTFile. Properties Config The font config of this RSTFile. using by RST v2. DataOffset The offset of the string data in this RSTFile. Entries The collection of hashes and strings of this RSTFile. Mode The mode of this RSTFile. Type The type of this RSTFile. Used to generate hashes. Version The version of this RSTFile. Methods Equals(RSTFile?) Indicates whether the current object is equal to another object of the same type. Equals(object?) Determines whether the specified object is equal to the current object. GetHashCode() Serves as the default hash function. Load(string) Load RSTFile from the local file. Write(Stream, bool) Using an output stream, write this RSTFile to that Stream. Write(string) Creates a new file, writes the binary data of this RSTFile to the file, and then closes the file. If the target file already exists, it is overwritten."
-  },
   "api/Noisrev.League.IO.RST.RSTFile.Load.html": {
     "href": "api/Noisrev.League.IO.RST.RSTFile.Load.html",
     "title": "Method Load",
@@ -174,6 +164,11 @@
     "title": "Method Write",
     "keywords": "Method Write Namespace Noisrev.League.IO.RST Assembly Noisrev.League.IO.RST.dll Write(string) Creates a new file, writes the binary data of this RSTFile to the file, and then closes the file. If the target file already exists, it is overwritten. public void Write(string outputPath) Parameters outputPath string The file to write to. Exceptions ArgumentNullException The outputPath is null. Write(Stream, bool) Using an output stream, write this RSTFile to that Stream. public void Write(Stream outputStream, bool leaveOpen) Parameters outputStream Stream The output stream. leaveOpen bool true to leave the stream open after the BinaryWriter object is disposed; otherwise, false. Exceptions ArgumentException The outputStream does not support writes. ArgumentNullException The outputStream is null."
   },
+  "api/Noisrev.League.IO.RST.RSTFile.html": {
+    "href": "api/Noisrev.League.IO.RST.RSTFile.html",
+    "title": "Class RSTFile",
+    "keywords": "Class RSTFile Namespace Noisrev.League.IO.RST Assembly Noisrev.League.IO.RST.dll Riot String Table File. public class RSTFile : IEquatable<RSTFile> Inheritance object RSTFile Implements IEquatable<RSTFile> Inherited Members object.Equals(object, object) object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors RSTFile(RVersion) Initializes a new instance of the RSTFile class based on the specified RVersion. RSTFile(Stream, bool) Initializes a new instance of the RSTFile class based on the specified Stream. Fields MagicCode The magic code of RSTFile. Properties Config The font config of this RSTFile. using by RST v2. DataOffset The offset of the string data in this RSTFile. Entries The collection of hashes and strings of this RSTFile. Mode The mode of this RSTFile. Type The type of this RSTFile. Used to generate hashes. Version The version of this RSTFile. Methods Equals(RSTFile?) Indicates whether the current object is equal to another object of the same type. Equals(object?) Determines whether the specified object is equal to the current object. GetHashCode() Serves as the default hash function. Load(string) Load RSTFile from the local file. Write(Stream, bool) Using an output stream, write this RSTFile to that Stream. Write(string) Creates a new file, writes the binary data of this RSTFile to the file, and then closes the file. If the target file already exists, it is overwritten."
+  },
   "api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html": {
     "href": "api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html",
     "title": "Method ComputeHash",
@@ -193,6 +188,11 @@
     "href": "api/Noisrev.League.IO.RST.RVersion.html",
     "title": "Enum RVersion",
     "keywords": "Enum RVersion Namespace Noisrev.League.IO.RST Assembly Noisrev.League.IO.RST.dll RST File Version. public enum RVersion : byte Extension Methods RTypeHelper.GetRType(RVersion) Fields Ver2 = 2 Version 2 Ver3 = 3 Version 3 Ver4 = 4 Version 4 Ver5 = 5 Version 5"
+  },
+  "api/Noisrev.League.IO.RST.html": {
+    "href": "api/Noisrev.League.IO.RST.html",
+    "title": "Namespace Noisrev.League.IO.RST",
+    "keywords": "Namespace Noisrev.League.IO.RST Namespaces Noisrev.League.IO.RST.Helpers Classes RSTBuilder Used to build RSTFile. This class cannot be inherited. RSTFile Riot String Table File. RSTHash RST hashes compute class. Enums RMode RST File Mode. RType RST File Type. RVersion RST File Version."
   },
   "index.html": {
     "href": "index.html",

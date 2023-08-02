@@ -367,15 +367,6 @@ references:
   commentId: Overload:Noisrev.League.IO.RST.RSTBuilder.Remove
   fullName: Noisrev.League.IO.RST.RSTBuilder.Remove
   nameWithType: RSTBuilder.Remove
-- uid: Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(System.String,System.String,System.Boolean)
-  name: ReplaceAll(string, string, bool)
-  href: api/Noisrev.League.IO.RST.RSTBuilder.ReplaceAll.html#Noisrev_League_IO_RST_RSTBuilder_ReplaceAll_System_String_System_String_System_Boolean_
-  commentId: M:Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(System.String,System.String,System.Boolean)
-  name.vb: ReplaceAll(String, String, Boolean)
-  fullName: Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(string, string, bool)
-  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(String, String, Boolean)
-  nameWithType: RSTBuilder.ReplaceAll(string, string, bool)
-  nameWithType.vb: RSTBuilder.ReplaceAll(String, String, Boolean)
 - uid: Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(System.String,System.String)
   name: ReplaceAll(string, string)
   href: api/Noisrev.League.IO.RST.RSTBuilder.ReplaceAll.html#Noisrev_League_IO_RST_RSTBuilder_ReplaceAll_System_String_System_String_
@@ -385,6 +376,15 @@ references:
   fullName.vb: Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(String, String)
   nameWithType: RSTBuilder.ReplaceAll(string, string)
   nameWithType.vb: RSTBuilder.ReplaceAll(String, String)
+- uid: Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(System.String,System.String,System.Boolean)
+  name: ReplaceAll(string, string, bool)
+  href: api/Noisrev.League.IO.RST.RSTBuilder.ReplaceAll.html#Noisrev_League_IO_RST_RSTBuilder_ReplaceAll_System_String_System_String_System_Boolean_
+  commentId: M:Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(System.String,System.String,System.Boolean)
+  name.vb: ReplaceAll(String, String, Boolean)
+  fullName: Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(string, string, bool)
+  fullName.vb: Noisrev.League.IO.RST.RSTBuilder.ReplaceAll(String, String, Boolean)
+  nameWithType: RSTBuilder.ReplaceAll(string, string, bool)
+  nameWithType.vb: RSTBuilder.ReplaceAll(String, String, Boolean)
 - uid: Noisrev.League.IO.RST.RSTBuilder.ReplaceAll*
   name: ReplaceAll
   href: api/Noisrev.League.IO.RST.RSTBuilder.ReplaceAll.html
@@ -754,24 +754,6 @@ references:
   commentId: T:Noisrev.League.IO.RST.RSTHash
   fullName: Noisrev.League.IO.RST.RSTHash
   nameWithType: RSTHash
-- uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,Noisrev.League.IO.RST.RType,System.Text.Encoding,System.Globalization.CultureInfo)
-  name: ComputeHash(string, RType, Encoding, CultureInfo)
-  href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_String_Noisrev_League_IO_RST_RType_System_Text_Encoding_System_Globalization_CultureInfo_
-  commentId: M:Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,Noisrev.League.IO.RST.RType,System.Text.Encoding,System.Globalization.CultureInfo)
-  name.vb: ComputeHash(String, RType, Encoding, CultureInfo)
-  fullName: Noisrev.League.IO.RST.RSTHash.ComputeHash(string, Noisrev.League.IO.RST.RType, System.Text.Encoding, System.Globalization.CultureInfo)
-  fullName.vb: Noisrev.League.IO.RST.RSTHash.ComputeHash(String, Noisrev.League.IO.RST.RType, System.Text.Encoding, System.Globalization.CultureInfo)
-  nameWithType: RSTHash.ComputeHash(string, RType, Encoding, CultureInfo)
-  nameWithType.vb: RSTHash.ComputeHash(String, RType, Encoding, CultureInfo)
-- uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,Noisrev.League.IO.RST.RType,System.Text.Encoding)
-  name: ComputeHash(string, RType, Encoding)
-  href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_String_Noisrev_League_IO_RST_RType_System_Text_Encoding_
-  commentId: M:Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,Noisrev.League.IO.RST.RType,System.Text.Encoding)
-  name.vb: ComputeHash(String, RType, Encoding)
-  fullName: Noisrev.League.IO.RST.RSTHash.ComputeHash(string, Noisrev.League.IO.RST.RType, System.Text.Encoding)
-  fullName.vb: Noisrev.League.IO.RST.RSTHash.ComputeHash(String, Noisrev.League.IO.RST.RType, System.Text.Encoding)
-  nameWithType: RSTHash.ComputeHash(string, RType, Encoding)
-  nameWithType.vb: RSTHash.ComputeHash(String, RType, Encoding)
 - uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,Noisrev.League.IO.RST.RType)
   name: ComputeHash(string, RType)
   href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_String_Noisrev_League_IO_RST_RType_
@@ -781,24 +763,24 @@ references:
   fullName.vb: Noisrev.League.IO.RST.RSTHash.ComputeHash(String, Noisrev.League.IO.RST.RType)
   nameWithType: RSTHash.ComputeHash(string, RType)
   nameWithType.vb: RSTHash.ComputeHash(String, RType)
-- uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,System.Int64,Noisrev.League.IO.RST.RType,System.Text.Encoding,System.Globalization.CultureInfo)
-  name: ComputeHash(string, long, RType, Encoding, CultureInfo)
-  href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_String_System_Int64_Noisrev_League_IO_RST_RType_System_Text_Encoding_System_Globalization_CultureInfo_
-  commentId: M:Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,System.Int64,Noisrev.League.IO.RST.RType,System.Text.Encoding,System.Globalization.CultureInfo)
-  name.vb: ComputeHash(String, Long, RType, Encoding, CultureInfo)
-  fullName: Noisrev.League.IO.RST.RSTHash.ComputeHash(string, long, Noisrev.League.IO.RST.RType, System.Text.Encoding, System.Globalization.CultureInfo)
-  fullName.vb: Noisrev.League.IO.RST.RSTHash.ComputeHash(String, Long, Noisrev.League.IO.RST.RType, System.Text.Encoding, System.Globalization.CultureInfo)
-  nameWithType: RSTHash.ComputeHash(string, long, RType, Encoding, CultureInfo)
-  nameWithType.vb: RSTHash.ComputeHash(String, Long, RType, Encoding, CultureInfo)
-- uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,System.Int64,Noisrev.League.IO.RST.RType,System.Text.Encoding)
-  name: ComputeHash(string, long, RType, Encoding)
-  href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_String_System_Int64_Noisrev_League_IO_RST_RType_System_Text_Encoding_
-  commentId: M:Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,System.Int64,Noisrev.League.IO.RST.RType,System.Text.Encoding)
-  name.vb: ComputeHash(String, Long, RType, Encoding)
-  fullName: Noisrev.League.IO.RST.RSTHash.ComputeHash(string, long, Noisrev.League.IO.RST.RType, System.Text.Encoding)
-  fullName.vb: Noisrev.League.IO.RST.RSTHash.ComputeHash(String, Long, Noisrev.League.IO.RST.RType, System.Text.Encoding)
-  nameWithType: RSTHash.ComputeHash(string, long, RType, Encoding)
-  nameWithType.vb: RSTHash.ComputeHash(String, Long, RType, Encoding)
+- uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,Noisrev.League.IO.RST.RType,System.Text.Encoding)
+  name: ComputeHash(string, RType, Encoding)
+  href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_String_Noisrev_League_IO_RST_RType_System_Text_Encoding_
+  commentId: M:Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,Noisrev.League.IO.RST.RType,System.Text.Encoding)
+  name.vb: ComputeHash(String, RType, Encoding)
+  fullName: Noisrev.League.IO.RST.RSTHash.ComputeHash(string, Noisrev.League.IO.RST.RType, System.Text.Encoding)
+  fullName.vb: Noisrev.League.IO.RST.RSTHash.ComputeHash(String, Noisrev.League.IO.RST.RType, System.Text.Encoding)
+  nameWithType: RSTHash.ComputeHash(string, RType, Encoding)
+  nameWithType.vb: RSTHash.ComputeHash(String, RType, Encoding)
+- uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,Noisrev.League.IO.RST.RType,System.Text.Encoding,System.Globalization.CultureInfo)
+  name: ComputeHash(string, RType, Encoding, CultureInfo)
+  href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_String_Noisrev_League_IO_RST_RType_System_Text_Encoding_System_Globalization_CultureInfo_
+  commentId: M:Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,Noisrev.League.IO.RST.RType,System.Text.Encoding,System.Globalization.CultureInfo)
+  name.vb: ComputeHash(String, RType, Encoding, CultureInfo)
+  fullName: Noisrev.League.IO.RST.RSTHash.ComputeHash(string, Noisrev.League.IO.RST.RType, System.Text.Encoding, System.Globalization.CultureInfo)
+  fullName.vb: Noisrev.League.IO.RST.RSTHash.ComputeHash(String, Noisrev.League.IO.RST.RType, System.Text.Encoding, System.Globalization.CultureInfo)
+  nameWithType: RSTHash.ComputeHash(string, RType, Encoding, CultureInfo)
+  nameWithType.vb: RSTHash.ComputeHash(String, RType, Encoding, CultureInfo)
 - uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,System.Int64,Noisrev.League.IO.RST.RType)
   name: ComputeHash(string, long, RType)
   href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_String_System_Int64_Noisrev_League_IO_RST_RType_
@@ -808,6 +790,24 @@ references:
   fullName.vb: Noisrev.League.IO.RST.RSTHash.ComputeHash(String, Long, Noisrev.League.IO.RST.RType)
   nameWithType: RSTHash.ComputeHash(string, long, RType)
   nameWithType.vb: RSTHash.ComputeHash(String, Long, RType)
+- uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,System.Int64,Noisrev.League.IO.RST.RType,System.Text.Encoding)
+  name: ComputeHash(string, long, RType, Encoding)
+  href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_String_System_Int64_Noisrev_League_IO_RST_RType_System_Text_Encoding_
+  commentId: M:Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,System.Int64,Noisrev.League.IO.RST.RType,System.Text.Encoding)
+  name.vb: ComputeHash(String, Long, RType, Encoding)
+  fullName: Noisrev.League.IO.RST.RSTHash.ComputeHash(string, long, Noisrev.League.IO.RST.RType, System.Text.Encoding)
+  fullName.vb: Noisrev.League.IO.RST.RSTHash.ComputeHash(String, Long, Noisrev.League.IO.RST.RType, System.Text.Encoding)
+  nameWithType: RSTHash.ComputeHash(string, long, RType, Encoding)
+  nameWithType.vb: RSTHash.ComputeHash(String, Long, RType, Encoding)
+- uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,System.Int64,Noisrev.League.IO.RST.RType,System.Text.Encoding,System.Globalization.CultureInfo)
+  name: ComputeHash(string, long, RType, Encoding, CultureInfo)
+  href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_String_System_Int64_Noisrev_League_IO_RST_RType_System_Text_Encoding_System_Globalization_CultureInfo_
+  commentId: M:Noisrev.League.IO.RST.RSTHash.ComputeHash(System.String,System.Int64,Noisrev.League.IO.RST.RType,System.Text.Encoding,System.Globalization.CultureInfo)
+  name.vb: ComputeHash(String, Long, RType, Encoding, CultureInfo)
+  fullName: Noisrev.League.IO.RST.RSTHash.ComputeHash(string, long, Noisrev.League.IO.RST.RType, System.Text.Encoding, System.Globalization.CultureInfo)
+  fullName.vb: Noisrev.League.IO.RST.RSTHash.ComputeHash(String, Long, Noisrev.League.IO.RST.RType, System.Text.Encoding, System.Globalization.CultureInfo)
+  nameWithType: RSTHash.ComputeHash(string, long, RType, Encoding, CultureInfo)
+  nameWithType.vb: RSTHash.ComputeHash(String, Long, RType, Encoding, CultureInfo)
 - uid: Noisrev.League.IO.RST.RSTHash.ComputeHash(System.UInt64,System.Int64,Noisrev.League.IO.RST.RType)
   name: ComputeHash(ulong, long, RType)
   href: api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html#Noisrev_League_IO_RST_RSTHash_ComputeHash_System_UInt64_System_Int64_Noisrev_League_IO_RST_RType_
