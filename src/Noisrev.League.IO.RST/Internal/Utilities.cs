@@ -16,7 +16,9 @@ internal static class Utilities
 {
     public static readonly ArrayPool<byte> LargeByteArrayPool = ArrayPool<byte>.Create(1024 * 1024 * 1024, 50);
 
+#if NETCOREAPP || NETSTANDARD2_1_OR_GREATER
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
     public static void ToLower(ReadOnlySpan<char> source, Span<char> destination, CultureInfo cultureInfo)
     {
 #if NETCOREAPP || NETSTANDARD2_1_OR_GREATER
