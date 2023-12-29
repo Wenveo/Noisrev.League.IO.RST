@@ -35,7 +35,7 @@
       "source_relative_path": "api/Noisrev.League.IO.RST.Helpers.RTypeHelper.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.Helpers.RTypeHelper.html"
+          "relative_path": "api/Noisrev.League.IO.RST.Helpers.RTypeHelper.GetRType.html"
         }
       },
       "version": ""
@@ -45,7 +45,7 @@
       "source_relative_path": "api/Noisrev.League.IO.RST.Helpers.RTypeHelper.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.Helpers.RTypeHelper.GetRType.html"
+          "relative_path": "api/Noisrev.League.IO.RST.Helpers.RTypeHelper.html"
         }
       },
       "version": ""
@@ -85,7 +85,7 @@
       "source_relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.html"
+          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.SetConfig.html"
         }
       },
       "version": ""
@@ -105,17 +105,7 @@
       "source_relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.ReplaceAll.html"
+          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.Item.html"
         }
       },
       "version": ""
@@ -135,26 +125,6 @@
       "source_relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.Item.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.SetConfig.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.yml",
-      "output": {
-        ".html": {
           "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.-ctor.html"
         }
       },
@@ -165,7 +135,7 @@
       "source_relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.Remove.html"
+          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.TryAdd.html"
         }
       },
       "version": ""
@@ -175,7 +145,7 @@
       "source_relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.ContainsValue.html"
+          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.Add.html"
         }
       },
       "version": ""
@@ -195,7 +165,37 @@
       "source_relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.Clear.html"
+          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.ContainsValue.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.Remove.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.ReplaceAll.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.html"
         }
       },
       "version": ""
@@ -215,17 +215,7 @@
       "source_relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.Add.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.html"
+          "relative_path": "api/Noisrev.League.IO.RST.RSTBuilder.Clear.html"
         }
       },
       "version": ""
@@ -245,6 +235,16 @@
       "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
       "output": {
         ".html": {
+          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
+      "output": {
+        ".html": {
           "relative_path": "api/Noisrev.League.IO.RST.RSTFile.Equals.html"
         }
       },
@@ -255,77 +255,7 @@
       "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.Write.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.-ctor.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.Entries.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.Mode.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.Type.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.DataOffset.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.Config.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.Version.html"
+          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.Load.html"
         }
       },
       "version": ""
@@ -345,17 +275,77 @@
       "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.Load.html"
+          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.Version.html"
         }
       },
       "version": ""
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Noisrev.League.IO.RST.RSTHash.yml",
+      "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html"
+          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.DataOffset.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.Type.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.Config.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.Entries.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.-ctor.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.Mode.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Noisrev.League.IO.RST.RSTFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Noisrev.League.IO.RST.RSTFile.Write.html"
         }
       },
       "version": ""
@@ -366,6 +356,16 @@
       "output": {
         ".html": {
           "relative_path": "api/Noisrev.League.IO.RST.RSTHash.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Noisrev.League.IO.RST.RSTHash.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Noisrev.League.IO.RST.RSTHash.ComputeHash.html"
         }
       },
       "version": ""
